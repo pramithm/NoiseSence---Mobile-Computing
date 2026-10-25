@@ -30,6 +30,13 @@ export const App: React.FC = () => {
   const [readings, setReadings] = useState<NoiseReading[]>([]);
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
 
+  // Target place passed from Map Search to Measure
+  const [targetPlaceForMeasurement, setTargetPlaceForMeasurement] = useState<{
+    name: string;
+    lat: number;
+    lng: number;
+  } | null>(null);
+
   // Sync offline readings
   const handleSyncOffline = useCallback(async () => {
     try {
@@ -134,8 +141,12 @@ export const App: React.FC = () => {
     };
   }, [loadAllData]);
 
-  const handleReadingSubmitted = () => {
+  const handleReadingSubmitted = (submittedCoords?: { lat: number; lng: number }) => {
     setOfflineCount(getOfflineQueue().length);
+    if (submittedCoords) {
+      setUserCoords(submittedCoords);
+    }
+    setTargetPlaceForMeasurement(null);
     loadAllData();
   };
 
@@ -159,7 +170,10 @@ export const App: React.FC = () => {
             stats={stats}
             cells={cells}
             recentReadings={readings}
-            onNavigateToMeasure={() => setActiveTab('measure')}
+            onNavigateToMeasure={() => {
+              setTargetPlaceForMeasurement(null);
+              setActiveTab('measure');
+            }}
             onNavigateToMap={() => setActiveTab('map')}
             isSimulating={isSimulating}
             onToggleSimulation={handleToggleSimulation}
@@ -171,6 +185,7 @@ export const App: React.FC = () => {
             onReadingSubmitted={handleReadingSubmitted}
             onNavigateToMap={() => setActiveTab('map')}
             isOnline={isOnline && socketStatus === 'connected'}
+            initialTargetPlace={targetPlaceForMeasurement}
           />
         )}
 
@@ -182,6 +197,10 @@ export const App: React.FC = () => {
             userCoords={userCoords}
             isSimulating={isSimulating}
             onToggleSimulation={handleToggleSimulation}
+            onNavigateToMeasureWithPlace={(place) => {
+              setTargetPlaceForMeasurement(place);
+              setActiveTab('measure');
+            }}
           />
         )}
 

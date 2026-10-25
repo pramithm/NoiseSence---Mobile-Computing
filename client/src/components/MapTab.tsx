@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -14,9 +14,14 @@ import {
   Volume2,
   TrendingUp,
   Clock,
-  Compass
+  Compass,
+  Search,
+  X,
+  Mic,
+  MapPin
 } from 'lucide-react';
 import type { HeatmapCell, NoiseReading } from '../types';
+import { searchPlaces, calculateDistanceMeters, type GeocodedPlace } from '../services/geolocation';
 
 interface MapTabProps {
   cells: HeatmapCell[];
@@ -25,6 +30,7 @@ interface MapTabProps {
   userCoords?: { lat: number; lng: number } | null;
   isSimulating?: boolean;
   onToggleSimulation?: () => void;
+  onNavigateToMeasureWithPlace?: (place: { name: string; lat: number; lng: number }) => void;
 }
 
 export const MapTab: React.FC<MapTabProps> = ({
@@ -33,27 +39,50 @@ export const MapTab: React.FC<MapTabProps> = ({
   onRefreshMap,
   userCoords,
   isSimulating = false,
-  onToggleSimulation
+  onToggleSimulation,
+  onNavigateToMeasureWithPlace
 }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
+  const searchMarkerRef = useRef<L.Marker | null>(null);
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedCell, setSelectedCell] = useState<HeatmapCell | null>(null);
   const [viewMode, setViewMode] = useState<'heatmap' | 'points' | 'both'>('both');
   const [activeTabDrawer, setActiveTabDrawer] = useState<'summary' | 'frequencies' | 'who' | 'samples'>('summary');
 
-  const DEFAULT_CENTER: [number, number] = [37.7750, -122.4194];
+  // Place Search & Noise Analysis State
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<GeocodedPlace[]>([]);
+  const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
+  const [searchedPlaceInfo, setSearchedPlaceInfo] = useState<{
+    place: GeocodedPlace;
+    nearestCell: HeatmapCell | null;
+    distanceMeters: number | null;
+  } | null>(null);
+
+  // Initial center prioritizes real user coordinates, then most recent reading, then campus
+  const getInitialCenter = useCallback((): [number, number] => {
+    if (userCoords && userCoords.lat && userCoords.lng) {
+      return [userCoords.lat, userCoords.lng];
+    }
+    if (recentReadings.length > 0 && recentReadings[0].latitude) {
+      return [recentReadings[0].latitude, recentReadings[0].longitude];
+    }
+    return [37.7750, -122.4194];
+  }, [userCoords, recentReadings]);
 
   // Initialize Leaflet map
   useEffect(() => {
     if (!mapContainerRef.current) return;
     if (mapInstanceRef.current) return;
 
+    const center = getInitialCenter();
     const map = L.map(mapContainerRef.current, {
-      center: DEFAULT_CENTER,
-      zoom: 16,
+      center: center,
+      zoom: 15,
       zoomControl: false
     });
 
@@ -72,7 +101,16 @@ export const MapTab: React.FC<MapTabProps> = ({
       map.remove();
       mapInstanceRef.current = null;
     };
-  }, []);
+  }, [getInitialCenter]);
+
+  // Auto-center on user coordinates when first discovered
+  const hasAutoCenteredRef = useRef(false);
+  useEffect(() => {
+    if (userCoords && userCoords.lat && userCoords.lng && mapInstanceRef.current && !hasAutoCenteredRef.current) {
+      mapInstanceRef.current.setView([userCoords.lat, userCoords.lng], 16, { animate: true });
+      hasAutoCenteredRef.current = true;
+    }
+  }, [userCoords]);
 
   // Sync selectedCell if cells change (e.g. live updates)
   useEffect(() => {
@@ -82,7 +120,7 @@ export const MapTab: React.FC<MapTabProps> = ({
     }
   }, [cells, selectedCell]);
 
-  // Render heatmap circles and point markers whenever cells or recentReadings change
+  // Render heatmap circles and point markers
   useEffect(() => {
     if (!mapInstanceRef.current || !layerGroupRef.current) return;
 
@@ -96,7 +134,6 @@ export const MapTab: React.FC<MapTabProps> = ({
 
         const radius = Math.min(115, 60 + Math.min(cell.readingCount * 8, 55));
         
-        // Base Circle
         const circle = L.circle([cell.latitude, cell.longitude], {
           radius: radius,
           color: cell.color,
@@ -105,7 +142,6 @@ export const MapTab: React.FC<MapTabProps> = ({
           weight: 2
         });
 
-        // Pulsing Radar Ring
         const radarCircle = L.circle([cell.latitude, cell.longitude], {
           radius: radius * 1.35,
           color: cell.color,
@@ -115,7 +151,6 @@ export const MapTab: React.FC<MapTabProps> = ({
           dashArray: '4, 4'
         });
 
-        // Cell Badge Icon
         const centerIcon = L.divIcon({
           className: 'custom-cell-badge-icon',
           html: `<div class="map-cell-db-badge" style="background-color: ${cell.color}; color: #ffffff;">
@@ -132,6 +167,7 @@ export const MapTab: React.FC<MapTabProps> = ({
 
         const clickHandler = () => {
           setSelectedCell(cell);
+          setSearchedPlaceInfo(null);
         };
 
         circle.on('click', clickHandler);
@@ -146,7 +182,7 @@ export const MapTab: React.FC<MapTabProps> = ({
 
     // 2. Draw Individual Reading Pins
     if (viewMode === 'points' || viewMode === 'both') {
-      recentReadings.slice(0, 35).forEach((reading) => {
+      recentReadings.slice(0, 40).forEach((reading) => {
         if (selectedCategory !== 'All' && reading.category !== selectedCategory) return;
 
         const color =
@@ -176,13 +212,13 @@ export const MapTab: React.FC<MapTabProps> = ({
               <span class="popup-cat">${reading.category}</span>
             </div>
             <div class="popup-freq">
-              <strong>Dominant Frequency:</strong> ${reading.dominantFrequency || 440} Hz
+              <strong>Dominant Pitch:</strong> ${reading.dominantFrequency || 440} Hz
             </div>
             <div class="popup-source">
-              <strong>Estimated Source:</strong> ${reading.estimatedSource || 'Ambient Sound'}
+              <strong>Source:</strong> ${reading.estimatedSource || reading.source}
             </div>
             <div class="popup-meta">
-              <span>${reading.source}</span> · 
+              <span>${reading.latitude.toFixed(4)}, ${reading.longitude.toFixed(4)}</span> · 
               <span>${new Date(reading.timestamp).toLocaleTimeString()}</span>
             </div>
           </div>
@@ -204,104 +240,324 @@ export const MapTab: React.FC<MapTabProps> = ({
         iconAnchor: [12, 12]
       });
       const userMarker = L.marker([userCoords.lat, userCoords.lng], { icon: userIcon });
-      userMarker.bindTooltip('Your Location', { permanent: false, direction: 'top' });
+      userMarker.bindTooltip('Your Current GPS Location', { permanent: false, direction: 'top' });
       layerGroup.addLayer(userMarker);
     }
   }, [cells, recentReadings, selectedCategory, viewMode, userCoords]);
 
-  const centerCampus = () => {
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView(DEFAULT_CENTER, 16, { animate: true });
+  // Handle Place Search Execution
+  const handleExecuteSearch = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!searchQuery.trim()) return;
+
+    setIsSearching(true);
+    setShowSearchResults(true);
+    const results = await searchPlaces(searchQuery);
+    setSearchResults(results);
+    setIsSearching(false);
+
+    if (results.length === 1) {
+      handleSelectPlace(results[0]);
     }
+  };
+
+  // When user selects a place from search
+  const handleSelectPlace = (place: GeocodedPlace) => {
+    setShowSearchResults(false);
+    setSelectedCell(null);
+
+    if (!mapInstanceRef.current) return;
+    mapInstanceRef.current.flyTo([place.lat, place.lng], 16, { duration: 1.2 });
+
+    // Drop or move Search Pin Marker
+    if (searchMarkerRef.current) {
+      searchMarkerRef.current.remove();
+    }
+
+    const searchIcon = L.divIcon({
+      className: 'search-place-pin-icon',
+      html: `<div class="search-pin-wrapper">
+               <div class="search-pin-beacon"></div>
+               <div class="search-pin-head">📍</div>
+             </div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
+
+    const marker = L.marker([place.lat, place.lng], { icon: searchIcon }).addTo(mapInstanceRef.current);
+    searchMarkerRef.current = marker;
+
+    // Calculate How Much Noise Is In That Location
+    let closestCell: HeatmapCell | null = null;
+    let minDistance = Infinity;
+
+    for (const cell of cells) {
+      const dist = calculateDistanceMeters(place.lat, place.lng, cell.latitude, cell.longitude);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestCell = cell;
+      }
+    }
+
+    // If within 2500m (2.5km), associate noise reading
+    const isNearby = minDistance <= 2500;
+    setSearchedPlaceInfo({
+      place,
+      nearestCell: isNearby ? closestCell : null,
+      distanceMeters: isNearby ? Math.round(minDistance) : null
+    });
   };
 
   const centerUser = () => {
     if (userCoords && userCoords.lat && userCoords.lng && mapInstanceRef.current) {
-      mapInstanceRef.current.setView([userCoords.lat, userCoords.lng], 17, { animate: true });
-    } else {
-      centerCampus();
+      mapInstanceRef.current.flyTo([userCoords.lat, userCoords.lng], 17, { duration: 1 });
+    }
+  };
+
+  const centerLatest = () => {
+    if (recentReadings.length > 0 && mapInstanceRef.current) {
+      const r = recentReadings[0];
+      mapInstanceRef.current.flyTo([r.latitude, r.longitude], 16, { duration: 1 });
     }
   };
 
   return (
     <div className="map-page-wrapper">
-      {/* Top Map Control Bar */}
-      <div className="map-controls-bar">
-        {/* Category Filters */}
-        <div className="map-filter-group">
-          <Filter size={15} className="text-secondary" />
-          {['All', 'Quiet', 'Moderate', 'Loud', 'Hazardous'].map((cat) => (
+      {/* Search Bar & Map Controls Overlay */}
+      <div className="map-search-and-controls">
+        {/* Place Search Box */}
+        <form onSubmit={handleExecuteSearch} className="map-search-form">
+          <div className="map-search-input-wrap">
+            <Search size={16} className="search-bar-icon" />
+            <input
+              type="text"
+              placeholder="Search any place, college, street, or city..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="map-search-input"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSearchResults([]);
+                  setShowSearchResults(false);
+                }}
+                className="search-clear-btn"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+          <button type="submit" disabled={isSearching} className="btn-map-search">
+            {isSearching ? <RefreshCw size={14} className="spin-icon" /> : 'Search'}
+          </button>
+        </form>
+
+        {/* Search Results Dropdown Menu */}
+        {showSearchResults && searchResults.length > 0 && (
+          <div className="search-results-dropdown animate-fade-in">
+            <div className="search-results-header">
+              <span>Matching Locations ({searchResults.length})</span>
+              <button
+                type="button"
+                onClick={() => setShowSearchResults(false)}
+                className="btn-icon-subtle"
+              >
+                <X size={13} />
+              </button>
+            </div>
+            {searchResults.map((item, idx) => (
+              <div
+                key={idx}
+                onClick={() => handleSelectPlace(item)}
+                className="search-result-row"
+              >
+                <MapPin size={15} className="text-teal flex-shrink-0" />
+                <div className="result-text-block">
+                  <strong className="result-title">{item.shortName}</strong>
+                  <span className="result-full-address">{item.displayName}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Controls Toolbar: Filters & Quick Centering */}
+        <div className="map-controls-bar">
+          <div className="map-filter-group">
+            <Filter size={14} className="text-secondary" />
+            {['All', 'Quiet', 'Moderate', 'Loud', 'Hazardous'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`map-filter-chip ${selectedCategory === cat ? 'map-filter-chip-active' : ''}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="map-view-actions">
+            {onToggleSimulation && (
+              <button
+                onClick={onToggleSimulation}
+                className={`btn-map-control ${isSimulating ? 'btn-stream-active' : ''}`}
+                title="Toggle Live Stream Simulator"
+              >
+                <Zap size={14} className={isSimulating ? 'pulse-icon' : ''} />
+                <span className="control-btn-text">{isSimulating ? 'Stream ON' : 'Live Stream'}</span>
+              </button>
+            )}
+
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`map-filter-chip ${selectedCategory === cat ? 'map-filter-chip-active' : ''}`}
+              onClick={() => setViewMode(viewMode === 'both' ? 'heatmap' : viewMode === 'heatmap' ? 'points' : 'both')}
+              className="btn-map-control"
+              title={`Toggle View Mode (Currently: ${viewMode})`}
             >
-              {cat}
+              <Layers size={14} />
+              <span className="control-btn-text">{viewMode.toUpperCase()}</span>
             </button>
-          ))}
-        </div>
 
-        {/* View Mode & Recenter Buttons */}
-        <div className="map-view-actions">
-          {onToggleSimulation && (
             <button
-              onClick={onToggleSimulation}
-              className={`btn-map-control ${isSimulating ? 'btn-stream-active' : ''}`}
-              title="Toggle Live Stream Simulator"
+              onClick={centerUser}
+              className="btn-map-control"
+              title="Fly to My Current GPS Location"
             >
-              <Zap size={15} className={isSimulating ? 'pulse-icon' : ''} />
-              <span className="control-btn-text">{isSimulating ? 'Stream Active' : 'Live Stream'}</span>
+              <Crosshair size={14} />
+              <span className="control-btn-text">My GPS</span>
             </button>
-          )}
 
-          <button
-            onClick={() => setViewMode(viewMode === 'both' ? 'heatmap' : viewMode === 'heatmap' ? 'points' : 'both')}
-            className="btn-map-control"
-            title={`Toggle View Mode (Currently: ${viewMode})`}
-          >
-            <Layers size={15} />
-            <span className="control-btn-text">{viewMode.toUpperCase()}</span>
-          </button>
+            <button
+              onClick={centerLatest}
+              className="btn-map-control"
+              title="Fly to Latest Contributed Reading"
+            >
+              <Compass size={14} />
+              <span className="control-btn-text">Latest</span>
+            </button>
 
-          <button
-            onClick={centerUser}
-            className="btn-map-control"
-            title="Center on My Location"
-          >
-            <Crosshair size={15} />
-            <span className="control-btn-text">Locate</span>
-          </button>
-
-          <button
-            onClick={centerCampus}
-            className="btn-map-control"
-            title="Center Campus"
-          >
-            <Compass size={15} />
-            <span className="control-btn-text">Campus</span>
-          </button>
-
-          <button
-            onClick={onRefreshMap}
-            className="btn-map-control"
-            title="Refresh Map Data"
-          >
-            <RefreshCw size={14} />
-          </button>
+            <button
+              onClick={onRefreshMap}
+              className="btn-map-control"
+              title="Refresh Map Data"
+            >
+              <RefreshCw size={13} />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Full Map Canvas Container */}
       <div ref={mapContainerRef} className="leaflet-map-container" />
 
-      {/* Floating Real-time Live Badge */}
+      {/* Floating Searched Location Sound Intelligence Card */}
+      {searchedPlaceInfo && (
+        <div className="searched-place-card animate-slide-up">
+          <div className="flex-between">
+            <div className="flex-row-center gap-2">
+              <span className="searched-badge">📍 Searched Place</span>
+              <span className="coord-mini font-mono text-xs text-secondary">
+                {searchedPlaceInfo.place.lat.toFixed(4)}, {searchedPlaceInfo.place.lng.toFixed(4)}
+              </span>
+            </div>
+            <button
+              onClick={() => setSearchedPlaceInfo(null)}
+              className="btn-icon-subtle"
+              aria-label="Close"
+            >
+              <X size={15} />
+            </button>
+          </div>
+
+          <h3 className="searched-place-name">{searchedPlaceInfo.place.shortName}</h3>
+          <p className="searched-place-full text-xs text-secondary mb-3">
+            {searchedPlaceInfo.place.displayName}
+          </p>
+
+          {/* Sound Level Report for this Place */}
+          {searchedPlaceInfo.nearestCell ? (
+            <div className="location-sound-report">
+              <div className="sound-report-metric">
+                <span className="report-label">Sound Level in this Location:</span>
+                <div className="flex-row-center gap-2 mt-1">
+                  <span
+                    className="report-db-badge"
+                    style={{
+                      backgroundColor: `${searchedPlaceInfo.nearestCell.color}20`,
+                      color: searchedPlaceInfo.nearestCell.color,
+                      borderColor: searchedPlaceInfo.nearestCell.color
+                    }}
+                  >
+                    {searchedPlaceInfo.nearestCell.averageDb} dB(A)
+                  </span>
+                  <span className="report-category" style={{ color: searchedPlaceInfo.nearestCell.color }}>
+                    {searchedPlaceInfo.nearestCell.category}
+                  </span>
+                </div>
+              </div>
+
+              <div className="sound-report-details mt-2">
+                <div className="report-detail-item">
+                  <span className="detail-label">Dominant Frequency:</span>
+                  <strong>{searchedPlaceInfo.nearestCell.dominantFrequency || 440} Hz</strong>
+                </div>
+                <div className="report-detail-item">
+                  <span className="detail-label">Likely Sound Source:</span>
+                  <strong>{searchedPlaceInfo.nearestCell.estimatedSource || 'Ambient Urban'}</strong>
+                </div>
+                <div className="report-detail-item">
+                  <span className="detail-label">Sensor Proximity:</span>
+                  <span>Reading within ~{searchedPlaceInfo.distanceMeters}m</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="location-sound-report report-unmeasured">
+              <div className="sound-report-metric">
+                <span className="report-label">Sound Level in this Location:</span>
+                <div className="flex-row-center gap-2 mt-1">
+                  <span className="report-db-badge baseline-badge">
+                    ~45.0 dB(A)
+                  </span>
+                  <span className="text-xs font-semibold text-secondary">
+                    Estimated Ambient Baseline
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs text-secondary mt-1.5 leading-relaxed">
+                No active mobile sensor contributions recorded in this specific micro-zone yet.
+              </p>
+            </div>
+          )}
+
+          {/* Action button: Measure sound in this searched location */}
+          <button
+            onClick={() => {
+              if (onNavigateToMeasureWithPlace) {
+                onNavigateToMeasureWithPlace({
+                  name: searchedPlaceInfo.place.shortName,
+                  lat: searchedPlaceInfo.place.lat,
+                  lng: searchedPlaceInfo.place.lng
+                });
+              }
+            }}
+            className="btn-measure-here"
+          >
+            <Mic size={16} />
+            <span>Measure Sound at {searchedPlaceInfo.place.shortName}</span>
+          </button>
+        </div>
+      )}
+
+      {/* Floating Status & Legend */}
       <div className="map-floating-status">
         <span className="pulse-dot"></span>
         <span className="font-semibold text-xs">Real-Time Grid</span>
-        <span className="text-xs text-secondary">({cells.length} Zones · Live Broadcaster)</span>
+        <span className="text-xs text-secondary">({cells.length} Active Zones)</span>
       </div>
 
-      {/* Floating Legend */}
       <div className="map-floating-legend">
         <div className="legend-title-row">
           <Info size={13} />
@@ -327,8 +583,8 @@ export const MapTab: React.FC<MapTabProps> = ({
         </div>
       </div>
 
-      {/* Selected Cell Comprehensive Detail Drawer */}
-      {selectedCell && (
+      {/* Selected Cell Detail Drawer */}
+      {selectedCell && !searchedPlaceInfo && (
         <div className="cell-detail-drawer animate-slide-up">
           <div className="drawer-handle"></div>
           
@@ -361,7 +617,6 @@ export const MapTab: React.FC<MapTabProps> = ({
             </button>
           </div>
 
-          {/* Sub-tab navigation inside details drawer */}
           <div className="drawer-tab-nav">
             <button
               onClick={() => setActiveTabDrawer('summary')}
@@ -389,7 +644,6 @@ export const MapTab: React.FC<MapTabProps> = ({
             </button>
           </div>
 
-          {/* Tab 1: Summary Overview */}
           {activeTabDrawer === 'summary' && (
             <div className="drawer-tab-content">
               <div className="drawer-metrics-row">
@@ -419,7 +673,6 @@ export const MapTab: React.FC<MapTabProps> = ({
                 </div>
               </div>
 
-              {/* Estimated Acoustic Source */}
               <div className="drawer-source-box">
                 <div className="flex-row-center gap-2">
                   <Activity size={16} className="text-teal" />
@@ -430,7 +683,6 @@ export const MapTab: React.FC<MapTabProps> = ({
                 </p>
               </div>
 
-              {/* Hourly Trend Curve */}
               {selectedCell.hourlyTrend && (
                 <div className="trend-curve-box">
                   <span className="text-xs font-semibold text-secondary flex-row-center gap-1 mb-2">
@@ -463,7 +715,6 @@ export const MapTab: React.FC<MapTabProps> = ({
             </div>
           )}
 
-          {/* Tab 2: Frequency Spectrum Breakdown */}
           {activeTabDrawer === 'frequencies' && (
             <div className="drawer-tab-content">
               <div className="freq-analysis-box">
@@ -480,7 +731,6 @@ export const MapTab: React.FC<MapTabProps> = ({
                   </div>
                 </div>
 
-                {/* 3 Frequency Bands Progress Meters */}
                 <div className="freq-meter-group">
                   <div className="freq-meter-item">
                     <div className="freq-meter-label-row">
@@ -528,7 +778,6 @@ export const MapTab: React.FC<MapTabProps> = ({
             </div>
           )}
 
-          {/* Tab 3: WHO Guidelines & Health Impact */}
           {activeTabDrawer === 'who' && (
             <div className="drawer-tab-content">
               {selectedCell.whoGuideline ? (
@@ -586,7 +835,6 @@ export const MapTab: React.FC<MapTabProps> = ({
             </div>
           )}
 
-          {/* Tab 4: Live Samples in this cell */}
           {activeTabDrawer === 'samples' && (
             <div className="drawer-tab-content">
               <div className="drawer-samples-list">

@@ -12,24 +12,28 @@ import {
   Send,
   Activity,
   Radio,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Compass,
+  MapPinned
 } from 'lucide-react';
 import { AudioNoiseMeter } from '../services/audioMeter';
-import { requestCurrentLocation, CAMPUS_PRESETS } from '../services/geolocation';
+import { requestCurrentLocation, reverseGeocode, CAMPUS_PRESETS } from '../services/geolocation';
 import { submitReading } from '../services/api';
 import { saveToOfflineQueue } from '../services/offlineQueue';
 import type { GeolocationState, FrequencyBreakdown } from '../types';
 
 interface MeasureTabProps {
-  onReadingSubmitted?: () => void;
+  onReadingSubmitted?: (submittedCoords?: { lat: number; lng: number }) => void;
   onNavigateToMap?: () => void;
   isOnline: boolean;
+  initialTargetPlace?: { name: string; lat: number; lng: number } | null;
 }
 
 export const MeasureTab: React.FC<MeasureTabProps> = ({
   onReadingSubmitted,
   onNavigateToMap,
-  isOnline
+  isOnline,
+  initialTargetPlace
 }) => {
   // Audio state
   const [isSampling, setIsSampling] = useState<boolean>(false);
@@ -54,17 +58,25 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   const [, setSampleSamples] = useState<number[]>([]);
   const [capturedAverage, setCapturedAverage] = useState<number | null>(null);
 
+  // Location mode: 'gps' | 'preset' | 'searched'
+  const [locationMode, setLocationMode] = useState<'gps' | 'preset' | 'searched'>(
+    initialTargetPlace ? 'searched' : 'gps'
+  );
+
   // Geolocation state
   const [geoState, setGeoState] = useState<GeolocationState>({
-    latitude: CAMPUS_PRESETS[0].lat,
-    longitude: CAMPUS_PRESETS[0].lng,
-    accuracy: 4,
+    latitude: initialTargetPlace?.lat || null,
+    longitude: initialTargetPlace?.lng || null,
+    accuracy: 5,
     error: null,
     loading: false,
     permission: 'unknown'
   });
-  const [selectedPreset, setSelectedPreset] = useState<string>(CAMPUS_PRESETS[0].name);
-  const [locationLabel, setLocationLabel] = useState<string>(CAMPUS_PRESETS[0].name);
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
+  const [locationLabel, setLocationLabel] = useState<string>(
+    initialTargetPlace?.name || 'Resolving real location...'
+  );
+  const [isGeocoding, setIsGeocoding] = useState<boolean>(false);
 
   // Status & submission feedback
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -121,39 +133,61 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     setOctaveBands(bands);
   }, []);
 
-  useEffect(() => {
-    refreshLocation();
+  // Fetch real device GPS & reverse geocode address
+  const fetchLiveDeviceGps = useCallback(async () => {
+    setLocationMode('gps');
+    setSelectedPreset(null);
+    setGeoState(prev => ({ ...prev, loading: true, error: null }));
+    setIsGeocoding(true);
+
+    try {
+      const result = await requestCurrentLocation();
+      setGeoState(result);
+
+      if (result.latitude && result.longitude) {
+        const placeName = await reverseGeocode(result.latitude, result.longitude);
+        setLocationLabel(placeName);
+      } else if (result.error) {
+        setLocationLabel('GPS unavailable - enter location manually or select preset');
+      }
+    } catch (err) {
+      console.error('Location error:', err);
+    } finally {
+      setIsGeocoding(false);
+    }
   }, []);
 
-  const refreshLocation = async () => {
-    setGeoState(prev => ({ ...prev, loading: true, error: null }));
-    const result = await requestCurrentLocation();
-    setGeoState(result);
-    if (result.latitude && result.longitude) {
-      const matched = CAMPUS_PRESETS.find(
-        p => Math.abs(p.lat - result.latitude!) < 0.001 && Math.abs(p.lng - result.longitude!) < 0.001
-      );
-      if (matched) {
-        setSelectedPreset(matched.name);
-        setLocationLabel(matched.name);
-      } else {
-        setLocationLabel(`Lat ${result.latitude.toFixed(4)}, Lng ${result.longitude.toFixed(4)}`);
-      }
+  useEffect(() => {
+    if (initialTargetPlace) {
+      setLocationMode('searched');
+      setLocationLabel(initialTargetPlace.name);
+      setGeoState({
+        latitude: initialTargetPlace.lat,
+        longitude: initialTargetPlace.lng,
+        accuracy: 5,
+        error: null,
+        loading: false,
+        permission: 'granted'
+      });
+    } else {
+      fetchLiveDeviceGps();
     }
-  };
+  }, [initialTargetPlace, fetchLiveDeviceGps]);
 
   const handlePresetSelect = (presetName: string) => {
-    setSelectedPreset(presetName);
     const found = CAMPUS_PRESETS.find(p => p.name === presetName);
     if (found) {
+      setLocationMode('preset');
+      setSelectedPreset(presetName);
       setLocationLabel(found.name);
-      setGeoState(prev => ({
-        ...prev,
+      setGeoState({
         latitude: found.lat,
         longitude: found.lng,
         accuracy: found.accuracy,
-        error: null
-      }));
+        error: null,
+        loading: false,
+        permission: 'granted'
+      });
     }
   };
 
@@ -242,7 +276,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
 
   const handleSubmit = async () => {
     if (!geoState.latitude || !geoState.longitude) {
-      setErrorMessage('Location coordinates required. Please select a campus zone or enable GPS.');
+      setErrorMessage('Valid location coordinates required. Enable GPS or choose a preset.');
       return;
     }
 
@@ -255,8 +289,8 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
       latitude: geoState.latitude,
       longitude: geoState.longitude,
       accuracy: geoState.accuracy || 5.0,
-      locationName: locationLabel || 'Mobile Acoustic Measurement',
-      source: 'Mobile Contributor (Web Audio API)',
+      locationName: locationLabel || `Location (${geoState.latitude.toFixed(4)}, ${geoState.longitude.toFixed(4)})`,
+      source: locationMode === 'gps' ? 'Live Mobile GPS' : 'Campus Preset Contributor',
       dominantFrequency: frequencyData.dominantHz,
       frequencyBand: frequencyData.bandName,
       frequencyDistribution: {
@@ -276,12 +310,13 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
       }
 
       setSubmissionSuccess(true);
-      onReadingSubmitted?.();
+      onReadingSubmitted?.({ lat: geoState.latitude, lng: geoState.longitude });
     } catch (err: unknown) {
       const error = err as Error;
       console.warn('Submission failed, queueing offline:', error);
       saveToOfflineQueue(payload);
       setSubmissionSuccess(true);
+      onReadingSubmitted?.({ lat: geoState.latitude, lng: geoState.longitude });
     } finally {
       setIsSubmitting(false);
     }
@@ -299,7 +334,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
       <div className="page-header">
         <h2 className="page-title">Acoustic Sound & Frequency Sensing</h2>
         <p className="page-subtitle">
-          Real-time Web Audio API decibel estimation, FFT frequency breakdown, and sound source detection
+          Real-time Web Audio API decibel estimation, FFT frequency breakdown, and GPS place resolution
         </p>
       </div>
 
@@ -314,11 +349,10 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         <div className="alert-box alert-success animate-fade-in">
           <CheckCircle2 size={18} />
           <div className="flex-1">
-            <strong>Reading & Frequency Snapshot Broadcast!</strong>
+            <strong>Reading Successfully Submitted & Broadcast!</strong>
             <p className="text-xs mt-0.5">
-              {isOnline
-                ? `Transmitted ${activeDisplayDb.toFixed(1)} dB (${frequencyData.dominantHz} Hz) to central server & all peer maps via Socket.IO.`
-                : 'Network unavailable. Stored in local offline queue and will sync automatically.'}
+              Recorded <strong>{activeDisplayDb.toFixed(1)} dB ({frequencyData.dominantHz} Hz)</strong> at{' '}
+              <strong>{locationLabel}</strong> ({geoState.latitude?.toFixed(4)}, {geoState.longitude?.toFixed(4)}).
             </p>
           </div>
           <button onClick={onNavigateToMap} className="btn-sm-inline">
@@ -480,7 +514,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </span>
         </div>
 
-        {/* 8-Band Octave EQ Bars */}
         <div className="octave-eq-grid">
           {OCTAVE_LABELS.map((label, idx) => {
             const val = octaveBands[idx] || 10;
@@ -502,7 +535,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           })}
         </div>
 
-        {/* 3 Frequency Bands Summary Progress */}
         <div className="band-breakdown-row mt-4">
           <div className="band-summary-item">
             <div className="band-summary-top">
@@ -539,76 +571,121 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         </div>
       </div>
 
-      {/* Geolocation & Metadata Panel */}
+      {/* Geolocation & Place Name Panel */}
       <div className="location-panel-card">
         <div className="panel-header-row">
           <div className="flex-row-center gap-2">
             <Navigation size={18} className="text-cyan" />
-            <h3 className="panel-title">Geographic Location Tagging</h3>
+            <div>
+              <h3 className="panel-title">Location & Geographic Tagging</h3>
+              <p className="text-xs text-secondary">
+                {locationMode === 'gps'
+                  ? 'Real-Time Device GPS with Reverse Geocoded Address'
+                  : locationMode === 'searched'
+                  ? 'Target Place Selected from Map Search'
+                  : 'Preset Simulation Location Active'}
+              </p>
+            </div>
           </div>
+        </div>
+
+        {/* Location Source Selector Tabs */}
+        <div className="location-mode-selector">
           <button
-            onClick={refreshLocation}
-            disabled={geoState.loading}
-            className="btn-link-action"
-            title="Refresh GPS Fix"
+            type="button"
+            onClick={fetchLiveDeviceGps}
+            className={`location-mode-btn ${locationMode === 'gps' ? 'location-mode-active' : ''}`}
           >
-            <RotateCcw size={13} className={geoState.loading ? 'spin-icon' : ''} />
-            <span>GPS Fix</span>
+            <Compass size={14} className={geoState.loading ? 'spin-icon' : ''} />
+            <span>Use Real Device GPS</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setLocationMode('preset')}
+            className={`location-mode-btn ${locationMode === 'preset' ? 'location-mode-active' : ''}`}
+          >
+            <MapPinned size={14} />
+            <span>Choose Demo Preset</span>
           </button>
         </div>
 
-        <div className="coordinates-grid">
+        {/* Real Address Card */}
+        <div className="resolved-address-box">
+          <div className="flex-between">
+            <span className="text-xs font-semibold text-secondary flex-row-center gap-1">
+              <MapPin size={13} className="text-teal" />
+              Detected Location Name:
+            </span>
+            {locationMode === 'gps' && (
+              <button
+                type="button"
+                onClick={fetchLiveDeviceGps}
+                disabled={geoState.loading || isGeocoding}
+                className="btn-refresh-address"
+                title="Refresh current GPS position and resolve address"
+              >
+                <RotateCcw size={12} className={geoState.loading || isGeocoding ? 'spin-icon' : ''} />
+                <span>{isGeocoding ? 'Resolving...' : 'Refresh Address'}</span>
+              </button>
+            )}
+          </div>
+          <input
+            type="text"
+            value={locationLabel}
+            onChange={(e) => setLocationLabel(e.target.value)}
+            className="text-input-primary font-bold mt-1"
+            placeholder="e.g. My College Campus, Room 204"
+          />
+          <small className="text-xs text-secondary mt-1 block">
+            This name will be saved and displayed on the live noise map and in history logs.
+          </small>
+        </div>
+
+        {/* Coordinates Details Grid */}
+        <div className="coordinates-grid mt-3">
           <div className="coordinate-item">
             <span className="coord-label">Latitude</span>
             <span className="coord-val">
-              {geoState.latitude ? geoState.latitude.toFixed(6) : 'Searching...'}
+              {geoState.latitude ? geoState.latitude.toFixed(6) : 'Searching GPS...'}
             </span>
           </div>
           <div className="coordinate-item">
             <span className="coord-label">Longitude</span>
             <span className="coord-val">
-              {geoState.longitude ? geoState.longitude.toFixed(6) : 'Searching...'}
+              {geoState.longitude ? geoState.longitude.toFixed(6) : 'Searching GPS...'}
             </span>
           </div>
           <div className="coordinate-item">
-            <span className="coord-label">GPS Accuracy</span>
+            <span className="coord-label">GPS Precision</span>
             <span className="coord-accuracy">
               {geoState.accuracy ? `±${geoState.accuracy.toFixed(1)}m` : '±5m'}
             </span>
           </div>
         </div>
 
-        <div className="preset-selector-group">
-          <label className="input-label">Campus Zone Preset:</label>
-          <div className="preset-chips-row">
-            {CAMPUS_PRESETS.map((p) => (
-              <button
-                key={p.name}
-                type="button"
-                onClick={() => handlePresetSelect(p.name)}
-                className={`preset-chip ${selectedPreset === p.name ? 'preset-chip-active' : ''}`}
-              >
-                <MapPin size={12} />
-                <span>{p.name}</span>
-              </button>
-            ))}
+        {/* Demo Preset Chips (Only shown if user selects 'preset' mode) */}
+        {locationMode === 'preset' && (
+          <div className="preset-selector-group animate-fade-in mt-3">
+            <label className="input-label">Select Demo Zone Preset:</label>
+            <div className="preset-chips-row">
+              {CAMPUS_PRESETS.map((p) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  onClick={() => handlePresetSelect(p.name)}
+                  className={`preset-chip ${selectedPreset === p.name ? 'preset-chip-active' : ''}`}
+                >
+                  <MapPin size={12} />
+                  <span>{p.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div className="form-group mt-3">
-          <label className="input-label">Area Description / Notes:</label>
-          <input
-            type="text"
-            value={locationLabel}
-            onChange={(e) => setLocationLabel(e.target.value)}
-            placeholder="e.g., Library 3rd Floor Quiet Study"
-            className="text-input"
-          />
-        </div>
+        )}
 
         <button
           onClick={handleSubmit}
-          disabled={isSubmitting || isSampling}
+          disabled={isSubmitting || isSampling || !geoState.latitude}
           className="btn-submit-reading"
         >
           {isSubmitting ? (
