@@ -1,0 +1,283 @@
+# NoiseSense — Architecture and Feasibility Plan
+
+Based on your decisions, I recommend building NoiseSense as a mobile-first Progressive Web App (PWA) with a central backend, an interactive noise map, and real-time synchronization.
+
+The objective is to deliver three things successfully: a professional user interface, a working end-to-end application, and a clear demonstration of Mobile Computing concepts.
+
+## 1. Finalized project definition
+
+Platform\
+Mobile-first PWA that works in a mobile browser and can be installed on supported devices.
+
+Connectivity\
+Internet-based client-server communication using a hosted backend.
+
+Core demonstration\
+One phone submits a noise reading, the backend processes it, and another phone's map updates automatically.
+
+Quality target\
+A polished dashboard, intuitive measurement flow, interactive map, useful statistics and reliable error handling.
+
+This preserves the central design in your NoiseSense presentation: microphone sensing, GPS tagging, backend aggregation, and a shared real-time heat map.&#x20;
+
+NoiseSense_Presentation.pptx
+
+
+
+## 2. Recommended technology stack
+
+I recommend the following stack for a student capstone. It is modern enough for a professional result without introducing unnecessary complexity.
+
+[React Logo Vector PNG | Modern JavaScript UI Library Emblem  - freepng](https://images.openai.com/static-rsc-4/v_YRxkVgaIO4SDeoNvs8wqFWCUPPpZZsL5kVx_ktDQiKtZgMAHiSkxHMJjDkyVuTICNI24RF-lwOIJxaeydWu09nWdyQFsirfUWfJani7GSpYOfLBE-LNBdDDc_8acLBouV10tSEh5cWrc3WFWUieGkP2unLzBMX37Q6Sq2WqGs?purpose=inline)
+
+Frontend — React + TypeScript + Vite
+
+Application interface and development tooling
+
+Build reusable components for the dashboard, measurement gauge, map, history and settings. TypeScript helps catch errors early.
+
+[Tailwind CSS Wordmark Logo PNG Vector (SVG) Free Download in 2025 | Word mark logo, Css, Vector logo](https://images.openai.com/static-rsc-4/iecL2Ab__eIJwMwWSQ0fsqaBOaRDQFYLB-PDmu7IyVB8sQq_th1AxXOVxgdKZ0__waTfGwLIHYI4No0nWeY3abP5vL0ik4OIKb_SFE1RmSR6viDxHB2N5Jlaoxv7T0mE1rB805ZIq_i5LMEB_tcI-NrF_idJ0XCmapBO7bf09Bs?purpose=inline)
+
+UI styling — Tailwind CSS
+
+Responsive design system
+
+Create consistent spacing, typography, responsive layouts, cards, navigation and polished mobile interactions.
+
+[Pengenalan Node JS Lengkap + Cara Install - Teziger Blog](https://images.openai.com/static-rsc-4/yhb6L_zHD89hq9StVnKJSbhV5YpcjpuXaUiwKe3Yd0Q3p8qLiwTo4xoM6cgkONkAC2R8lMT8_9O1FOAg1f3t88UK4wnh_g7GSnUoengav4u4Cuy4V1KWDeoEr_8EXAvRqrXtBzD4mBtIunoq3hjYaw1TePJfYx8Vj52vuhBOF50?purpose=inline)
+
+Backend — Node.js + Express + TypeScript
+
+REST API and application logic
+
+Receive readings, validate submissions, aggregate measurements and expose the data needed by the frontend.
+
+[Postgresql Logo PNG Transparent With Clear Background ID 473068 |  TOPpng](https://images.openai.com/static-rsc-4/x6sDZ8oKI9URixQ5E82vqCQV1aR38qK7E8n0HKggx6_cD8G7QtlPuHlyO99GalHPJOycjs41bPgfrRTqdHFqayPWJl57hxNttQynREzHXSUSsui_zVAB_ssyc1xdm_msJ5GiDzf23C9Z2RuuoyVCc6J0AbuAqX5Aul_x1J78q2I?purpose=inline)
+
+Database — PostgreSQL with PostGIS
+
+Persistent and geographic data storage
+
+Store readings, timestamps, coordinates and aggregated map cells. PostGIS supports geographic queries.
+
+[Leaflet PNG Logo — Download Free Transparent Logo](https://images.openai.com/static-rsc-4/oc_CJobR8dzxJVyHlkVwYP3RB1YKndauo3zHS1UxeSlUKLEuV9-ZL9eTdX1fYGPpDg2Oy7Sh2QlJtyfN2OJET5nurUsRacVewflNYxRbNqPMY3SRvbU-Yh0ora9UMBwYs6ly9H7xVFjUg3zGERYhWdnz2YdjIkTQ_bli688qjDg?purpose=inline)
+
+Maps — Leaflet + OpenStreetMap
+
+Interactive map and geographic visualization
+
+Show reading locations, map-cell noise levels, a legend and area details.
+
+[A Powerful System for Veterinary Clinics Staff and Management | Touch4IT](https://images.openai.com/static-rsc-4/DNdhlPEmWYO7Fq2AqDxc_VCJkaDBuXsXDNP7aX9CL0hEHdrtGmved_dsTUoxXaljJg4HOXH6mUM6PGU_8b06coY-e21d0PcJvXwColyA-ZkEv7LznAnD-CLaJoRO0sNgQn963LRClY-Fpz0aww8lb8ptBpd8wZH4F2KB27T4_jQ?purpose=inline)
+
+Real-time updates — Socket.IO
+
+Live communication between clients and server
+
+Notify connected clients when aggregated noise-map data changes.
+
+Additional browser capabilities:
+
+- Web Audio API: estimate ambient sound level from microphone samples.
+- Geolocation API: obtain latitude, longitude and reported location accuracy.
+- IndexedDB: temporarily queue readings when the network is unavailable.
+- Service Worker: support PWA installation and selected offline functionality.
+
+These choices largely follow the technologies proposed in your presentation, with PostgreSQL/PostGIS selected as the preferred database option rather than leaving the database decision open.&#x20;
+
+NoiseSense_Presentation.pptx
+
+
+
+## 3. Proposed system architecture
+
+The system will have four main layers: mobile client, sensing services, backend services and data storage.
+
+### Layer 1 — Mobile PWA
+
+React · TypeScript · Tailwind CSS
+
+Dashboard · Measure · Map · History
+
+HTTPS REST API + WebSocket
+
+### Layer 2 — Backend
+
+Node.js · Express · Socket.IO
+
+Validation · Aggregation · Rate limiting · Broadcasting
+
+### Layer 3 — Database
+
+PostgreSQL + PostGIS
+
+Readings · Geographic cells · Timestamps · Aggregates
+
+### Layer 4 — Shared visualization
+
+Leaflet map with live noise updates
+
+Connected phones receive the latest map data.
+
+The fourth layer represents the output of the system, not an additional backend service.
+
+### How a reading travels through the application
+
+1. Capture: A user taps Measure and grants microphone permission. The application samples audio for approximately 10 seconds.
+2. Locate: The application obtains the phone's location and reported GPS accuracy.
+3. Submit: A measurement containing the estimated noise level, coordinates and timestamp is sent to the backend.
+4. Validate and aggregate: The backend checks the input and calculates a representative level for the corresponding geographic grid cell.
+5. Store: The reading is saved in PostgreSQL.
+6. Broadcast: Socket.IO sends updated cell information to connected map clients.
+7. Display: Other users see the updated heat map without refreshing their browsers.
+
+A practical detail: the database should store individual readings separately from aggregated map-cell statistics. This makes history, filtering and recalculation easier.
+
+## 4. UI design direction
+
+I recommend a clean environmental intelligence dashboard with a light background, deep navy text, teal accents and a green-to-yellow-to-red noise scale.
+
+[Urban Sound dashboard by Layo on Dribbble](https://images.openai.com/static-rsc-4/XSsoWSVLMCxGC4bvfdIY47w7ONCjeS6SVh_Hi2QU1bOMaNTXCEtjnTC-m_0jLDlgJtOq0IkCm2yoRj3ZppYtF7aja84HfTaa_-SbIHjwzNmBLJQ821_LWeotUb1_c2hoeqv5ZbsSDIVeMc3vKWfypyhUl6w2YzTQ-YE8wSxDPOU?purpose=inline)
+
+Dashboard
+
+- Current area noise summary
+- Total measurements and monitored areas
+- Recent readings and trends
+- Clear action to start measuring
+
+[Decibel Meter App by Abdillah Syah Putra on Dribbble](https://images.openai.com/static-rsc-4/1fxo5RhPr9v0_ZVtzuFdvNVuKX-L1CZD6zI7XFGFloHGi-L3xBuVwsldDh9BDKdJPmtiweDEVvD8yW4CcMmxSRu0VAGEqDUFIsy9lt9-2FfGWgSuPi_XNGP70Z5zm4GSfYeDZGlg9AXRoiJydybwZk4n9YSzrBJxfRzpQH3bhuU?purpose=inline)
+
+Measure screen
+
+- Large animated level gauge
+- Ten-second measurement progress
+- Location and permission status
+- Save-reading button and success feedback
+
+[Avecion — 360° Acoustic Intelligence Infrastructure](https://images.openai.com/static-rsc-4/a06rTsv2RZtagXfFQNhBSEgRW4F66f_dBq1H6EbTHx57LMJoF5-p7hkS6GO4uV8jwHEK6oxytYGkU_8PUUk7lWPfcR8ny42vLP8i8lVwxRAIaMw8lK9AY7jo5f4FP81XZ8rHb9Hnb47L3UeoHg1CnzfSkMt-LxaYYKmf8Wq_mjU?purpose=inline)
+
+Noise map
+
+- Interactive map with noise overlays
+- Selected area's average and sample count
+- Time filters and map legend
+- Live-update indicator
+
+These images are design references, not screenshots of an implemented application. The final UI should use a consistent design system across all screens.
+
+For the mobile layout, use a bottom navigation bar with Home, Measure, Map and History. On desktop, use a sidebar and a larger map workspace.
+
+## 5. Feasibility assessment
+
+The project is feasible at moderate complexity if we keep the first version focused.
+
+| Feature                    | Feasibility          | Main consideration                            |
+| -------------------------- | -------------------- | --------------------------------------------- |
+| Responsive PWA             | High                 | Browser compatibility and HTTPS               |
+| Microphone measurement     | High for an estimate | Device-dependent calibration                  |
+| GPS tagging                | High                 | User permission and signal quality            |
+| Persistent database        | High                 | Hosted database configuration                 |
+| Live map updates           | High                 | WebSocket connection management               |
+| Noise heat map             | High                 | Enough valid readings per area                |
+| Offline measurement queue  | Moderate             | Storage and retry handling                    |
+| Accurate, calibrated dB(A) | More difficult       | Reference measurements and device differences |
+
+The primary technical risk is not building the UI or connecting the database. It is producing meaningful sound-level estimates across different phone models.
+
+We should clearly label the measurement as an estimated sound level until calibration has been validated. We also should not label a reading harmful solely because it crosses a threshold without accounting for measurement uncertainty and exposure duration.
+
+### What we should not build initially
+
+To keep the project achievable, defer:
+
+- Machine-learning classification of traffic, construction and music.
+- Complex user accounts and social features.
+- Native Android and iOS applications.
+- Advanced city-authority reporting.
+- Predictive noise modelling.
+- Elaborate offline synchronization across devices.
+
+These can be future enhancements rather than requirements for the initial submission.
+
+## 6. Backend API plan
+
+The first version can be implemented with a small set of endpoints.
+
+| Endpoint                          | Purpose                                  |
+| --------------------------------- | ---------------------------------------- |
+| `POST /api/readings`              | Validate and save a new reading          |
+| `GET /api/readings`               | Retrieve recent readings and history     |
+| `GET /api/heatmap`                | Retrieve aggregated geographic cell data |
+| `GET /api/stats`                  | Retrieve dashboard statistics            |
+| Socket.IO event: `heatmap:update` | Notify clients about updated map cells   |
+
+The API should validate coordinate ranges, timestamps and plausible sound-level values. It should also apply submission limits and avoid trusting a client-provided device identifier as proof of authenticity.
+
+We can start with anonymous submissions and no login system. This reduces implementation time and personal-data collection.
+
+## 7. Development plan
+
+### 01
+
+Project foundation
+
+Set up the frontend, backend, database and responsive design system.
+
+### 02
+
+Sensing and location
+
+Implement microphone permissions, level estimation, GPS and reading submission.
+
+### 03
+
+Backend and database
+
+Build validation, storage, aggregation and API responses.
+
+### 04
+
+Live map
+
+Implement the interactive map, geographic cells and Socket.IO updates.
+
+### 05
+
+Dashboard and history
+
+Add summary statistics, measurement history, filters and polished loading/error states.
+
+### 06
+
+Testing and demonstration
+
+Test on multiple phones, verify synchronization, evaluate measurement consistency and prepare the presentation.
+
+## 8. What a successful final demonstration should prove
+
+Your capstone should demonstrate the entire workflow rather than just showing static screens.
+
+A phone captures a measurement and attaches its location.
+
+The backend stores and aggregates the reading.
+
+A second phone receives the updated map automatically.
+
+The user can view reading history and area statistics.
+
+The app handles denied permissions, weak location fixes and failed network requests gracefully.
+
+For a reliable classroom demonstration, we should also seed the database with clearly labelled sample readings from several areas. That allows the map to look populated even before multiple participants contribute real measurements.
+
+My recommendation: Use React, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL/PostGIS, Leaflet and Socket.IO. Implement the complete sensing-to-live-map workflow first, then polish the UI and add history and statistics.
+
+Before we begin implementation, one final decision will help us choose the simplest deployment approach: where do you plan to run the application during your demonstration?
+
+Hosted online — accessible from phones using a public URL.
+
+My laptop — run the backend locally and connect phones over the same Wi-Fi network.
+
+Not decided yet — recommend the easiest reliable option.
+
+Finalize deployment approach

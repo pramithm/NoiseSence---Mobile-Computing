@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#grad)" />
+  <!-- Acoustic Waveform Bars -->
+  <rect x="80" y="216" width="40" height="80" rx="20" fill="#ffffff" />
+  <rect x="150" y="156" width="40" height="200" rx="20" fill="#ffffff" />
+  <rect x="220" y="96" width="40" height="320" rx="20" fill="#ffffff" />
+  <rect x="290" y="176" width="40" height="160" rx="20" fill="#ffffff" />
+  <rect x="360" y="136" width="40" height="240" rx="20" fill="#ffffff" />
+  <rect x="430" y="226" width="40" height="60" rx="20" fill="#ffffff" />
+</svg>

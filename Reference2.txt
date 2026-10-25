@@ -1,0 +1,218 @@
+# NoiseSense — Online Deployment Plan
+
+For your capstone, I recommend a hosted frontend, hosted backend, and managed PostgreSQL database, with one public URL that you can open on your phone or laptop.
+
+This setup lets you demonstrate the complete NoiseSense workflow without depending on your laptop as a server during your presentation.
+
+## 1. Recommended deployment architecture
+
+Student phones and laptops
+
+Open the NoiseSense public URL
+
+Frontend hosting — Vercel
+
+React · TypeScript · Tailwind CSS · PWA
+
+Serves the user interface over HTTPS
+
+Backend hosting — Render
+
+Node.js · Express · Socket.IO
+
+Validates readings, aggregates data and broadcasts updates
+
+Managed database — Neon
+
+PostgreSQL + PostGIS, subject to plan support
+
+Stores readings, timestamps and aggregated data
+
+The architecture is deliberately separated into three deployable services. If the UI needs changes, you can update the frontend without redesigning the database or rewriting the measurement logic.
+
+One important deployment detail: the backend must remain reachable for live updates. Some hosting plans suspend inactive services or impose usage limits, so we should verify the selected plan's current behaviour before committing to it.
+
+## 2. Hosting services to use
+
+[How to Use Vercel - Getting Started Guide (2026) | Delv](https://images.openai.com/static-rsc-4/II9DBEprjDf0_Y2RIUGxgZ4bjOULzr-2p-vKNBRgqy7HlRqGOMqEpPcOwUNksEJ5cF_VNDkA9VOZEQMGM7tEd68wU6Qq1Ie8oBMWk56TuhpHeXCmYhRbaAIW1gPry2H2caHr25d3R9XsGDeBbGjL3gVZdw_ZqTY_kipySshbK7A?purpose=inline)
+
+Frontend: Vercel
+
+Recommended
+
+Deploy the React/Vite application from a GitHub repository. Vercel supports preview and production deployments, which is useful for testing before your final demonstration.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://vercel.com\&sz=32)
+
+Vercel
+
++1
+
+
+
+[Vercel website](https://vercel.com/?utm_source=chatgpt.com)
+
+[Render: $100 Million Series C Extension At $1.5 Billion Valuation Raised For Modern Cloud Platform](https://images.openai.com/static-rsc-4/XQ8Itzkko2ukMle7Uxpew8KfTJDML0AFQIELfD8nzBWnDbB2buV_-AsF1NxFDv08z8p-iC-K-GzCon6hOvM1io703iDnnCW5d-XUwc-1wQc1rJI4dj2LRKYXQ0fbQIER6RcL5ZHsIaa7bzs3Cm8EBYEEKdiNbKqTe6vIudIBfWQ?purpose=inline)
+
+Backend: Render
+
+Deploy the Express server as a web service. It provides a public HTTPS URL and supports WebSocket connections.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://render.com\&sz=32)
+
+Render Docs
+
++1
+
+
+
+Important: Render's free web services spin down after 15 minutes without inbound traffic and can take around a minute to restart. For a live presentation, test this behaviour in advance or use a plan that does not spin down.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://render.com\&sz=32)
+
+Render Docs
+
++1
+
+
+
+[Render website](https://render.com/?utm_source=chatgpt.com)
+
+[Supabase Logo PNG,  Vector (AI, EPS, CDR, PDF, SVG) - iconLogoVector](https://images.openai.com/static-rsc-4/ZWNEwueIa4jX7IEKpIW_ZvVuoMv7nOsWdPj6prThJJQ0b_Hdaj2TjpLMM3E--UH3DlZFvFuaW_7en80O46eYFmbPzAHBLTg5tC347p9Jxt-PfqHdXtVqQqYVLwjnGugv7sybOkq1Oxeuve_jUb8c_HhsjDpmewZufk8XjOfQcYc?purpose=inline)
+
+Database: Supabase
+
+Use its managed PostgreSQL database and enable PostGIS for geographic operations. The official documentation explains how to enable the extension and create spatial indexes.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://supabase.com\&sz=32)
+
+Supabase Docs
+
++1
+
+
+
+[Supabase website](https://supabase.com/?utm_source=chatgpt.com)
+
+[GitHub Integration – Linear](https://images.openai.com/static-rsc-4/rJFYKD22TVU86k5IjJOsVpWjjO4UF9UBvAsMXWxHqUJgB5dep2teKggU8ejIJTXGoK9I9xCXFJyQOBfRHZRjI-wAaq79vvmfpUWLiuL2IomqV9UqwkwjDLUk96L-h3esJA8KfTO2MNWBPSiVeWQuhOkJZH2PmQE9cmpZYL1Vzh8?purpose=inline)
+
+Source control: GitHub
+
+Keep the frontend and backend code in repositories so deployments can be repeated and changes can be tracked.
+
+[GitHub website](https://github.com/?utm_source=chatgpt.com)
+
+These are proposed services, not accounts or deployments that have already been created. Check current plan limits, availability and pricing before choosing a paid option.
+
+## 3. Public URL structure
+
+Once deployed, your application will have URLs similar to these examples; the actual addresses will be assigned by the hosting providers.
+
+| Component    | Example format                                       |
+| ------------ | ---------------------------------------------------- |
+| Frontend     | `https://noisesense-example.vercel.app`              |
+| Backend API  | `https://noisesense-api-example.onrender.com`        |
+| Health check | `https://noisesense-api-example.onrender.com/health` |
+
+Your presentation needs only the frontend URL. The browser will communicate with the backend behind the scenes.
+
+For microphone and location access, the deployed frontend must use HTTPS and request the user's permission. These browser APIs are restricted to secure contexts.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://developer.mozilla.org\&sz=32)
+
+MDN
+
++1
+
+
+
+## 4. Development prerequisites
+
+Before implementation, prepare the following tools on your computer.
+
+## Setup checklist
+
+0 of 6 ready
+
+Node.js LTS and npm
+
+Run the React frontend, install packages and start the Express backend.
+
+Visual Studio Code
+
+Edit and manage the project source code.
+
+Git and GitHub
+
+Track changes and connect the code to hosting services.
+
+Chrome or Edge desktop browser
+
+Inspect errors, network requests and responsive layouts.
+
+Android phone with a modern browser
+
+Test microphone permissions, GPS and the installed PWA.
+
+Hosting accounts
+
+Create accounts on Vercel, Render and Supabase when deployment begins.
+
+You do not need to create every account immediately. We can develop and test locally first.
+
+Downloads and documentation:
+
+- [Node.js](https://nodejs.org/en/download?utm_source=chatgpt.com)
+- [Visual Studio Code](https://code.visualstudio.com/?utm_source=chatgpt.com)
+- [Git](https://git-scm.com/downloads?utm_source=chatgpt.com)
+- [GitHub](https://github.com/?utm_source=chatgpt.com)
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/?utm_source=chatgpt.com)
+
+## 5. Environment configuration
+
+The frontend and backend need a small set of configuration variables.
+
+Frontend — `.env.local`
+
+```
+VITE_API_URL=http://localhost:5000
+```
+
+Use the local URL during development. Replace it with the deployed backend URL for production.
+
+Backend — `.env`
+
+```
+PORT=5000
+DATABASE_URL=your_database_connection_string
+FRONTEND_URL=http://localhost:5173
+```
+
+The database connection string and any credentials must remain on the backend. Never commit `.env` files or expose database passwords in frontend code.
+
+For production, the backend must allow the actual frontend origin through CORS, use the platform-provided port, and configure Socket.IO for the deployed frontend URL. The client should reconnect after network interruptions and fetch the latest map state when it reconnects.
+
+## 6. Deployment and testing sequence
+
+I recommend this order so that we do not attempt to deploy an incomplete application.
+
+1. Develop locally: Create the frontend, backend and database schema. Verify that a reading can be submitted and retrieved.
+2. Test on a phone: Access the development environment through an appropriate secure setup and verify microphone and GPS permissions.
+3. Deploy the database: Create the managed PostgreSQL instance, enable PostGIS, and apply the schema.
+4. Deploy the backend: Configure database credentials, CORS, health checks and Socket.IO. Test the public API.
+5. Deploy the frontend: Connect the repository to Vercel and set the production API URL.
+6. Run an end-to-end test: Open NoiseSense on two phones, submit a measurement from one and confirm that the other receives the updated map.
+7. Prepare for the presentation: Test the public URL, verify database persistence, check hosting sleep behaviour and preload sample data for the map.
+
+## 7. Final recommendations
+
+- Use Vercel + Render + Supabase as the initial hosting combination.
+- Start with anonymous readings and no login system.
+- Keep the backend responsible for validation and aggregation.
+- Store only the sound-level measurements and necessary location metadata; do not upload or retain raw audio.
+- Seed the database with clearly labelled demonstration data, while distinguishing it from live readings.
+- Verify microphone and GPS behaviour on the actual phones you will use for the demonstration.
+
+The most important success criterion is that NoiseSense must work as one connected system, not just as a good-looking frontend.
+
+Next step: Establish the project structure and development configuration, then implement the dashboard and sensing-to-backend workflow in stages. We should not begin with hosting configuration alone; a working local application will make deployment much more predictable.

@@ -1,0 +1,115 @@
+{
+  "readings": [
+    {
+      "id": "read-1792945896601-45363c",
+      "decibel": 42,
+      "latitude": 37.7732,
+      "longitude": -122.417,
+      "accuracy": 4,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Quiet",
+      "source": "Mobile Client (Web Audio API)",
+      "timestamp": "2026-10-25T16:31:36.549Z"
+    },
+    {
+      "id": "read-1792945868390-x6v14t",
+      "decibel": 42,
+      "latitude": 37.7732,
+      "longitude": -122.417,
+      "accuracy": 4,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Quiet",
+      "source": "Mobile Client (Web Audio API)",
+      "timestamp": "2026-10-25T16:31:08.365Z"
+    },
+    {
+      "id": "read-1792945688910-56zk43",
+      "decibel": 62.5,
+      "latitude": 37.7758,
+      "longitude": -122.4182,
+      "accuracy": 4.5,
+      "locationName": "Library Cafe",
+      "category": "Moderate",
+      "source": "Test Script",
+      "timestamp": "2026-10-25T16:28:08.910Z"
+    },
+    {
+      "id": "seed-1",
+      "decibel": 39.4,
+      "latitude": 37.7758,
+      "longitude": -122.4182,
+      "accuracy": 4.2,
+      "locationName": "University Library - 3rd Floor Silence Zone",
+      "category": "Quiet",
+      "timestamp": "2026-10-25T16:10:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-2",
+      "decibel": 72.8,
+      "latitude": 37.7741,
+      "longitude": -122.4205,
+      "accuracy": 5.1,
+      "locationName": "Student Union Cafeteria",
+      "category": "Moderate",
+      "timestamp": "2026-10-25T16:00:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-3",
+      "decibel": 83.2,
+      "latitude": 37.7765,
+      "longitude": -122.4221,
+      "accuracy": 6,
+      "locationName": "University Ave Bus Stop & Transit Hub",
+      "category": "Loud",
+      "timestamp": "2026-10-25T15:50:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-4",
+      "decibel": 91.5,
+      "latitude": 37.7732,
+      "longitude": -122.417,
+      "accuracy": 3.8,
+      "locationName": "Engineering Hall Expansion Construction",
+      "category": "Hazardous",
+      "timestamp": "2026-10-25T15:40:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-5",
+      "decibel": 48.7,
+      "latitude": 37.777,
+      "longitude": -122.416,
+      "accuracy": 5.5,
+      "locationName": "Memorial Quad & Botanical Garden",
+      "category": "Quiet",
+      "timestamp": "2026-10-25T15:30:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-6",
+      "decibel": 64.3,
+      "latitude": 37.7745,
+      "longitude": -122.4148,
+      "accuracy": 4.9,
+      "locationName": "Computer Science Innovation Lab",
+      "category": "Moderate",
+      "timestamp": "2026-10-25T15:15:04.745Z",
+      "source": "Demonstration Baseline"
+    },
+    {
+      "id": "seed-7",
+      "decibel": 76.1,
+      "latitude": 37.7725,
+      "longitude": -122.4215,
+      "accuracy": 6.4,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "timestamp": "2026-10-25T14:55:04.745Z",
+      "source": "Demonstration Baseline"
+    }
+  ],
+  "updatedAt": "2026-10-25T16:25:04.745Z"
+}
