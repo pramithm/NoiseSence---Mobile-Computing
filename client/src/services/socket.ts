@@ -11,6 +11,7 @@ export interface SocketCallbacks {
   onHeatmapUpdate?: (cells: HeatmapCell[]) => void;
   onNewReading?: (reading: NoiseReading) => void;
   onStatsUpdate?: (stats: DashboardStats) => void;
+  onSimulationChange?: (active: boolean) => void;
 }
 
 export function initSocket(callbacks: SocketCallbacks): Socket {
@@ -55,6 +56,10 @@ export function initSocket(callbacks: SocketCallbacks): Socket {
 
   socket.on('stats:update', (stats: DashboardStats) => {
     callbacks.onStatsUpdate?.(stats);
+  });
+
+  socket.on('simulation:status', (data: { active: boolean }) => {
+    callbacks.onSimulationChange?.(data.active);
   });
 
   return socket;

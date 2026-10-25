@@ -12,10 +12,7 @@ const { Pool } = pg;
 let pool = null;
 let usePostgres = false;
 
-// Default campus demo coordinates (around a lively university campus)
-const CAMPUS_CENTER = { lat: 37.7749, lng: -122.4194 }; // San Francisco / Campus reference
-
-// Pre-seeded demo readings to ensure the map and dashboard look rich immediately
+// Pre-seeded demo readings with rich acoustic frequency profiles
 const SEED_READINGS = [
   {
     id: 'seed-1',
@@ -25,8 +22,12 @@ const SEED_READINGS = [
     accuracy: 4.2,
     locationName: 'University Library - 3rd Floor Silence Zone',
     category: 'Quiet',
-    timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 120,
+    frequencyBand: 'Low (Rumble)',
+    frequencyDistribution: { lowPercent: 58, midPercent: 32, highPercent: 10 },
+    estimatedSource: 'HVAC Airflow / Whisper Quiet'
   },
   {
     id: 'seed-2',
@@ -36,8 +37,12 @@ const SEED_READINGS = [
     accuracy: 5.1,
     locationName: 'Student Union Cafeteria',
     category: 'Moderate',
-    timestamp: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 18).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 580,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 24, midPercent: 62, highPercent: 14 },
+    estimatedSource: 'Active Social Babble & Cutlery'
   },
   {
     id: 'seed-3',
@@ -47,8 +52,12 @@ const SEED_READINGS = [
     accuracy: 6.0,
     locationName: 'University Ave Bus Stop & Transit Hub',
     category: 'Loud',
-    timestamp: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 85,
+    frequencyBand: 'Low (Rumble)',
+    frequencyDistribution: { lowPercent: 68, midPercent: 22, highPercent: 10 },
+    estimatedSource: 'Diesel Transit Bus & Traffic Tires'
   },
   {
     id: 'seed-4',
@@ -58,8 +67,12 @@ const SEED_READINGS = [
     accuracy: 3.8,
     locationName: 'Engineering Hall Expansion Construction',
     category: 'Hazardous',
-    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 32).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 3400,
+    frequencyBand: 'High (Machinery/Siren)',
+    frequencyDistribution: { lowPercent: 35, midPercent: 25, highPercent: 40 },
+    estimatedSource: 'Pneumatic Drill & Steel Grinding'
   },
   {
     id: 'seed-5',
@@ -69,8 +82,12 @@ const SEED_READINGS = [
     accuracy: 5.5,
     locationName: 'Memorial Quad & Botanical Garden',
     category: 'Quiet',
-    timestamp: new Date(Date.now() - 1000 * 60 * 55).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 2400,
+    frequencyBand: 'High (Machinery/Siren)',
+    frequencyDistribution: { lowPercent: 20, midPercent: 45, highPercent: 35 },
+    estimatedSource: 'Fountain Water & Ambient Breeze'
   },
   {
     id: 'seed-6',
@@ -80,8 +97,12 @@ const SEED_READINGS = [
     accuracy: 4.9,
     locationName: 'Computer Science Innovation Lab',
     category: 'Moderate',
-    timestamp: new Date(Date.now() - 1000 * 60 * 70).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 450,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 30, midPercent: 55, highPercent: 15 },
+    estimatedSource: 'Collaborative Discussion & Keyboards'
   },
   {
     id: 'seed-7',
@@ -91,12 +112,15 @@ const SEED_READINGS = [
     accuracy: 6.4,
     locationName: 'Campus South Perimeter Road',
     category: 'Loud',
-    timestamp: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
-    source: 'Demonstration Baseline'
+    timestamp: new Date(Date.now() - 1000 * 60 * 85).toISOString(),
+    source: 'Demonstration Baseline',
+    dominantFrequency: 110,
+    frequencyBand: 'Low (Rumble)',
+    frequencyDistribution: { lowPercent: 62, midPercent: 28, highPercent: 10 },
+    estimatedSource: 'Vehicle Traffic & Acceleration'
   }
 ];
 
-// Helper to determine noise category
 export function categorizeDecibels(db) {
   if (db < 50) return { label: 'Quiet', color: '#10b981', level: 'safe' };
   if (db < 70) return { label: 'Moderate', color: '#06b6d4', level: 'acceptable' };
@@ -104,7 +128,43 @@ export function categorizeDecibels(db) {
   return { label: 'Hazardous', color: '#ef4444', level: 'harmful' };
 }
 
-// In-memory / file fallback store
+export function computeWhoGuideline(avgDb) {
+  if (avgDb < 55) {
+    return {
+      compliance: 'Compliant',
+      daytimeLimit: 55,
+      nighttimeLimit: 45,
+      maxSafeExposure: 'Continuous (No Limit)',
+      healthAdvice: 'Acoustically safe environment for extended rest and concentration according to WHO environmental limits.'
+    };
+  }
+  if (avgDb < 70) {
+    return {
+      compliance: 'Caution',
+      daytimeLimit: 55,
+      nighttimeLimit: 45,
+      maxSafeExposure: 'Up to 8–12 hours',
+      healthAdvice: 'Acceptable daytime background sound. Sensitive individuals may experience mild cognitive fatigue over prolonged periods.'
+    };
+  }
+  if (avgDb < 85) {
+    return {
+      compliance: 'Exceeded',
+      daytimeLimit: 55,
+      nighttimeLimit: 45,
+      maxSafeExposure: 'Limit to 4–8 hours without breaks',
+      healthAdvice: 'Exceeds WHO community guideline limits. Chronic exposure contributes to cardiovascular stress and elevated annoyance.'
+    };
+  }
+  return {
+    compliance: 'Exceeded',
+    daytimeLimit: 55,
+    nighttimeLimit: 45,
+    maxSafeExposure: 'Under 15–30 minutes without PPE',
+    healthAdvice: 'Occupational hearing risk threshold exceeded. Certified ear protection or rapid egress strongly recommended.'
+  };
+}
+
 let memoryStore = {
   readings: [...SEED_READINGS],
   updatedAt: new Date().toISOString()
@@ -153,7 +213,6 @@ export async function initDatabase() {
       console.log('Connected to PostgreSQL successfully.');
       usePostgres = true;
 
-      // Create schema with PostGIS extension support if available
       await client.query(`
         CREATE EXTENSION IF NOT EXISTS postgis;
         CREATE TABLE IF NOT EXISTS noise_readings (
@@ -165,27 +224,41 @@ export async function initDatabase() {
           location_name VARCHAR(255),
           category VARCHAR(32),
           source VARCHAR(64),
+          dominant_frequency NUMERIC(7,1),
+          frequency_band VARCHAR(64),
+          estimated_source VARCHAR(128),
+          freq_low NUMERIC(4,1),
+          freq_mid NUMERIC(4,1),
+          freq_high NUMERIC(4,1),
           created_at TIMESTAMPTZ DEFAULT NOW()
         );
         CREATE INDEX IF NOT EXISTS idx_noise_coords ON noise_readings (latitude, longitude);
         CREATE INDEX IF NOT EXISTS idx_noise_created ON noise_readings (created_at DESC);
       `);
 
-      // Check if table is empty, seed if necessary
       const res = await client.query('SELECT COUNT(*) FROM noise_readings');
       if (parseInt(res.rows[0].count, 10) === 0) {
         console.log('Seeding PostgreSQL with initial demonstration readings...');
         for (const r of SEED_READINGS) {
           await client.query(
-            `INSERT INTO noise_readings (id, decibel, latitude, longitude, accuracy, location_name, category, source, created_at)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-            [r.id, r.decibel, r.latitude, r.longitude, r.accuracy, r.locationName, r.category, r.source, r.timestamp]
+            `INSERT INTO noise_readings (
+              id, decibel, latitude, longitude, accuracy, location_name, category, source,
+              dominant_frequency, frequency_band, estimated_source, freq_low, freq_mid, freq_high, created_at
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`,
+            [
+              r.id, r.decibel, r.latitude, r.longitude, r.accuracy, r.locationName, r.category, r.source,
+              r.dominantFrequency || 440, r.frequencyBand || 'Mid', r.estimatedSource || 'Ambient',
+              r.frequencyDistribution?.lowPercent || 30,
+              r.frequencyDistribution?.midPercent || 50,
+              r.frequencyDistribution?.highPercent || 20,
+              r.timestamp
+            ]
           );
         }
       }
       client.release();
     } catch (error) {
-      console.warn('PostgreSQL connection failed, falling back to local persistent store:', error.message);
+      console.warn('PostgreSQL connection failed, using local store:', error.message);
       usePostgres = false;
     }
   } else {
@@ -196,7 +269,6 @@ export async function initDatabase() {
   return { usePostgres };
 }
 
-// Spatial grid resolution (~0.002 deg is approx 200m)
 const GRID_SIZE = 0.002;
 
 export function snapToGrid(lat, lng) {
@@ -217,14 +289,30 @@ export async function insertReading(readingData) {
     locationName: readingData.locationName || `Lat ${readingData.latitude.toFixed(3)}, Lng ${readingData.longitude.toFixed(3)}`,
     category: categoryInfo.label,
     source: readingData.source || 'Live Mobile Contribution',
+    dominantFrequency: readingData.dominantFrequency || Math.round(200 + Math.random() * 800),
+    frequencyBand: readingData.frequencyBand || (readingData.decibel < 50 ? 'Low (Rumble)' : 'Mid (Speech/Urban)'),
+    frequencyDistribution: readingData.frequencyDistribution || {
+      lowPercent: Math.round(25 + Math.random() * 30),
+      midPercent: Math.round(40 + Math.random() * 25),
+      highPercent: 15
+    },
+    estimatedSource: readingData.estimatedSource || (readingData.decibel > 80 ? 'Transit Traffic / Construction' : 'Ambient Conversation'),
     timestamp: readingData.timestamp || new Date().toISOString()
   };
 
   if (usePostgres && pool) {
     await pool.query(
-      `INSERT INTO noise_readings (id, decibel, latitude, longitude, accuracy, location_name, category, source, created_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-      [reading.id, reading.decibel, reading.latitude, reading.longitude, reading.accuracy, reading.locationName, reading.category, reading.source, reading.timestamp]
+      `INSERT INTO noise_readings (
+        id, decibel, latitude, longitude, accuracy, location_name, category, source,
+        dominant_frequency, frequency_band, estimated_source, freq_low, freq_mid, freq_high, created_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`,
+      [
+        reading.id, reading.decibel, reading.latitude, reading.longitude, reading.accuracy,
+        reading.locationName, reading.category, reading.source,
+        reading.dominantFrequency, reading.frequencyBand, reading.estimatedSource,
+        reading.frequencyDistribution.lowPercent, reading.frequencyDistribution.midPercent, reading.frequencyDistribution.highPercent,
+        reading.timestamp
+      ]
     );
   } else {
     memoryStore.readings.unshift(reading);
@@ -237,13 +325,26 @@ export async function insertReading(readingData) {
 export async function getRecentReadings(limit = 50) {
   if (usePostgres && pool) {
     const res = await pool.query(
-      `SELECT id, decibel, latitude, longitude, accuracy, location_name AS "locationName", category, source, created_at AS "timestamp"
+      `SELECT id, decibel, latitude, longitude, accuracy, location_name AS "locationName",
+              category, source, dominant_frequency AS "dominantFrequency", frequency_band AS "frequencyBand",
+              estimated_source AS "estimatedSource", freq_low, freq_mid, freq_high, created_at AS "timestamp"
        FROM noise_readings
        ORDER BY created_at DESC
        LIMIT $1`,
       [limit]
     );
-    return res.rows.map(r => ({ ...r, decibel: parseFloat(r.decibel), latitude: parseFloat(r.latitude), longitude: parseFloat(r.longitude) }));
+    return res.rows.map(r => ({
+      ...r,
+      decibel: parseFloat(r.decibel),
+      latitude: parseFloat(r.latitude),
+      longitude: parseFloat(r.longitude),
+      dominantFrequency: r.dominantFrequency ? parseFloat(r.dominantFrequency) : 440,
+      frequencyDistribution: {
+        lowPercent: r.freq_low ? parseFloat(r.freq_low) : 30,
+        midPercent: r.freq_mid ? parseFloat(r.freq_mid) : 50,
+        highPercent: r.freq_high ? parseFloat(r.freq_high) : 20
+      }
+    }));
   }
 
   return memoryStore.readings.slice(0, limit);
@@ -264,6 +365,9 @@ export async function getHeatmapCells() {
         count: 0,
         minDb: r.decibel,
         maxDb: r.decibel,
+        freqSums: { low: 0, mid: 0, high: 0 },
+        dominantHzSum: 0,
+        sources: {},
         readings: [],
         lastUpdated: r.timestamp
       });
@@ -274,17 +378,55 @@ export async function getHeatmapCells() {
     cell.count += 1;
     cell.minDb = Math.min(cell.minDb, r.decibel);
     cell.maxDb = Math.max(cell.maxDb, r.decibel);
+
+    const freqDist = r.frequencyDistribution || { lowPercent: 30, midPercent: 50, highPercent: 20 };
+    cell.freqSums.low += freqDist.lowPercent;
+    cell.freqSums.mid += freqDist.midPercent;
+    cell.freqSums.high += freqDist.highPercent;
+    cell.dominantHzSum += (r.dominantFrequency || 440);
+
+    const src = r.estimatedSource || 'Ambient Noise';
+    cell.sources[src] = (cell.sources[src] || 0) + 1;
+
     if (new Date(r.timestamp) > new Date(cell.lastUpdated)) {
       cell.lastUpdated = r.timestamp;
     }
-    if (cell.readings.length < 5) {
-      cell.readings.push({ id: r.id, decibel: r.decibel, timestamp: r.timestamp, locationName: r.locationName });
+    if (cell.readings.length < 6) {
+      cell.readings.push({
+        id: r.id,
+        decibel: r.decibel,
+        timestamp: r.timestamp,
+        locationName: r.locationName,
+        dominantFrequency: r.dominantFrequency,
+        estimatedSource: r.estimatedSource
+      });
     }
   }
 
   const cells = Array.from(cellMap.values()).map(cell => {
     const avgDb = parseFloat((cell.totalDb / cell.count).toFixed(1));
     const cat = categorizeDecibels(avgDb);
+    const avgLow = Math.round(cell.freqSums.low / cell.count);
+    const avgMid = Math.round(cell.freqSums.mid / cell.count);
+    const avgHigh = Math.round(cell.freqSums.high / cell.count);
+    const avgHz = Math.round(cell.dominantHzSum / cell.count);
+
+    // Most common source in this zone
+    let prevailingSource = Object.keys(cell.sources).sort((a, b) => cell.sources[b] - cell.sources[a])[0] || 'Ambient Acoustic';
+
+    // WHO compliance
+    const whoGuideline = computeWhoGuideline(avgDb);
+
+    // Simulated 6-hour acoustic trend curve for this zone
+    const hourlyTrend = [
+      { hour: '08:00', db: Math.max(35, parseFloat((avgDb - 8 + Math.random() * 4).toFixed(1))) },
+      { hour: '11:00', db: Math.max(35, parseFloat((avgDb + 2 + Math.random() * 3).toFixed(1))) },
+      { hour: '13:00', db: Math.max(35, parseFloat((avgDb + 4 + Math.random() * 3).toFixed(1))) },
+      { hour: '15:00', db: Math.max(35, parseFloat((avgDb + 1 + Math.random() * 3).toFixed(1))) },
+      { hour: '18:00', db: Math.max(35, parseFloat((avgDb + 5 + Math.random() * 4).toFixed(1))) },
+      { hour: 'Now', db: avgDb }
+    ];
+
     return {
       cellId: cell.cellId,
       latitude: cell.lat,
@@ -297,6 +439,12 @@ export async function getHeatmapCells() {
       color: cat.color,
       level: cat.level,
       lastUpdated: cell.lastUpdated,
+      dominantFrequency: avgHz,
+      frequencyBand: avgHz < 250 ? 'Low (Rumble)' : avgHz < 4000 ? 'Mid (Speech/Urban)' : 'High (Machinery/Siren)',
+      frequencyDistribution: { lowPercent: avgLow, midPercent: avgMid, highPercent: avgHigh },
+      estimatedSource: prevailingSource,
+      whoGuideline,
+      hourlyTrend,
       recentSamples: cell.readings
     };
   });
@@ -317,7 +465,8 @@ export async function getStats() {
       minNoise: 0,
       loudestArea: 'None',
       quietestArea: 'None',
-      storageEngine: usePostgres ? 'PostgreSQL (PostGIS)' : 'Local File Persistence'
+      storageEngine: usePostgres ? 'PostgreSQL (PostGIS)' : 'Local File Persistence',
+      frequencyAverages: { lowPercent: 33, midPercent: 45, highPercent: 22, predominantSource: 'Ambient Baseline' }
     };
   }
 
@@ -325,9 +474,17 @@ export async function getStats() {
   let max = readings[0];
   let min = readings[0];
 
+  let lowSum = 0;
+  let midSum = 0;
+  let highSum = 0;
+
   for (const r of readings) {
     if (r.decibel > max.decibel) max = r;
     if (r.decibel < min.decibel) min = r;
+    const dist = r.frequencyDistribution || { lowPercent: 30, midPercent: 50, highPercent: 20 };
+    lowSum += dist.lowPercent;
+    midSum += dist.midPercent;
+    highSum += dist.highPercent;
   }
 
   return {
@@ -338,7 +495,13 @@ export async function getStats() {
     minNoise: min.decibel,
     loudestArea: max.locationName || `${max.latitude}, ${max.longitude}`,
     quietestArea: min.locationName || `${min.latitude}, ${min.longitude}`,
-    storageEngine: usePostgres ? 'PostgreSQL (PostGIS)' : 'Local Persistent Engine'
+    storageEngine: usePostgres ? 'PostgreSQL (PostGIS)' : 'Local Persistent Engine',
+    frequencyAverages: {
+      lowPercent: Math.round(lowSum / readings.length),
+      midPercent: Math.round(midSum / readings.length),
+      highPercent: Math.round(highSum / readings.length),
+      predominantSource: max.estimatedSource || 'Urban Traffic & Social Activity'
+    }
   };
 }
 
@@ -347,9 +510,16 @@ export async function resetToDemoSeed() {
     await pool.query('DELETE FROM noise_readings');
     for (const r of SEED_READINGS) {
       await pool.query(
-        `INSERT INTO noise_readings (id, decibel, latitude, longitude, accuracy, location_name, category, source, created_at)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-        [r.id, r.decibel, r.latitude, r.longitude, r.accuracy, r.locationName, r.category, r.source, r.timestamp]
+        `INSERT INTO noise_readings (
+          id, decibel, latitude, longitude, accuracy, location_name, category, source,
+          dominant_frequency, frequency_band, estimated_source, freq_low, freq_mid, freq_high, created_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`,
+        [
+          r.id, r.decibel, r.latitude, r.longitude, r.accuracy, r.locationName, r.category, r.source,
+          r.dominantFrequency, r.frequencyBand, r.estimatedSource,
+          r.frequencyDistribution.lowPercent, r.frequencyDistribution.midPercent, r.frequencyDistribution.highPercent,
+          r.timestamp
+        ]
       );
     }
   } else {

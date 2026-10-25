@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Wifi, WifiOff, RefreshCw, Moon, Sun, Database } from 'lucide-react';
+import { Activity, Wifi, WifiOff, RefreshCw, Moon, Sun, Database, Zap } from 'lucide-react';
 import type { SocketStatus } from '../services/socket';
 import { resetDemoSeed } from '../services/api';
 
@@ -11,6 +11,8 @@ interface HeaderProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
   onRefreshData: () => void;
+  isSimulating?: boolean;
+  onToggleSimulation?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -20,7 +22,9 @@ export const Header: React.FC<HeaderProps> = ({
   onSyncOffline,
   isDarkMode,
   onToggleTheme,
-  onRefreshData
+  onRefreshData,
+  isSimulating = false,
+  onToggleSimulation
 }) => {
   const [isResetting, setIsResetting] = React.useState(false);
 
@@ -57,6 +61,18 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Status Indicators & Actions */}
         <div className="header-actions">
+          {/* Live Multi-Node Simulator Stream Toggle */}
+          {onToggleSimulation && (
+            <button
+              onClick={onToggleSimulation}
+              className={`stream-toggle-pill ${isSimulating ? 'stream-active' : ''}`}
+              title={isSimulating ? 'Live campus streaming is ACTIVE (Simulating crowd readings every 3s)' : 'Click to start real-time multi-node campus stream'}
+            >
+              <Zap size={13} className={isSimulating ? 'pulse-icon' : ''} />
+              <span className="pill-text">{isSimulating ? 'Live Stream ON' : 'Live Stream'}</span>
+            </button>
+          )}
+
           {/* Real-time Socket Indicator */}
           <div
             className={`status-pill ${

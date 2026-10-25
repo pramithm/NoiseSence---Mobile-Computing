@@ -9,13 +9,16 @@ import {
   RotateCcw,
   Sparkles,
   MapPin,
-  Send
+  Send,
+  Activity,
+  Radio,
+  SlidersHorizontal
 } from 'lucide-react';
 import { AudioNoiseMeter } from '../services/audioMeter';
 import { requestCurrentLocation, CAMPUS_PRESETS } from '../services/geolocation';
 import { submitReading } from '../services/api';
 import { saveToOfflineQueue } from '../services/offlineQueue';
-import type { GeolocationState } from '../types';
+import type { GeolocationState, FrequencyBreakdown } from '../types';
 
 interface MeasureTabProps {
   onReadingSubmitted?: () => void;
@@ -34,6 +37,17 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   const [peakDb, setPeakDb] = useState<number>(42.0);
   const [calibrationOffset, setCalibrationOffset] = useState<number>(96.0);
   const [showCalibration, setShowCalibration] = useState<boolean>(false);
+
+  // Frequency analysis state
+  const [frequencyData, setFrequencyData] = useState<FrequencyBreakdown>({
+    lowPercent: 28,
+    midPercent: 54,
+    highPercent: 18,
+    dominantHz: 440,
+    bandName: 'Mid (Speech/Urban)',
+    estimatedSource: 'Human Conversation / Ambient'
+  });
+  const [octaveBands, setOctaveBands] = useState<number[]>([15, 25, 45, 60, 50, 30, 20, 10]);
 
   // 10-second capture progress
   const [sampleProgress, setSampleProgress] = useState<number>(0);
@@ -57,12 +71,10 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // AudioMeter reference & Canvas reference
   const meterRef = useRef<AudioNoiseMeter | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const timerIntervalRef = useRef<number | null>(null);
 
-  // Category determination
   const getCategoryDetails = (db: number) => {
     if (db < 50) return { label: 'Quiet', color: 'var(--color-emerald)', desc: 'Library / Study standard' };
     if (db < 70) return { label: 'Moderate', color: 'var(--color-cyan)', desc: 'Normal conversation' };
@@ -73,7 +85,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   const activeDisplayDb = capturedAverage !== null ? capturedAverage : currentDb;
   const category = getCategoryDetails(activeDisplayDb);
 
-  // Draw Audio Spectrum Visualizer
   const handleSpectrumUpdate = useCallback((freqData: Uint8Array) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -84,17 +95,16 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     const height = canvas.height;
     ctx.clearRect(0, 0, width, height);
 
-    const barCount = 32;
+    const barCount = 36;
     const barWidth = (width / barCount) - 2;
 
     for (let i = 0; i < barCount; i++) {
-      const value = freqData[i * 2] || 0;
+      const value = freqData[i * 3] || 0;
       const percent = value / 255;
       const barHeight = Math.max(3, percent * height);
       const x = i * (barWidth + 2);
       const y = height - barHeight;
 
-      // Gradient color based on intensity
       const grad = ctx.createLinearGradient(0, height, 0, 0);
       grad.addColorStop(0, '#06b6d4');
       grad.addColorStop(1, percent > 0.7 ? '#ef4444' : percent > 0.4 ? '#f59e0b' : '#10b981');
@@ -106,7 +116,11 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   }, []);
 
-  // Request location on mount
+  const handleFrequencyUpdate = useCallback((breakdown: FrequencyBreakdown, bands: number[]) => {
+    setFrequencyData(breakdown);
+    setOctaveBands(bands);
+  }, []);
+
   useEffect(() => {
     refreshLocation();
   }, []);
@@ -116,7 +130,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     const result = await requestCurrentLocation();
     setGeoState(result);
     if (result.latitude && result.longitude) {
-      // Find closest preset or format coordinates
       const matched = CAMPUS_PRESETS.find(
         p => Math.abs(p.lat - result.latitude!) < 0.001 && Math.abs(p.lng - result.longitude!) < 0.001
       );
@@ -129,7 +142,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  // Select Preset Handler
   const handlePresetSelect = (presetName: string) => {
     setSelectedPreset(presetName);
     const found = CAMPUS_PRESETS.find(p => p.name === presetName);
@@ -145,7 +157,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  // Start 10-Second Acoustic Sample
   const startSampling = async () => {
     setErrorMessage(null);
     setSubmissionSuccess(false);
@@ -163,14 +174,14 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
             setPeakDb(peak);
             setSampleSamples(prev => [...prev, db]);
           },
-          onSpectrumUpdate: handleSpectrumUpdate
+          onSpectrumUpdate: handleSpectrumUpdate,
+          onFrequencyUpdate: handleFrequencyUpdate
         });
       }
 
       await meterRef.current.start();
       setIsSampling(true);
 
-      // Start 10-second countdown
       const startTime = Date.now();
       const durationMs = 10000;
 
@@ -192,7 +203,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  // Stop sampling & compute representative average
   const stopSampling = () => {
     if (timerIntervalRef.current) {
       clearInterval(timerIntervalRef.current);
@@ -206,7 +216,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
 
     setIsSampling(false);
 
-    // Calculate average over collected samples
     setSampleSamples(samples => {
       if (samples.length > 0) {
         const sum = samples.reduce((a, b) => a + b, 0);
@@ -217,7 +226,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     });
   };
 
-  // Clean up on unmount
   useEffect(() => {
     return () => {
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
@@ -225,7 +233,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     };
   }, []);
 
-  // Update calibration
   const handleCalibrationChange = (val: number) => {
     setCalibrationOffset(val);
     if (meterRef.current) {
@@ -233,7 +240,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  // Submit reading to backend or offline queue
   const handleSubmit = async () => {
     if (!geoState.latitude || !geoState.longitude) {
       setErrorMessage('Location coordinates required. Please select a campus zone or enable GPS.');
@@ -250,7 +256,15 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
       longitude: geoState.longitude,
       accuracy: geoState.accuracy || 5.0,
       locationName: locationLabel || 'Mobile Acoustic Measurement',
-      source: 'Mobile Client (Web Audio API)',
+      source: 'Mobile Contributor (Web Audio API)',
+      dominantFrequency: frequencyData.dominantHz,
+      frequencyBand: frequencyData.bandName,
+      frequencyDistribution: {
+        lowPercent: frequencyData.lowPercent,
+        midPercent: frequencyData.midPercent,
+        highPercent: frequencyData.highPercent
+      },
+      estimatedSource: frequencyData.estimatedSource,
       timestamp: new Date().toISOString()
     };
 
@@ -273,24 +287,22 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  // SVG Gauge calculations
-  // Gauge range: 30 to 110 dB (span = 80 dB)
   const minGauge = 30;
   const maxGauge = 110;
   const normalizedValue = Math.min(Math.max((activeDisplayDb - minGauge) / (maxGauge - minGauge), 0), 1);
   const strokeDashoffset = 440 - (440 * 0.75 * normalizedValue);
 
+  const OCTAVE_LABELS = ['63Hz', '125Hz', '250Hz', '500Hz', '1kHz', '2kHz', '4kHz', '8kHz'];
+
   return (
     <div className="tab-page-container">
-      {/* Title & Status */}
       <div className="page-header">
-        <h2 className="page-title">Acoustic Sound Sensing</h2>
+        <h2 className="page-title">Acoustic Sound & Frequency Sensing</h2>
         <p className="page-subtitle">
-          Web Audio API continuous acoustic estimation with 10-second noise averaging
+          Real-time Web Audio API decibel estimation, FFT frequency breakdown, and sound source detection
         </p>
       </div>
 
-      {/* Error / Alert Display */}
       {errorMessage && (
         <div className="alert-box alert-error">
           <AlertCircle size={18} />
@@ -298,15 +310,14 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         </div>
       )}
 
-      {/* Submission Success Toast */}
       {submissionSuccess && (
         <div className="alert-box alert-success animate-fade-in">
           <CheckCircle2 size={18} />
           <div className="flex-1">
-            <strong>Reading Broadcast Successfully!</strong>
+            <strong>Reading & Frequency Snapshot Broadcast!</strong>
             <p className="text-xs mt-0.5">
               {isOnline
-                ? 'Updated live map and synchronized with all connected peers via Socket.IO.'
+                ? `Transmitted ${activeDisplayDb.toFixed(1)} dB (${frequencyData.dominantHz} Hz) to central server & all peer maps via Socket.IO.`
                 : 'Network unavailable. Stored in local offline queue and will sync automatically.'}
             </p>
           </div>
@@ -318,7 +329,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
 
       {/* Main Gauge & Visualizer Card */}
       <div className="gauge-card">
-        {/* Gauge Top Bar */}
         <div className="gauge-top-bar">
           <span
             className="category-pill"
@@ -327,16 +337,23 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
             {category.label}
           </span>
 
-          <div className="gauge-peak-badge">
-            <span>Peak:</span>
-            <strong>{peakDb.toFixed(1)} dB</strong>
+          <div className="flex-row-center gap-3">
+            <div className="frequency-dominant-badge">
+              <Activity size={12} className="text-cyan" />
+              <span>Pitch:</span>
+              <strong>{frequencyData.dominantHz} Hz</strong>
+            </div>
+
+            <div className="gauge-peak-badge">
+              <span>Peak:</span>
+              <strong>{peakDb.toFixed(1)} dB</strong>
+            </div>
           </div>
         </div>
 
         {/* SVG Circular Decibel Arc Gauge */}
         <div className="gauge-svg-wrapper">
           <svg className="gauge-svg" viewBox="0 0 200 200">
-            {/* Background Track */}
             <circle
               className="gauge-bg-circle"
               cx="100"
@@ -346,7 +363,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
               strokeDashoffset="110"
               strokeLinecap="round"
             />
-            {/* Active Arc */}
             <circle
               className="gauge-progress-circle"
               cx="100"
@@ -359,7 +375,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
             />
           </svg>
 
-          {/* Central Numerical Display */}
           <div className="gauge-center-content">
             <span className="gauge-db-number" style={{ color: category.color }}>
               {activeDisplayDb.toFixed(1)}
@@ -373,15 +388,22 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         <div className="visualizer-container">
           <canvas
             ref={canvasRef}
-            width={280}
-            height={42}
+            width={320}
+            height={46}
             className="spectrum-canvas"
           />
         </div>
 
+        {/* Sound Signature Banner */}
+        <div className="sound-signature-pill">
+          <Radio size={13} className="text-teal" />
+          <span className="text-xs font-semibold">Detected Profile:</span>
+          <span className="text-xs text-primary font-bold">{frequencyData.estimatedSource}</span>
+        </div>
+
         {/* 10-Second Progress Indicator */}
         {isSampling && (
-          <div className="sampling-progress-wrapper animate-fade-in">
+          <div className="sampling-progress-wrapper animate-fade-in mt-3">
             <div className="sampling-progress-header">
               <span className="sampling-progress-label">
                 <Sparkles size={14} className="spin-icon" />
@@ -401,11 +423,11 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         )}
 
         {/* Capture / Sampling Controls */}
-        <div className="gauge-actions-row">
+        <div className="gauge-actions-row mt-3">
           {!isSampling ? (
             <button onClick={startSampling} className="btn-measure-start">
               <Play size={20} fill="currentColor" />
-              <span>{capturedAverage ? 'Re-sample (10s)' : 'Start 10s Sample'}</span>
+              <span>{capturedAverage ? 'Re-sample 10s' : 'Start 10s Sample'}</span>
             </button>
           ) : (
             <button onClick={stopSampling} className="btn-measure-stop">
@@ -423,7 +445,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </button>
         </div>
 
-        {/* Microphone Calibration Offset Accordion */}
+        {/* Calibration Drawer */}
         {showCalibration && (
           <div className="calibration-drawer animate-fade-in">
             <div className="calibration-header">
@@ -446,6 +468,77 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         )}
       </div>
 
+      {/* Real-time Frequency Spectrum & Octave Bands Card */}
+      <div className="frequency-card">
+        <div className="frequency-card-header">
+          <div className="flex-row-center gap-2">
+            <SlidersHorizontal size={17} className="text-teal" />
+            <h3 className="panel-title">Real-Time Frequency Octave Bands</h3>
+          </div>
+          <span className="frequency-dominant-badge">
+            Peak: <strong>{frequencyData.dominantHz} Hz</strong>
+          </span>
+        </div>
+
+        {/* 8-Band Octave EQ Bars */}
+        <div className="octave-eq-grid">
+          {OCTAVE_LABELS.map((label, idx) => {
+            const val = octaveBands[idx] || 10;
+            return (
+              <div key={label} className="octave-col">
+                <span className="octave-val">{val}%</span>
+                <div className="octave-track">
+                  <div
+                    className="octave-fill"
+                    style={{
+                      height: `${Math.max(8, val)}%`,
+                      backgroundColor: idx < 2 ? '#f59e0b' : idx < 6 ? '#06b6d4' : '#ef4444'
+                    }}
+                  />
+                </div>
+                <span className="octave-label">{label}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* 3 Frequency Bands Summary Progress */}
+        <div className="band-breakdown-row mt-4">
+          <div className="band-summary-item">
+            <div className="band-summary-top">
+              <span className="text-xs font-semibold">Low (20–250 Hz)</span>
+              <span className="font-mono font-bold text-amber text-xs">{frequencyData.lowPercent}%</span>
+            </div>
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill bg-amber" style={{ width: `${frequencyData.lowPercent}%` }} />
+            </div>
+            <small className="text-secondary text-xs">Rumble, engines, HVAC</small>
+          </div>
+
+          <div className="band-summary-item">
+            <div className="band-summary-top">
+              <span className="text-xs font-semibold">Mid (250–4000 Hz)</span>
+              <span className="font-mono font-bold text-cyan text-xs">{frequencyData.midPercent}%</span>
+            </div>
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill bg-cyan" style={{ width: `${frequencyData.midPercent}%` }} />
+            </div>
+            <small className="text-secondary text-xs">Human speech, dialogue</small>
+          </div>
+
+          <div className="band-summary-item">
+            <div className="band-summary-top">
+              <span className="text-xs font-semibold">High (4000+ Hz)</span>
+              <span className="font-mono font-bold text-rose text-xs">{frequencyData.highPercent}%</span>
+            </div>
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill bg-rose" style={{ width: `${frequencyData.highPercent}%` }} />
+            </div>
+            <small className="text-secondary text-xs">Sirens, grinding, hiss</small>
+          </div>
+        </div>
+      </div>
+
       {/* Geolocation & Metadata Panel */}
       <div className="location-panel-card">
         <div className="panel-header-row">
@@ -464,7 +557,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </button>
         </div>
 
-        {/* GPS Coordinate Display */}
         <div className="coordinates-grid">
           <div className="coordinate-item">
             <span className="coord-label">Latitude</span>
@@ -486,7 +578,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </div>
         </div>
 
-        {/* Quick Campus Presets (Ideal for classroom testing & presentations) */}
         <div className="preset-selector-group">
           <label className="input-label">Campus Zone Preset:</label>
           <div className="preset-chips-row">
@@ -504,7 +595,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </div>
         </div>
 
-        {/* Custom Location Name / Notes */}
         <div className="form-group mt-3">
           <label className="input-label">Area Description / Notes:</label>
           <input
@@ -516,7 +606,6 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           />
         </div>
 
-        {/* Submit Reading CTA */}
         <button
           onClick={handleSubmit}
           disabled={isSubmitting || isSampling}
@@ -525,12 +614,12 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           {isSubmitting ? (
             <>
               <RotateCcw size={18} className="spin-icon" />
-              <span>Transmitting Reading...</span>
+              <span>Transmitting Reading & Frequency Snapshot...</span>
             </>
           ) : (
             <>
               <Send size={18} />
-              <span>Submit & Broadcast Reading ({activeDisplayDb.toFixed(1)} dB)</span>
+              <span>Submit & Broadcast Reading ({activeDisplayDb.toFixed(1)} dB · {frequencyData.dominantHz} Hz)</span>
             </>
           )}
         </button>

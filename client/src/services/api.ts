@@ -54,6 +54,15 @@ export async function resetDemoSeed(): Promise<{ message: string }> {
   return res.json();
 }
 
+export async function toggleSimulation(): Promise<{ active: boolean; message: string }> {
+  const res = await fetch(`${API_BASE}/api/simulation/toggle`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+  return res.json();
+}
+
 export async function checkServerHealth(): Promise<boolean> {
   try {
     const res = await fetch(`${API_BASE}/api/health`, { method: 'GET' });

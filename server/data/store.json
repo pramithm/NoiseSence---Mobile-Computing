@@ -1,6 +1,2077 @@
 {
   "readings": [
     {
+      "id": "read-1792947295608-3glrgz",
+      "decibel": 74.7,
+      "latitude": 37.772487,
+      "longitude": -122.421516,
+      "accuracy": 5.3,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 138,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:54:55.608Z"
+    },
+    {
+      "id": "read-1792947292606-ffzw7s",
+      "decibel": 77.7,
+      "latitude": 37.77247,
+      "longitude": -122.421513,
+      "accuracy": 4.8,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 135,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:54:52.606Z"
+    },
+    {
+      "id": "read-1792947289595-agvcj5",
+      "decibel": 42.3,
+      "latitude": 37.775781,
+      "longitude": -122.418287,
+      "accuracy": 3.7,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 108,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:54:49.595Z"
+    },
+    {
+      "id": "read-1792947286589-uw0gog",
+      "decibel": 48.7,
+      "latitude": 37.777089,
+      "longitude": -122.416174,
+      "accuracy": 5.6,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2111,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:54:46.589Z"
+    },
+    {
+      "id": "read-1792947283578-aveh1m",
+      "decibel": 73.5,
+      "latitude": 37.772353,
+      "longitude": -122.421425,
+      "accuracy": 4.4,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 119,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:54:43.578Z"
+    },
+    {
+      "id": "read-1792947280561-tiyv3z",
+      "decibel": 90.9,
+      "latitude": 37.773125,
+      "longitude": -122.417087,
+      "accuracy": 3.5,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3183,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:54:40.561Z"
+    },
+    {
+      "id": "read-1792947277545-3lf5wf",
+      "decibel": 71.7,
+      "latitude": 37.774083,
+      "longitude": -122.420368,
+      "accuracy": 4,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 627,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:54:37.545Z"
+    },
+    {
+      "id": "read-1792947274528-8z2xew",
+      "decibel": 80.6,
+      "latitude": 37.77642,
+      "longitude": -122.422254,
+      "accuracy": 5.7,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 77,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:54:34.528Z"
+    },
+    {
+      "id": "read-1792947271512-x893hr",
+      "decibel": 70.8,
+      "latitude": 37.773958,
+      "longitude": -122.42066,
+      "accuracy": 4.7,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 616,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:54:31.512Z"
+    },
+    {
+      "id": "read-1792947268511-cen67c",
+      "decibel": 82.9,
+      "latitude": 37.776364,
+      "longitude": -122.421936,
+      "accuracy": 3.3,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 122,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:54:28.511Z"
+    },
+    {
+      "id": "read-1792947265510-wkdghg",
+      "decibel": 46.6,
+      "latitude": 37.777139,
+      "longitude": -122.415825,
+      "accuracy": 5.6,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2118,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:54:25.510Z"
+    },
+    {
+      "id": "read-1792947262508-109gfx",
+      "decibel": 82.6,
+      "latitude": 37.776654,
+      "longitude": -122.422117,
+      "accuracy": 4.1,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 100,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:54:22.508Z"
+    },
+    {
+      "id": "read-1792947259495-61vz52",
+      "decibel": 80.9,
+      "latitude": 37.776435,
+      "longitude": -122.422026,
+      "accuracy": 5.2,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 115,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:54:19.495Z"
+    },
+    {
+      "id": "read-1792947256495-ego54t",
+      "decibel": 43.4,
+      "latitude": 37.775881,
+      "longitude": -122.418081,
+      "accuracy": 5.7,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 107,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:54:16.495Z"
+    },
+    {
+      "id": "read-1792947253477-l1xoyt",
+      "decibel": 69.1,
+      "latitude": 37.774244,
+      "longitude": -122.420648,
+      "accuracy": 5.8,
+      "locationName": "Student Union Cafeteria",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 641,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:54:13.477Z"
+    },
+    {
+      "id": "read-1792947250478-x9ng9x",
+      "decibel": 76.9,
+      "latitude": 37.772394,
+      "longitude": -122.421401,
+      "accuracy": 4.5,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 168,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:54:10.478Z"
+    },
+    {
+      "id": "read-1792947247478-u5ir03",
+      "decibel": 71,
+      "latitude": 37.77418,
+      "longitude": -122.420644,
+      "accuracy": 5,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 613,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:54:07.478Z"
+    },
+    {
+      "id": "read-1792947244478-9jrvea",
+      "decibel": 48,
+      "latitude": 37.777013,
+      "longitude": -122.416033,
+      "accuracy": 4.1,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2128,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:54:04.478Z"
+    },
+    {
+      "id": "read-1792947241478-pz182h",
+      "decibel": 38.6,
+      "latitude": 37.77594,
+      "longitude": -122.418146,
+      "accuracy": 4.9,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 131,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:54:01.478Z"
+    },
+    {
+      "id": "read-1792947238475-djht37",
+      "decibel": 76.9,
+      "latitude": 37.772551,
+      "longitude": -122.421442,
+      "accuracy": 3.8,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 138,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:53:58.475Z"
+    },
+    {
+      "id": "read-1792947235462-eo3och",
+      "decibel": 89.6,
+      "latitude": 37.773048,
+      "longitude": -122.417134,
+      "accuracy": 3.8,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3201,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:53:55.462Z"
+    },
+    {
+      "id": "read-1792947232460-cmlvig",
+      "decibel": 79.7,
+      "latitude": 37.772538,
+      "longitude": -122.421515,
+      "accuracy": 5.4,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 136,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:53:52.460Z"
+    },
+    {
+      "id": "read-1792947229444-ayng5x",
+      "decibel": 84.4,
+      "latitude": 37.776564,
+      "longitude": -122.422024,
+      "accuracy": 4.6,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 78,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:53:49.444Z"
+    },
+    {
+      "id": "read-1792947226444-62c9tk",
+      "decibel": 38.8,
+      "latitude": 37.775706,
+      "longitude": -122.418017,
+      "accuracy": 4.6,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 135,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:53:46.443Z"
+    },
+    {
+      "id": "read-1792947223434-p0uufa",
+      "decibel": 92.3,
+      "latitude": 37.773182,
+      "longitude": -122.416873,
+      "accuracy": 4.4,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3182,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:53:43.434Z"
+    },
+    {
+      "id": "read-1792947220424-actytx",
+      "decibel": 86.3,
+      "latitude": 37.773057,
+      "longitude": -122.417092,
+      "accuracy": 4.2,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3202,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:53:40.424Z"
+    },
+    {
+      "id": "read-1792947217422-6l2vjl",
+      "decibel": 76.5,
+      "latitude": 37.774282,
+      "longitude": -122.420672,
+      "accuracy": 5.3,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 616,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:53:37.422Z"
+    },
+    {
+      "id": "read-1792947214412-auxulu",
+      "decibel": 75.3,
+      "latitude": 37.773997,
+      "longitude": -122.420622,
+      "accuracy": 5.1,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 593,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:53:34.412Z"
+    },
+    {
+      "id": "read-1792947211395-gjbs7y",
+      "decibel": 70.1,
+      "latitude": 37.774058,
+      "longitude": -122.420545,
+      "accuracy": 3.1,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 597,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:53:31.395Z"
+    },
+    {
+      "id": "read-1792947208381-48lz1c",
+      "decibel": 45.7,
+      "latitude": 37.776824,
+      "longitude": -122.41589,
+      "accuracy": 3.1,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2107,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:53:28.381Z"
+    },
+    {
+      "id": "read-1792947205370-59bgeg",
+      "decibel": 80.2,
+      "latitude": 37.772436,
+      "longitude": -122.421484,
+      "accuracy": 5.9,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 121,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:53:25.370Z"
+    },
+    {
+      "id": "read-1792947202349-8k7yh8",
+      "decibel": 74.6,
+      "latitude": 37.773934,
+      "longitude": -122.420498,
+      "accuracy": 3.1,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 621,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:53:22.349Z"
+    },
+    {
+      "id": "read-1792947199389-rwfme8",
+      "decibel": 47.7,
+      "latitude": 37.777133,
+      "longitude": -122.415949,
+      "accuracy": 4.6,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2127,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:53:19.340Z"
+    },
+    {
+      "id": "read-1792947196332-ymkqml",
+      "decibel": 61.3,
+      "latitude": 37.774657,
+      "longitude": -122.414869,
+      "accuracy": 6,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 491,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:53:16.332Z"
+    },
+    {
+      "id": "read-1792947193300-0sunnk",
+      "decibel": 84,
+      "latitude": 37.776567,
+      "longitude": -122.422058,
+      "accuracy": 5.9,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 110,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:53:13.300Z"
+    },
+    {
+      "id": "read-1792947190291-7i0do2",
+      "decibel": 50.5,
+      "latitude": 37.776924,
+      "longitude": -122.416092,
+      "accuracy": 4.9,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2093,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:53:10.291Z"
+    },
+    {
+      "id": "read-1792947187238-06tgu8",
+      "decibel": 83.2,
+      "latitude": 37.776418,
+      "longitude": -122.422121,
+      "accuracy": 3.5,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 121,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:53:07.238Z"
+    },
+    {
+      "id": "read-1792947184238-8lyqk9",
+      "decibel": 59.4,
+      "latitude": 37.774432,
+      "longitude": -122.414817,
+      "accuracy": 3.5,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 472,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:53:04.238Z"
+    },
+    {
+      "id": "read-1792947181219-3vstxk",
+      "decibel": 85.8,
+      "latitude": 37.776646,
+      "longitude": -122.422252,
+      "accuracy": 5.8,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 111,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:53:01.219Z"
+    },
+    {
+      "id": "read-1792947178184-ulcjje",
+      "decibel": 85.5,
+      "latitude": 37.776338,
+      "longitude": -122.422031,
+      "accuracy": 3.4,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 105,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:52:58.184Z"
+    },
+    {
+      "id": "read-1792947175153-if5hai",
+      "decibel": 73.1,
+      "latitude": 37.774084,
+      "longitude": -122.420504,
+      "accuracy": 3.8,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 609,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:52:55.153Z"
+    },
+    {
+      "id": "read-1792947172123-rehubx",
+      "decibel": 64.7,
+      "latitude": 37.774639,
+      "longitude": -122.414974,
+      "accuracy": 4.2,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 484,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:52:52.123Z"
+    },
+    {
+      "id": "read-1792947169113-lts6dt",
+      "decibel": 74.2,
+      "latitude": 37.772563,
+      "longitude": -122.421606,
+      "accuracy": 3.9,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 145,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:52:49.113Z"
+    },
+    {
+      "id": "read-1792947166084-zrvzz5",
+      "decibel": 69.4,
+      "latitude": 37.77413,
+      "longitude": -122.420323,
+      "accuracy": 3.4,
+      "locationName": "Student Union Cafeteria",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 591,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:52:46.084Z"
+    },
+    {
+      "id": "read-1792947162984-ugsjq0",
+      "decibel": 64,
+      "latitude": 37.774526,
+      "longitude": -122.414729,
+      "accuracy": 6,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 508,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:52:42.984Z"
+    },
+    {
+      "id": "read-1792947159950-p4555n",
+      "decibel": 81.8,
+      "latitude": 37.776603,
+      "longitude": -122.422051,
+      "accuracy": 4.8,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 119,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:52:39.950Z"
+    },
+    {
+      "id": "read-1792947156923-467w2l",
+      "decibel": 49.4,
+      "latitude": 37.776984,
+      "longitude": -122.415912,
+      "accuracy": 5.4,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2112,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:52:36.923Z"
+    },
+    {
+      "id": "read-1792947153888-haisq3",
+      "decibel": 82.4,
+      "latitude": 37.776446,
+      "longitude": -122.42225,
+      "accuracy": 4.7,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 68,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:52:33.888Z"
+    },
+    {
+      "id": "read-1792947150871-0jq4e5",
+      "decibel": 38.2,
+      "latitude": 37.775841,
+      "longitude": -122.41819,
+      "accuracy": 3.9,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 111,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:52:30.871Z"
+    },
+    {
+      "id": "read-1792947147828-pcwssb",
+      "decibel": 84.3,
+      "latitude": 37.776586,
+      "longitude": -122.422209,
+      "accuracy": 3.8,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 83,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:52:27.828Z"
+    },
+    {
+      "id": "read-1792947144820-kbj6zd",
+      "decibel": 46.4,
+      "latitude": 37.777017,
+      "longitude": -122.416102,
+      "accuracy": 5.4,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2090,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:52:24.820Z"
+    },
+    {
+      "id": "read-1792947141792-uo7qtc",
+      "decibel": 78.2,
+      "latitude": 37.772432,
+      "longitude": -122.421486,
+      "accuracy": 4.7,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 160,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:52:21.792Z"
+    },
+    {
+      "id": "read-1792947138781-wvq4gn",
+      "decibel": 90.2,
+      "latitude": 37.7732,
+      "longitude": -122.416961,
+      "accuracy": 4.7,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3228,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:52:18.781Z"
+    },
+    {
+      "id": "read-1792947135728-66lb1t",
+      "decibel": 89,
+      "latitude": 37.773045,
+      "longitude": -122.416967,
+      "accuracy": 5.5,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3217,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:52:15.728Z"
+    },
+    {
+      "id": "read-1792947132673-sthog0",
+      "decibel": 86.4,
+      "latitude": 37.773212,
+      "longitude": -122.416928,
+      "accuracy": 5.8,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3171,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:52:12.673Z"
+    },
+    {
+      "id": "read-1792947129631-2lzsvj",
+      "decibel": 66,
+      "latitude": 37.774394,
+      "longitude": -122.414849,
+      "accuracy": 3.3,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 502,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:52:09.631Z"
+    },
+    {
+      "id": "read-1792947126593-w742fa",
+      "decibel": 86.7,
+      "latitude": 37.773204,
+      "longitude": -122.417057,
+      "accuracy": 3.2,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3196,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:52:06.593Z"
+    },
+    {
+      "id": "read-1792947123536-jwtcg7",
+      "decibel": 72.6,
+      "latitude": 37.773938,
+      "longitude": -122.420601,
+      "accuracy": 6,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 647,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:52:03.536Z"
+    },
+    {
+      "id": "read-1792947120501-4np8mk",
+      "decibel": 78.6,
+      "latitude": 37.772493,
+      "longitude": -122.421653,
+      "accuracy": 3.9,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 153,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:52:00.501Z"
+    },
+    {
+      "id": "read-1792947117452-rtq24p",
+      "decibel": 42.4,
+      "latitude": 37.775819,
+      "longitude": -122.418081,
+      "accuracy": 4.2,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 129,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:51:57.452Z"
+    },
+    {
+      "id": "read-1792947114436-amqdqa",
+      "decibel": 78,
+      "latitude": 37.772324,
+      "longitude": -122.421424,
+      "accuracy": 4.9,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 117,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:51:54.436Z"
+    },
+    {
+      "id": "read-1792947111425-1gppex",
+      "decibel": 85.4,
+      "latitude": 37.776392,
+      "longitude": -122.421977,
+      "accuracy": 3.1,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 73,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:51:51.425Z"
+    },
+    {
+      "id": "read-1792947108424-laq54r",
+      "decibel": 89.7,
+      "latitude": 37.773306,
+      "longitude": -122.41693,
+      "accuracy": 5.5,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3179,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:51:48.424Z"
+    },
+    {
+      "id": "read-1792947105416-bpqakh",
+      "decibel": 49.4,
+      "latitude": 37.776808,
+      "longitude": -122.415918,
+      "accuracy": 4.4,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2072,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:51:45.416Z"
+    },
+    {
+      "id": "read-1792947102405-atbpa6",
+      "decibel": 36.5,
+      "latitude": 37.775876,
+      "longitude": -122.418232,
+      "accuracy": 5.6,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 125,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:51:42.405Z"
+    },
+    {
+      "id": "read-1792947099391-0uevsi",
+      "decibel": 85.1,
+      "latitude": 37.77668,
+      "longitude": -122.422183,
+      "accuracy": 5.6,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 94,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:51:39.390Z"
+    },
+    {
+      "id": "read-1792947096386-6ck4zd",
+      "decibel": 89.4,
+      "latitude": 37.773358,
+      "longitude": -122.416961,
+      "accuracy": 5.3,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3203,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:51:36.386Z"
+    },
+    {
+      "id": "read-1792947093381-4jo5y8",
+      "decibel": 51.8,
+      "latitude": 37.776914,
+      "longitude": -122.416123,
+      "accuracy": 4.8,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2116,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:51:33.381Z"
+    },
+    {
+      "id": "read-1792947090380-tx3bw6",
+      "decibel": 75.6,
+      "latitude": 37.774291,
+      "longitude": -122.420582,
+      "accuracy": 6,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 599,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:51:30.380Z"
+    },
+    {
+      "id": "read-1792947087361-edqw02",
+      "decibel": 75.5,
+      "latitude": 37.773971,
+      "longitude": -122.420381,
+      "accuracy": 3.9,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 614,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:51:27.361Z"
+    },
+    {
+      "id": "read-1792947084355-1lrx1u",
+      "decibel": 51.3,
+      "latitude": 37.776994,
+      "longitude": -122.416055,
+      "accuracy": 5,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2127,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:51:24.355Z"
+    },
+    {
+      "id": "read-1792947081350-6rhsg0",
+      "decibel": 70,
+      "latitude": 37.774062,
+      "longitude": -122.420434,
+      "accuracy": 3.1,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 642,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:51:21.350Z"
+    },
+    {
+      "id": "read-1792947078334-qymbhe",
+      "decibel": 49.7,
+      "latitude": 37.777022,
+      "longitude": -122.415942,
+      "accuracy": 4.8,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2098,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:51:18.334Z"
+    },
+    {
+      "id": "read-1792947075323-clx9xg",
+      "decibel": 66.4,
+      "latitude": 37.774468,
+      "longitude": -122.41468,
+      "accuracy": 4.6,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 471,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:51:15.323Z"
+    },
+    {
+      "id": "read-1792947072315-0et6ho",
+      "decibel": 66.3,
+      "latitude": 37.774642,
+      "longitude": -122.414614,
+      "accuracy": 5.3,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 493,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:51:12.315Z"
+    },
+    {
+      "id": "read-1792947069304-q6up3g",
+      "decibel": 44,
+      "latitude": 37.775804,
+      "longitude": -122.418364,
+      "accuracy": 3.5,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 143,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:51:09.304Z"
+    },
+    {
+      "id": "read-1792947066294-6c5ffq",
+      "decibel": 51.9,
+      "latitude": 37.776866,
+      "longitude": -122.415946,
+      "accuracy": 3.7,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2114,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:51:06.294Z"
+    },
+    {
+      "id": "read-1792947063286-0sraro",
+      "decibel": 85.7,
+      "latitude": 37.776541,
+      "longitude": -122.422051,
+      "accuracy": 3.6,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 82,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:51:03.286Z"
+    },
+    {
+      "id": "read-1792947060281-el12ba",
+      "decibel": 73.5,
+      "latitude": 37.772457,
+      "longitude": -122.4215,
+      "accuracy": 5.2,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 155,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:51:00.281Z"
+    },
+    {
+      "id": "read-1792947057263-w3z4y4",
+      "decibel": 85.6,
+      "latitude": 37.776596,
+      "longitude": -122.421933,
+      "accuracy": 3.2,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 84,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:50:57.263Z"
+    },
+    {
+      "id": "read-1792947054250-x8sw9i",
+      "decibel": 89.2,
+      "latitude": 37.773145,
+      "longitude": -122.417007,
+      "accuracy": 5.3,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3181,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:50:54.250Z"
+    },
+    {
+      "id": "read-1792947051235-pk91em",
+      "decibel": 74.7,
+      "latitude": 37.77403,
+      "longitude": -122.420501,
+      "accuracy": 5.9,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 596,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:50:51.235Z"
+    },
+    {
+      "id": "read-1792947048220-d7h2sa",
+      "decibel": 59.7,
+      "latitude": 37.774346,
+      "longitude": -122.414703,
+      "accuracy": 3.7,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 472,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:50:48.220Z"
+    },
+    {
+      "id": "read-1792947045215-2p4vmy",
+      "decibel": 77.2,
+      "latitude": 37.772362,
+      "longitude": -122.421665,
+      "accuracy": 3.8,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 117,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:50:45.215Z"
+    },
+    {
+      "id": "read-1792947042202-7kjb7p",
+      "decibel": 76.6,
+      "latitude": 37.772464,
+      "longitude": -122.421358,
+      "accuracy": 5.6,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 169,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:50:42.202Z"
+    },
+    {
+      "id": "read-1792947039190-41otub",
+      "decibel": 89.3,
+      "latitude": 37.773309,
+      "longitude": -122.417046,
+      "accuracy": 3.2,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3212,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:50:39.190Z"
+    },
+    {
+      "id": "read-1792947036183-w6gm90",
+      "decibel": 47.6,
+      "latitude": 37.776956,
+      "longitude": -122.41597,
+      "accuracy": 3.2,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2098,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:50:36.183Z"
+    },
+    {
+      "id": "read-1792947033167-hekdmw",
+      "decibel": 81.5,
+      "latitude": 37.776517,
+      "longitude": -122.422097,
+      "accuracy": 3.6,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 97,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:50:33.167Z"
+    },
+    {
+      "id": "read-1792947030149-nbxjgi",
+      "decibel": 60.1,
+      "latitude": 37.774627,
+      "longitude": -122.414936,
+      "accuracy": 3,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 491,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:50:30.149Z"
+    },
+    {
+      "id": "read-1792947027149-9ler9a",
+      "decibel": 38.1,
+      "latitude": 37.775957,
+      "longitude": -122.418397,
+      "accuracy": 5.4,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 142,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:50:27.149Z"
+    },
+    {
+      "id": "read-1792947024131-p743he",
+      "decibel": 80,
+      "latitude": 37.772636,
+      "longitude": -122.421549,
+      "accuracy": 4.4,
+      "locationName": "Campus South Perimeter Road",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 142,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Urban Vehicle Traffic",
+      "timestamp": "2026-10-25T16:50:24.131Z"
+    },
+    {
+      "id": "read-1792947021114-n7aod8",
+      "decibel": 42.8,
+      "latitude": 37.775602,
+      "longitude": -122.418035,
+      "accuracy": 5.2,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 110,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:50:21.113Z"
+    },
+    {
+      "id": "read-1792947018105-73o6jw",
+      "decibel": 62.9,
+      "latitude": 37.77467,
+      "longitude": -122.41472,
+      "accuracy": 5,
+      "locationName": "CS Innovation Hub",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 477,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Keyboards & Dialogue",
+      "timestamp": "2026-10-25T16:50:18.105Z"
+    },
+    {
+      "id": "read-1792947015093-5bxnq5",
+      "decibel": 37.2,
+      "latitude": 37.775972,
+      "longitude": -122.418219,
+      "accuracy": 4.6,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 150,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:50:15.093Z"
+    },
+    {
+      "id": "read-1792947012089-p8s8eg",
+      "decibel": 92.8,
+      "latitude": 37.773118,
+      "longitude": -122.417015,
+      "accuracy": 5.3,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3184,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:50:12.089Z"
+    },
+    {
+      "id": "read-1792947009080-vegtfc",
+      "decibel": 71.4,
+      "latitude": 37.774278,
+      "longitude": -122.420511,
+      "accuracy": 4,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 610,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:50:09.080Z"
+    },
+    {
+      "id": "read-1792947006064-ytjjlc",
+      "decibel": 53,
+      "latitude": 37.777043,
+      "longitude": -122.415949,
+      "accuracy": 3.2,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2072,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:50:06.064Z"
+    },
+    {
+      "id": "read-1792947003060-4egnis",
+      "decibel": 37.3,
+      "latitude": 37.775682,
+      "longitude": -122.418383,
+      "accuracy": 4.2,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 112,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:50:03.060Z"
+    },
+    {
+      "id": "read-1792947000044-4w4bbu",
+      "decibel": 72.2,
+      "latitude": 37.773953,
+      "longitude": -122.420637,
+      "accuracy": 4.4,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 597,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:50:00.044Z"
+    },
+    {
+      "id": "read-1792946997031-yvbq8r",
+      "decibel": 42.9,
+      "latitude": 37.775924,
+      "longitude": -122.418116,
+      "accuracy": 3.7,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 116,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:49:57.031Z"
+    },
+    {
+      "id": "read-1792946994020-n76sjk",
+      "decibel": 75,
+      "latitude": 37.774286,
+      "longitude": -122.420449,
+      "accuracy": 4.8,
+      "locationName": "Student Union Cafeteria",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 624,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Chatter & Cutlery",
+      "timestamp": "2026-10-25T16:49:54.020Z"
+    },
+    {
+      "id": "read-1792946991011-mlvfde",
+      "decibel": 48.8,
+      "latitude": 37.776995,
+      "longitude": -122.415862,
+      "accuracy": 5.9,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2111,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:49:51.011Z"
+    },
+    {
+      "id": "read-1792946988006-gqurgi",
+      "decibel": 52.8,
+      "latitude": 37.777136,
+      "longitude": -122.416174,
+      "accuracy": 4,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2124,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:49:48.006Z"
+    },
+    {
+      "id": "read-1792946984989-wycj3l",
+      "decibel": 41.4,
+      "latitude": 37.775685,
+      "longitude": -122.418321,
+      "accuracy": 3.7,
+      "locationName": "University Library Silence Zone",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 127,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "HVAC Airflow / Whisper",
+      "timestamp": "2026-10-25T16:49:44.989Z"
+    },
+    {
+      "id": "read-1792946981985-qgyli3",
+      "decibel": 79,
+      "latitude": 37.77645,
+      "longitude": -122.422294,
+      "accuracy": 3.2,
+      "locationName": "University Ave Bus Stop",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 102,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:49:41.985Z"
+    },
+    {
+      "id": "read-1792946978967-70uzps",
+      "decibel": 85.3,
+      "latitude": 37.776429,
+      "longitude": -122.421908,
+      "accuracy": 3.8,
+      "locationName": "University Ave Bus Stop",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 89,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Transit Bus Acceleration",
+      "timestamp": "2026-10-25T16:49:38.967Z"
+    },
+    {
+      "id": "read-1792946975961-4swgci",
+      "decibel": 51.7,
+      "latitude": 37.777028,
+      "longitude": -122.415999,
+      "accuracy": 3.5,
+      "locationName": "Memorial Botanical Quad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 2073,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 60,
+        "highPercent": 25
+      },
+      "estimatedSource": "Fountain Water & Trees",
+      "timestamp": "2026-10-25T16:49:35.961Z"
+    },
+    {
+      "id": "read-1792946972951-1g67i8",
+      "decibel": 92.1,
+      "latitude": 37.773091,
+      "longitude": -122.41708,
+      "accuracy": 4.5,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3225,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:49:32.951Z"
+    },
+    {
+      "id": "read-1792946969939-478h4z",
+      "decibel": 94,
+      "latitude": 37.773213,
+      "longitude": -122.417059,
+      "accuracy": 3.3,
+      "locationName": "Engineering Hall Expansion",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3217,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Steel Cut & Pneumatic Drill",
+      "timestamp": "2026-10-25T16:49:29.939Z"
+    },
+    {
       "id": "read-1792945896601-45363c",
       "decibel": 42,
       "latitude": 37.7732,

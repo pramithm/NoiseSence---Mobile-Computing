@@ -5,7 +5,7 @@ import { DashboardTab } from './components/DashboardTab';
 import { MeasureTab } from './components/MeasureTab';
 import { MapTab } from './components/MapTab';
 import { HistoryTab } from './components/HistoryTab';
-import { fetchStats, fetchReadings, fetchHeatmap } from './services/api';
+import { fetchStats, fetchReadings, fetchHeatmap, toggleSimulation } from './services/api';
 import { initSocket, disconnectSocket, type SocketStatus } from './services/socket';
 import { getOfflineQueue, syncOfflineQueue } from './services/offlineQueue';
 import { requestCurrentLocation } from './services/geolocation';
@@ -22,6 +22,7 @@ export const App: React.FC = () => {
   const [socketStatus, setSocketStatus] = useState<SocketStatus>('connecting');
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [offlineCount, setOfflineCount] = useState<number>(() => getOfflineQueue().length);
+  const [isSimulating, setIsSimulating] = useState<boolean>(false);
 
   // Domain data
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -35,7 +36,6 @@ export const App: React.FC = () => {
       const result = await syncOfflineQueue();
       setOfflineCount(getOfflineQueue().length);
       if (result.synced > 0) {
-        // Refresh domain data
         loadAllData();
       }
     } catch (err) {
@@ -52,7 +52,6 @@ export const App: React.FC = () => {
     });
   };
 
-  // Apply dark/light class on document
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
@@ -61,7 +60,6 @@ export const App: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  // Network online/offline event handlers
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
@@ -81,7 +79,6 @@ export const App: React.FC = () => {
     };
   }, [handleSyncOffline]);
 
-  // Fetch all initial data
   const loadAllData = useCallback(async () => {
     try {
       const [statsData, heatmapData, readingsData] = await Promise.all([
@@ -98,11 +95,18 @@ export const App: React.FC = () => {
     }
   }, []);
 
-  // Setup real-time Socket.IO and listeners
+  const handleToggleSimulation = async () => {
+    try {
+      const res = await toggleSimulation();
+      setIsSimulating(res.active);
+    } catch (err) {
+      console.error('Failed to toggle simulation:', err);
+    }
+  };
+
   useEffect(() => {
     loadAllData();
 
-    // Fetch user coords for map centering
     requestCurrentLocation().then(res => {
       if (res.latitude && res.longitude) {
         setUserCoords({ lat: res.latitude, lng: res.longitude });
@@ -119,6 +123,9 @@ export const App: React.FC = () => {
       },
       onStatsUpdate: (updatedStats) => {
         setStats(updatedStats);
+      },
+      onSimulationChange: (active) => {
+        setIsSimulating(active);
       }
     });
 
@@ -127,7 +134,6 @@ export const App: React.FC = () => {
     };
   }, [loadAllData]);
 
-  // Callback when a new reading is submitted from MeasureTab
   const handleReadingSubmitted = () => {
     setOfflineCount(getOfflineQueue().length);
     loadAllData();
@@ -143,6 +149,8 @@ export const App: React.FC = () => {
         isDarkMode={isDarkMode}
         onToggleTheme={handleToggleTheme}
         onRefreshData={loadAllData}
+        isSimulating={isSimulating}
+        onToggleSimulation={handleToggleSimulation}
       />
 
       <main className="app-main-content">
@@ -153,6 +161,8 @@ export const App: React.FC = () => {
             recentReadings={readings}
             onNavigateToMeasure={() => setActiveTab('measure')}
             onNavigateToMap={() => setActiveTab('map')}
+            isSimulating={isSimulating}
+            onToggleSimulation={handleToggleSimulation}
           />
         )}
 
@@ -170,6 +180,8 @@ export const App: React.FC = () => {
             recentReadings={readings}
             onRefreshMap={loadAllData}
             userCoords={userCoords}
+            isSimulating={isSimulating}
+            onToggleSimulation={handleToggleSimulation}
           />
         )}
 

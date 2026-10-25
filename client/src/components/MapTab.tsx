@@ -6,7 +6,15 @@ import {
   Crosshair,
   Filter,
   RefreshCw,
-  Info
+  Info,
+  Zap,
+  Activity,
+  ShieldCheck,
+  AlertTriangle,
+  Volume2,
+  TrendingUp,
+  Clock,
+  Compass
 } from 'lucide-react';
 import type { HeatmapCell, NoiseReading } from '../types';
 
@@ -15,13 +23,17 @@ interface MapTabProps {
   recentReadings: NoiseReading[];
   onRefreshMap: () => void;
   userCoords?: { lat: number; lng: number } | null;
+  isSimulating?: boolean;
+  onToggleSimulation?: () => void;
 }
 
 export const MapTab: React.FC<MapTabProps> = ({
   cells,
   recentReadings,
   onRefreshMap,
-  userCoords
+  userCoords,
+  isSimulating = false,
+  onToggleSimulation
 }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -30,11 +42,11 @@ export const MapTab: React.FC<MapTabProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedCell, setSelectedCell] = useState<HeatmapCell | null>(null);
   const [viewMode, setViewMode] = useState<'heatmap' | 'points' | 'both'>('both');
+  const [activeTabDrawer, setActiveTabDrawer] = useState<'summary' | 'frequencies' | 'who' | 'samples'>('summary');
 
-  // Default center: Campus coordinates
   const DEFAULT_CENTER: [number, number] = [37.7750, -122.4194];
 
-  // Initialize Leaflet map once
+  // Initialize Leaflet map
   useEffect(() => {
     if (!mapContainerRef.current) return;
     if (mapInstanceRef.current) return;
@@ -45,13 +57,11 @@ export const MapTab: React.FC<MapTabProps> = ({
       zoomControl: false
     });
 
-    // Add high quality tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors | NoiseSense',
       maxZoom: 19
     }).addTo(map);
 
-    // Zoom control at bottom right
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
     const layerGroup = L.layerGroup().addTo(map);
@@ -63,6 +73,14 @@ export const MapTab: React.FC<MapTabProps> = ({
       mapInstanceRef.current = null;
     };
   }, []);
+
+  // Sync selectedCell if cells change (e.g. live updates)
+  useEffect(() => {
+    if (selectedCell) {
+      const updated = cells.find(c => c.cellId === selectedCell.cellId);
+      if (updated) setSelectedCell(updated);
+    }
+  }, [cells, selectedCell]);
 
   // Render heatmap circles and point markers whenever cells or recentReadings change
   useEffect(() => {
@@ -76,26 +94,38 @@ export const MapTab: React.FC<MapTabProps> = ({
       cells.forEach((cell) => {
         if (selectedCategory !== 'All' && cell.category !== selectedCategory) return;
 
-        // Visual radius scaled slightly by sample count (minimum 55m, max 110m)
-        const radius = Math.min(110, 55 + Math.min(cell.readingCount * 8, 55));
+        const radius = Math.min(115, 60 + Math.min(cell.readingCount * 8, 55));
         
-        // Color based on dB level
+        // Base Circle
         const circle = L.circle([cell.latitude, cell.longitude], {
           radius: radius,
           color: cell.color,
           fillColor: cell.color,
-          fillOpacity: 0.38,
+          fillOpacity: 0.35,
           weight: 2
         });
 
-        // Custom HTML Marker / Label in center of cell
+        // Pulsing Radar Ring
+        const radarCircle = L.circle([cell.latitude, cell.longitude], {
+          radius: radius * 1.35,
+          color: cell.color,
+          fillColor: cell.color,
+          fillOpacity: 0.12,
+          weight: 1,
+          dashArray: '4, 4'
+        });
+
+        // Cell Badge Icon
         const centerIcon = L.divIcon({
           className: 'custom-cell-badge-icon',
           html: `<div class="map-cell-db-badge" style="background-color: ${cell.color}; color: #ffffff;">
-                   <strong>${cell.averageDb}</strong> <small>dB</small>
+                   <div class="map-badge-flex">
+                     <strong>${cell.averageDb}</strong> <small>dB</small>
+                   </div>
+                   <div class="map-badge-hz">${cell.dominantFrequency || 440} Hz</div>
                  </div>`,
-          iconSize: [52, 28],
-          iconAnchor: [26, 14]
+          iconSize: [60, 36],
+          iconAnchor: [30, 18]
         });
 
         const badgeMarker = L.marker([cell.latitude, cell.longitude], { icon: centerIcon });
@@ -105,8 +135,10 @@ export const MapTab: React.FC<MapTabProps> = ({
         };
 
         circle.on('click', clickHandler);
+        radarCircle.on('click', clickHandler);
         badgeMarker.on('click', clickHandler);
 
+        layerGroup.addLayer(radarCircle);
         layerGroup.addLayer(circle);
         layerGroup.addLayer(badgeMarker);
       });
@@ -114,7 +146,7 @@ export const MapTab: React.FC<MapTabProps> = ({
 
     // 2. Draw Individual Reading Pins
     if (viewMode === 'points' || viewMode === 'both') {
-      recentReadings.slice(0, 30).forEach((reading) => {
+      recentReadings.slice(0, 35).forEach((reading) => {
         if (selectedCategory !== 'All' && reading.category !== selectedCategory) return;
 
         const color =
@@ -143,6 +175,12 @@ export const MapTab: React.FC<MapTabProps> = ({
               <span class="popup-db" style="color: ${color}">${reading.decibel.toFixed(1)} dB</span>
               <span class="popup-cat">${reading.category}</span>
             </div>
+            <div class="popup-freq">
+              <strong>Dominant Frequency:</strong> ${reading.dominantFrequency || 440} Hz
+            </div>
+            <div class="popup-source">
+              <strong>Estimated Source:</strong> ${reading.estimatedSource || 'Ambient Sound'}
+            </div>
             <div class="popup-meta">
               <span>${reading.source}</span> · 
               <span>${new Date(reading.timestamp).toLocaleTimeString()}</span>
@@ -154,7 +192,7 @@ export const MapTab: React.FC<MapTabProps> = ({
       });
     }
 
-    // 3. Draw User Current Location Pulse if available
+    // 3. Draw User Current Location Pulse
     if (userCoords && userCoords.lat && userCoords.lng) {
       const userIcon = L.divIcon({
         className: 'user-loc-icon',
@@ -171,7 +209,6 @@ export const MapTab: React.FC<MapTabProps> = ({
     }
   }, [cells, recentReadings, selectedCategory, viewMode, userCoords]);
 
-  // Recenter map functions
   const centerCampus = () => {
     if (mapInstanceRef.current) {
       mapInstanceRef.current.setView(DEFAULT_CENTER, 16, { animate: true });
@@ -206,12 +243,23 @@ export const MapTab: React.FC<MapTabProps> = ({
 
         {/* View Mode & Recenter Buttons */}
         <div className="map-view-actions">
+          {onToggleSimulation && (
+            <button
+              onClick={onToggleSimulation}
+              className={`btn-map-control ${isSimulating ? 'btn-stream-active' : ''}`}
+              title="Toggle Live Stream Simulator"
+            >
+              <Zap size={15} className={isSimulating ? 'pulse-icon' : ''} />
+              <span className="control-btn-text">{isSimulating ? 'Stream Active' : 'Live Stream'}</span>
+            </button>
+          )}
+
           <button
             onClick={() => setViewMode(viewMode === 'both' ? 'heatmap' : viewMode === 'heatmap' ? 'points' : 'both')}
             className="btn-map-control"
             title={`Toggle View Mode (Currently: ${viewMode})`}
           >
-            <Layers size={16} />
+            <Layers size={15} />
             <span className="control-btn-text">{viewMode.toUpperCase()}</span>
           </button>
 
@@ -220,7 +268,7 @@ export const MapTab: React.FC<MapTabProps> = ({
             className="btn-map-control"
             title="Center on My Location"
           >
-            <Crosshair size={16} />
+            <Crosshair size={15} />
             <span className="control-btn-text">Locate</span>
           </button>
 
@@ -229,7 +277,7 @@ export const MapTab: React.FC<MapTabProps> = ({
             className="btn-map-control"
             title="Center Campus"
           >
-            <Crosshair size={16} />
+            <Compass size={15} />
             <span className="control-btn-text">Campus</span>
           </button>
 
@@ -238,7 +286,7 @@ export const MapTab: React.FC<MapTabProps> = ({
             className="btn-map-control"
             title="Refresh Map Data"
           >
-            <RefreshCw size={15} />
+            <RefreshCw size={14} />
           </button>
         </div>
       </div>
@@ -249,45 +297,59 @@ export const MapTab: React.FC<MapTabProps> = ({
       {/* Floating Real-time Live Badge */}
       <div className="map-floating-status">
         <span className="pulse-dot"></span>
-        <span className="font-semibold text-xs">Live Sync</span>
-        <span className="text-xs text-secondary">({cells.length} Active Zones)</span>
+        <span className="font-semibold text-xs">Real-Time Grid</span>
+        <span className="text-xs text-secondary">({cells.length} Zones · Live Broadcaster)</span>
       </div>
 
       {/* Floating Legend */}
       <div className="map-floating-legend">
         <div className="legend-title-row">
           <Info size={13} />
-          <span>Noise Scale</span>
+          <span>Noise Scale & Frequencies</span>
         </div>
         <div className="legend-items">
           <div className="legend-item">
             <span className="legend-color-dot" style={{ backgroundColor: '#10b981' }}></span>
-            <span>&lt;50 dB Quiet</span>
+            <span>&lt;50 dB · Quiet / Ambient</span>
           </div>
           <div className="legend-item">
             <span className="legend-color-dot" style={{ backgroundColor: '#06b6d4' }}></span>
-            <span>50-70 dB Moderate</span>
+            <span>50-70 dB · Moderate / Speech</span>
           </div>
           <div className="legend-item">
             <span className="legend-color-dot" style={{ backgroundColor: '#f59e0b' }}></span>
-            <span>70-85 dB Loud</span>
+            <span>70-85 dB · Loud / Traffic</span>
           </div>
           <div className="legend-item">
             <span className="legend-color-dot" style={{ backgroundColor: '#ef4444' }}></span>
-            <span>&gt;85 dB Hazardous</span>
+            <span>&gt;85 dB · Hazardous / Mechanical</span>
           </div>
         </div>
       </div>
 
-      {/* Selected Cell Detail Modal / Bottom Drawer */}
+      {/* Selected Cell Comprehensive Detail Drawer */}
       {selectedCell && (
         <div className="cell-detail-drawer animate-slide-up">
           <div className="drawer-handle"></div>
+          
           <div className="drawer-header">
             <div>
-              <span className="drawer-grid-id">Micro-Grid Cell: {selectedCell.cellId}</span>
+              <div className="drawer-tag-row">
+                <span className="drawer-grid-id">Micro-Grid: {selectedCell.cellId}</span>
+                <span
+                  className="drawer-category-pill"
+                  style={{ color: selectedCell.color, borderColor: selectedCell.color, backgroundColor: `${selectedCell.color}15` }}
+                >
+                  {selectedCell.category}
+                </span>
+                {selectedCell.frequencyBand && (
+                  <span className="drawer-band-pill">
+                    {selectedCell.frequencyBand}
+                  </span>
+                )}
+              </div>
               <h3 className="drawer-title">
-                {selectedCell.recentSamples?.[0]?.locationName || `Lat ${selectedCell.latitude}, Lng ${selectedCell.longitude}`}
+                {selectedCell.recentSamples?.[0]?.locationName || `Zone (${selectedCell.latitude}, ${selectedCell.longitude})`}
               </h3>
             </div>
             <button
@@ -299,42 +361,259 @@ export const MapTab: React.FC<MapTabProps> = ({
             </button>
           </div>
 
-          <div className="drawer-metrics-row">
-            <div className="drawer-metric-item">
-              <span className="drawer-metric-label">Average Noise</span>
-              <span className="drawer-metric-val" style={{ color: selectedCell.color }}>
-                {selectedCell.averageDb} dB
-              </span>
-            </div>
-            <div className="drawer-metric-item">
-              <span className="drawer-metric-label">Range</span>
-              <span className="drawer-metric-val">
-                {selectedCell.minDb} - {selectedCell.maxDb} dB
-              </span>
-            </div>
-            <div className="drawer-metric-item">
-              <span className="drawer-metric-label">Contributions</span>
-              <span className="drawer-metric-val">
-                {selectedCell.readingCount} {selectedCell.readingCount === 1 ? 'sample' : 'samples'}
-              </span>
-            </div>
-            <div className="drawer-metric-item">
-              <span className="drawer-metric-label">Category</span>
-              <span className="drawer-metric-val" style={{ color: selectedCell.color }}>
-                {selectedCell.category}
-              </span>
-            </div>
+          {/* Sub-tab navigation inside details drawer */}
+          <div className="drawer-tab-nav">
+            <button
+              onClick={() => setActiveTabDrawer('summary')}
+              className={`drawer-tab-btn ${activeTabDrawer === 'summary' ? 'drawer-tab-active' : ''}`}
+            >
+              Acoustic Overview
+            </button>
+            <button
+              onClick={() => setActiveTabDrawer('frequencies')}
+              className={`drawer-tab-btn ${activeTabDrawer === 'frequencies' ? 'drawer-tab-active' : ''}`}
+            >
+              Frequency Spectrum
+            </button>
+            <button
+              onClick={() => setActiveTabDrawer('who')}
+              className={`drawer-tab-btn ${activeTabDrawer === 'who' ? 'drawer-tab-active' : ''}`}
+            >
+              WHO Health Guidelines
+            </button>
+            <button
+              onClick={() => setActiveTabDrawer('samples')}
+              className={`drawer-tab-btn ${activeTabDrawer === 'samples' ? 'drawer-tab-active' : ''}`}
+            >
+              Live Samples ({selectedCell.readingCount})
+            </button>
           </div>
 
-          {selectedCell.recentSamples && selectedCell.recentSamples.length > 0 && (
-            <div className="drawer-samples-list">
-              <span className="text-xs font-semibold text-secondary mb-1 block">Recent Readings in this Cell:</span>
-              {selectedCell.recentSamples.map((s) => (
-                <div key={s.id} className="drawer-sample-row">
-                  <span>{s.locationName || 'Acoustic sample'}</span>
-                  <span className="font-semibold">{s.decibel} dB</span>
+          {/* Tab 1: Summary Overview */}
+          {activeTabDrawer === 'summary' && (
+            <div className="drawer-tab-content">
+              <div className="drawer-metrics-row">
+                <div className="drawer-metric-item">
+                  <span className="drawer-metric-label">Average Decibel</span>
+                  <span className="drawer-metric-val" style={{ color: selectedCell.color }}>
+                    {selectedCell.averageDb} dB(A)
+                  </span>
                 </div>
-              ))}
+                <div className="drawer-metric-item">
+                  <span className="drawer-metric-label">Noise Range</span>
+                  <span className="drawer-metric-val">
+                    {selectedCell.minDb} – {selectedCell.maxDb} dB
+                  </span>
+                </div>
+                <div className="drawer-metric-item">
+                  <span className="drawer-metric-label">Dominant Frequency</span>
+                  <span className="drawer-metric-val text-cyan">
+                    {selectedCell.dominantFrequency || 440} Hz
+                  </span>
+                </div>
+                <div className="drawer-metric-item">
+                  <span className="drawer-metric-label">Crowd Samples</span>
+                  <span className="drawer-metric-val">
+                    {selectedCell.readingCount}
+                  </span>
+                </div>
+              </div>
+
+              {/* Estimated Acoustic Source */}
+              <div className="drawer-source-box">
+                <div className="flex-row-center gap-2">
+                  <Activity size={16} className="text-teal" />
+                  <span className="font-semibold text-xs">Acoustic Source Signature:</span>
+                </div>
+                <p className="drawer-source-text">
+                  {selectedCell.estimatedSource || 'General Ambient Activity'}
+                </p>
+              </div>
+
+              {/* Hourly Trend Curve */}
+              {selectedCell.hourlyTrend && (
+                <div className="trend-curve-box">
+                  <span className="text-xs font-semibold text-secondary flex-row-center gap-1 mb-2">
+                    <TrendingUp size={13} />
+                    Hourly Decibel Fluctuation Trend:
+                  </span>
+                  <div className="trend-bars-row">
+                    {selectedCell.hourlyTrend.map((t, idx) => {
+                      const heightPercent = Math.min(100, Math.max(15, ((t.db - 30) / 70) * 100));
+                      return (
+                        <div key={idx} className="trend-bar-col">
+                          <span className="trend-bar-val">{t.db}</span>
+                          <div className="trend-bar-track">
+                            <div
+                              className="trend-bar-fill"
+                              style={{
+                                height: `${heightPercent}%`,
+                                backgroundColor:
+                                  t.db < 50 ? '#10b981' : t.db < 70 ? '#06b6d4' : t.db < 85 ? '#f59e0b' : '#ef4444'
+                              }}
+                            />
+                          </div>
+                          <span className="trend-bar-hour">{t.hour}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab 2: Frequency Spectrum Breakdown */}
+          {activeTabDrawer === 'frequencies' && (
+            <div className="drawer-tab-content">
+              <div className="freq-analysis-box">
+                <div className="freq-header-row">
+                  <div>
+                    <h4 className="font-bold text-sm">Acoustic Frequency Band Energy</h4>
+                    <p className="text-xs text-secondary">
+                      Spectral energy distribution recorded across micro-grid audio sensors
+                    </p>
+                  </div>
+                  <div className="peak-hz-badge">
+                    <span>Peak Pitch:</span>
+                    <strong>{selectedCell.dominantFrequency || 440} Hz</strong>
+                  </div>
+                </div>
+
+                {/* 3 Frequency Bands Progress Meters */}
+                <div className="freq-meter-group">
+                  <div className="freq-meter-item">
+                    <div className="freq-meter-label-row">
+                      <span className="freq-band-name">Sub-Bass & Low Rumble (20 – 250 Hz)</span>
+                      <span className="freq-band-percent">{selectedCell.frequencyDistribution?.lowPercent || 35}%</span>
+                    </div>
+                    <div className="freq-meter-track">
+                      <div
+                        className="freq-meter-fill bg-amber"
+                        style={{ width: `${selectedCell.frequencyDistribution?.lowPercent || 35}%` }}
+                      />
+                    </div>
+                    <span className="freq-band-desc">Associated with diesel engines, vehicular chassis rumble, HVAC fans.</span>
+                  </div>
+
+                  <div className="freq-meter-item">
+                    <div className="freq-meter-label-row">
+                      <span className="freq-band-name">Mid-Range Urban & Speech (250 – 4000 Hz)</span>
+                      <span className="freq-band-percent">{selectedCell.frequencyDistribution?.midPercent || 50}%</span>
+                    </div>
+                    <div className="freq-meter-track">
+                      <div
+                        className="freq-meter-fill bg-cyan"
+                        style={{ width: `${selectedCell.frequencyDistribution?.midPercent || 50}%` }}
+                      />
+                    </div>
+                    <span className="freq-band-desc">Human speech dialogue, classroom discussion, foot traffic, cafe ambience.</span>
+                  </div>
+
+                  <div className="freq-meter-item">
+                    <div className="freq-meter-label-row">
+                      <span className="freq-band-name">High-Frequency Treble (4000 – 20000 Hz)</span>
+                      <span className="freq-band-percent">{selectedCell.frequencyDistribution?.highPercent || 15}%</span>
+                    </div>
+                    <div className="freq-meter-track">
+                      <div
+                        className="freq-meter-fill bg-rose"
+                        style={{ width: `${selectedCell.frequencyDistribution?.highPercent || 15}%` }}
+                      />
+                    </div>
+                    <span className="freq-band-desc">Machinery squeal, brakes, whistles, high ventilation hiss.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: WHO Guidelines & Health Impact */}
+          {activeTabDrawer === 'who' && (
+            <div className="drawer-tab-content">
+              {selectedCell.whoGuideline ? (
+                <div className="who-guideline-card">
+                  <div className="who-status-banner">
+                    {selectedCell.whoGuideline.compliance === 'Compliant' ? (
+                      <div className="who-badge-status who-safe">
+                        <ShieldCheck size={18} />
+                        <span>WHO Guideline: Fully Compliant</span>
+                      </div>
+                    ) : selectedCell.whoGuideline.compliance === 'Caution' ? (
+                      <div className="who-badge-status who-caution">
+                        <Volume2 size={18} />
+                        <span>WHO Guideline: Moderate Ambient (Caution)</span>
+                      </div>
+                    ) : (
+                      <div className="who-badge-status who-exceeded">
+                        <AlertTriangle size={18} />
+                        <span>WHO Guideline: Noise Limit Exceeded</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="who-details-grid">
+                    <div className="who-detail-item">
+                      <span className="who-label">WHO Daytime Threshold:</span>
+                      <strong className="who-val">55.0 dB</strong>
+                    </div>
+                    <div className="who-detail-item">
+                      <span className="who-label">WHO Nighttime Threshold:</span>
+                      <strong className="who-val">45.0 dB</strong>
+                    </div>
+                    <div className="who-detail-item">
+                      <span className="who-label">Max Safe Exposure:</span>
+                      <strong className="who-val">{selectedCell.whoGuideline.maxSafeExposure}</strong>
+                    </div>
+                    <div className="who-detail-item">
+                      <span className="who-label">Current Zone Level:</span>
+                      <strong className="who-val" style={{ color: selectedCell.color }}>
+                        {selectedCell.averageDb} dB
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="who-advice-box">
+                    <span className="font-semibold text-xs text-secondary block mb-1">Health Recommendation:</span>
+                    <p className="text-xs leading-relaxed">{selectedCell.whoGuideline.healthAdvice}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="empty-state-box">
+                  <p className="text-xs text-secondary">Acoustic assessment computed automatically based on decibel levels.</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab 4: Live Samples in this cell */}
+          {activeTabDrawer === 'samples' && (
+            <div className="drawer-tab-content">
+              <div className="drawer-samples-list">
+                {selectedCell.recentSamples && selectedCell.recentSamples.length > 0 ? (
+                  selectedCell.recentSamples.map((s) => (
+                    <div key={s.id} className="drawer-sample-row">
+                      <div>
+                        <span className="font-semibold text-xs block">{s.locationName || 'Acoustic Sample'}</span>
+                        <span className="text-xs text-secondary">
+                          <Clock size={11} className="inline mr-1 opacity-70" />
+                          {new Date(s.timestamp).toLocaleTimeString()} · {s.estimatedSource || 'Ambient'}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-bold text-sm block" style={{ color: selectedCell.color }}>
+                          {s.decibel} dB
+                        </span>
+                        <span className="text-xs text-cyan font-mono">
+                          {s.dominantFrequency || 440} Hz
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-secondary py-3 text-center">No individual samples recorded yet.</p>
+                )}
+              </div>
             </div>
           )}
         </div>

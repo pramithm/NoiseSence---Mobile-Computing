@@ -6,7 +6,8 @@ import {
   Trash2,
   Clock,
   WifiOff,
-  Radio
+  Radio,
+  Activity
 } from 'lucide-react';
 import type { NoiseReading, OfflineReading } from '../types';
 import { getOfflineQueue, removeFromOfflineQueue } from '../services/offlineQueue';
@@ -39,25 +40,26 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
     setOfflineItems(getOfflineQueue());
   };
 
-  // Filtered readings
   const filteredReadings = readings.filter((r) => {
     const matchesCat = filterCategory === 'All' || r.category === filterCategory;
     const matchesSearch =
       searchQuery === '' ||
       r.locationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      r.source.toLowerCase().includes(searchQuery.toLowerCase());
+      r.source.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (r.estimatedSource && r.estimatedSource.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCat && matchesSearch;
   });
 
-  // Export to CSV helper
   const exportToCSV = () => {
     if (readings.length === 0) return;
 
-    const headers = ['ID', 'Decibel_dBA', 'Category', 'Latitude', 'Longitude', 'Accuracy_m', 'Location', 'Source', 'Timestamp'];
+    const headers = ['ID', 'Decibel_dBA', 'Category', 'DominantFrequency_Hz', 'Estimated_Source', 'Latitude', 'Longitude', 'Accuracy_m', 'Location', 'Source', 'Timestamp'];
     const rows = readings.map((r) => [
       r.id,
       r.decibel,
       r.category,
+      r.dominantFrequency || 440,
+      `"${(r.estimatedSource || 'Ambient').replace(/"/g, '""')}"`,
       r.latitude,
       r.longitude,
       r.accuracy,
@@ -70,7 +72,7 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `noisesense_readings_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `noisesense_acoustic_audit_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -78,12 +80,11 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
 
   return (
     <div className="tab-page-container">
-      {/* Page Header */}
       <div className="page-header flex-between">
         <div>
-          <h2 className="page-title">Measurement Log & History</h2>
+          <h2 className="page-title">Measurement Log & Spectral History</h2>
           <p className="page-subtitle">
-            Chronological audit of crowdsourced acoustic contributions
+            Chronological audit of crowdsourced acoustic contributions with frequency analysis
           </p>
         </div>
         <button
@@ -97,7 +98,6 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
         </button>
       </div>
 
-      {/* Offline Queue Section if pending */}
       {offlineItems.length > 0 && (
         <div className="offline-panel-card animate-fade-in">
           <div className="offline-panel-header">
@@ -145,19 +145,17 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
 
       {/* Search & Filter Controls */}
       <div className="history-filters-bar">
-        {/* Search input */}
         <div className="search-input-wrapper">
           <Search size={16} className="search-icon" />
           <input
             type="text"
-            placeholder="Search by area or source..."
+            placeholder="Search by area, frequency, or source..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
         </div>
 
-        {/* Category Pills */}
         <div className="history-category-chips">
           {['All', 'Quiet', 'Moderate', 'Loud', 'Hazardous'].map((cat) => (
             <button
@@ -171,7 +169,7 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
         </div>
       </div>
 
-      {/* Readings Table / Card List */}
+      {/* Readings Table */}
       <div className="history-list-card">
         <div className="history-list-header">
           <span className="font-semibold text-sm">
@@ -200,7 +198,8 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
               <thead>
                 <tr>
                   <th>Sound Level</th>
-                  <th>Category</th>
+                  <th>Pitch (Hz)</th>
+                  <th>Detected Source</th>
                   <th>Location / Area</th>
                   <th>Coordinates</th>
                   <th>Source</th>
@@ -224,10 +223,8 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
                         <span className="table-db-val" style={{ color: dbColor }}>
                           {r.decibel.toFixed(1)} dB
                         </span>
-                      </td>
-                      <td>
                         <span
-                          className="table-cat-badge"
+                          className="table-cat-badge ml-1.5"
                           style={{
                             color: dbColor,
                             borderColor: dbColor,
@@ -235,6 +232,17 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
                           }}
                         >
                           {r.category}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="font-mono text-xs font-bold text-cyan">
+                          <Activity size={11} className="inline mr-1" />
+                          {r.dominantFrequency || 440} Hz
+                        </span>
+                      </td>
+                      <td>
+                        <span className="text-xs font-semibold text-primary block">
+                          {r.estimatedSource || 'Ambient Acoustic'}
                         </span>
                       </td>
                       <td>

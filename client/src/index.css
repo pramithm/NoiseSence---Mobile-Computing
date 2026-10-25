@@ -1862,3 +1862,516 @@ body {
 .gap-1 { gap: 0.25rem; }
 .gap-1\.5 { gap: 0.375rem; }
 .gap-2 { gap: 0.5rem; }
+
+/* Stream Toggle Pills */
+.stream-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--color-teal);
+  border: 1px solid rgba(13, 148, 136, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stream-toggle-pill:hover {
+  background: rgba(13, 148, 136, 0.2);
+  transform: translateY(-1px);
+}
+
+.stream-active {
+  background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 12px rgba(13, 148, 136, 0.5);
+}
+
+.btn-stream-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(2, 132, 199, 0.15);
+  color: var(--color-cyan);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-stream-active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+}
+
+/* Frequency Dominant Badges & Pills */
+.frequency-dominant-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  background: var(--bg-app);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+.frequency-dominant-badge strong {
+  color: var(--color-cyan);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.sound-signature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-app);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-top: 0.5rem;
+}
+
+/* Octave EQ & Frequency Card in MeasureTab */
+.frequency-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.frequency-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.octave-eq-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.4rem;
+  height: 120px;
+  align-items: flex-end;
+  padding: 0.5rem 0.2rem;
+  background: var(--bg-app);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.octave-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.octave-track {
+  width: 14px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.dark-mode .octave-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.octave-fill {
+  width: 100%;
+  border-radius: 6px;
+  transition: height 0.1s ease-out;
+}
+
+.octave-val {
+  font-size: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.octave-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.band-breakdown-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .band-breakdown-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.band-summary-item {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.band-summary-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+/* Dashboard Frequency Grid */
+.dashboard-freq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .dashboard-freq-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dashboard-freq-item {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem;
+}
+
+/* Leaflet Map Badge Overrides */
+.map-badge-flex {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+
+.map-badge-hz {
+  font-size: 0.58rem;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.popup-freq, .popup-source {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Cell Detail Drawer Tabs & Sub-Content */
+.drawer-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.drawer-category-pill {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.drawer-band-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--bg-app);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.drawer-tab-nav {
+  display: flex;
+  gap: 0.35rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.drawer-tab-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.drawer-tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-app);
+}
+
+.drawer-tab-active {
+  background: var(--color-teal) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.drawer-tab-content {
+  animation: fadeIn 0.2s ease;
+}
+
+.drawer-source-box {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.drawer-source-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.2rem;
+}
+
+/* Hourly Trend Box */
+.trend-curve-box {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem;
+}
+
+.trend-bars-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+  height: 90px;
+  align-items: flex-end;
+}
+
+.trend-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 0.2rem;
+}
+
+.trend-bar-track {
+  width: 16px;
+  height: 55px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.dark-mode .trend-bar-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.trend-bar-fill {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.trend-bar-val {
+  font-size: 0.58rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.trend-bar-hour {
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+}
+
+/* Frequency Analysis Tab in Drawer */
+.freq-analysis-box {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.freq-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.peak-hz-badge {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.peak-hz-badge strong {
+  color: var(--color-teal);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.freq-meter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.freq-meter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.freq-meter-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+}
+
+.freq-band-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.freq-band-percent {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+}
+
+.freq-meter-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.dark-mode .freq-meter-track {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.freq-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.freq-band-desc {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+/* WHO Guidelines Card in Drawer */
+.who-guideline-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.who-status-banner {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.who-badge-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.who-safe {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dark-mode .who-safe {
+  color: #34d399;
+}
+
+.who-caution {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.who-exceeded {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.who-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .who-details-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.who-detail-item {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.who-label {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.who-val {
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.who-advice-box {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+}
+
