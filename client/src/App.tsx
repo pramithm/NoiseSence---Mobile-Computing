@@ -185,7 +185,7 @@ export const App: React.FC = () => {
             onReadingSubmitted={handleReadingSubmitted}
             onNavigateToMap={() => setActiveTab('map')}
             onNavigateToHistory={() => setActiveTab('history')}
-            isOnline={isOnline && socketStatus === 'connected'}
+            isOnline={isOnline}
             initialTargetPlace={targetPlaceForMeasurement}
           />
         )}

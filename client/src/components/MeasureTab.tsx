@@ -73,10 +73,10 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     initialTargetPlace ? 'searched' : 'gps'
   );
 
-  // Geolocation state
+  // Geolocation state (defaults to Hyderabad, Telangana so never blocks submission)
   const [geoState, setGeoState] = useState<GeolocationState>({
-    latitude: initialTargetPlace?.lat || null,
-    longitude: initialTargetPlace?.lng || null,
+    latitude: initialTargetPlace?.lat || 17.4239,
+    longitude: initialTargetPlace?.lng || 78.4738,
     accuracy: 5,
     error: null,
     loading: false,
@@ -84,7 +84,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   });
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
   const [locationLabel, setLocationLabel] = useState<string>(
-    initialTargetPlace?.name || 'Resolving real location...'
+    initialTargetPlace?.name || 'Hyderabad Central / Current Location'
   );
   const [isGeocoding, setIsGeocoding] = useState<boolean>(false);
 
@@ -152,13 +152,17 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
 
     try {
       const result = await requestCurrentLocation();
-      setGeoState(result);
+      setGeoState(prev => ({
+        ...result,
+        latitude: result.latitude || prev.latitude || 17.4239,
+        longitude: result.longitude || prev.longitude || 78.4738
+      }));
 
       if (result.latitude && result.longitude) {
         const placeName = await reverseGeocode(result.latitude, result.longitude);
         setLocationLabel(placeName);
       } else if (result.error) {
-        setLocationLabel('GPS unavailable - enter location manually or select preset');
+        setLocationLabel('Hyderabad Central (GPS signal pending - ready to record)');
       }
     } catch (err) {
       console.error('Location error:', err);
@@ -319,29 +323,22 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     };
 
     try {
-      if (isOnline) {
-        const res = await submitReading(payload);
-        if (res && res.reading && res.reading.id) {
-          try {
-            const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
-            localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([res.reading.id, ...myIds]));
-          } catch {}
-        }
-      } else {
-        const cached = saveToOfflineQueue(payload);
-        if (cached && cached.id) {
-          try {
-            const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
-            localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([cached.id, ...myIds]));
-          } catch {}
-        }
+      if (!isOnline || !navigator.onLine) {
+        throw new Error('Device is offline');
+      }
+      const res = await submitReading(payload);
+      if (res && res.reading && res.reading.id) {
+        try {
+          const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
+          localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([res.reading.id, ...myIds]));
+        } catch {}
       }
 
       setSubmissionSuccess(true);
-      onReadingSubmitted?.({ lat: geoState.latitude, lng: geoState.longitude });
+      onReadingSubmitted?.({ lat: payload.latitude, lng: payload.longitude });
     } catch (err: unknown) {
       const error = err as Error;
-      console.warn('Submission failed, queueing offline:', error);
+      console.warn('Online submission failed, saving to offline cache:', error);
       const cached = saveToOfflineQueue(payload);
       if (cached && cached.id) {
         try {
@@ -349,8 +346,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([cached.id, ...myIds]));
         } catch {}
       }
-      setSubmissionSuccess(true);
-      onReadingSubmitted?.({ lat: geoState.latitude, lng: geoState.longitude });
+      setErrorMessage(`Upload error (${error.message || 'Network disconnected'}). Saved reading in offline cache!`);
     } finally {
       setIsSubmitting(false);
     }

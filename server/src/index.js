@@ -33,6 +33,14 @@ app.use(cors({
   credentials: true
 }));
 
+app.use((req, res, next) => {
+  // Normalize consecutive slashes e.g. //api/readings -> /api/readings
+  if (req.url && req.url.includes('//')) {
+    req.url = req.url.replace(/\/+/g, '/');
+  }
+  next();
+});
+
 app.use(express.json());
 
 const io = new SocketIOServer(server, {

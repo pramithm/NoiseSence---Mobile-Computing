@@ -1,10 +1,12 @@
 import type { DashboardStats, HeatmapCell, NoiseReading } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_URL || (
+const rawBase = (import.meta.env.VITE_API_URL as string) || (
   window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:5000'
     : window.location.origin
 );
+// Ensure no trailing slash so ${API_BASE}/api/... never becomes //api/...
+const API_BASE = rawBase.trim().replace(/\/+$/, '');
 
 export async function fetchStats(): Promise<DashboardStats> {
   const res = await fetch(`${API_BASE}/api/stats`);
