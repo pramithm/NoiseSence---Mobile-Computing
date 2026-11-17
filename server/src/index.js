@@ -9,7 +9,8 @@ import {
   getRecentReadings,
   getHeatmapCells,
   getStats,
-  resetToDemoSeed
+  resetToDemoSeed,
+  seedAreaReadings
 } from './db.js';
 
 dotenv.config();
@@ -45,15 +46,15 @@ let connectedClients = 0;
 let simulationInterval = null;
 let isSimulating = false;
 
-// Campus preset zones used for real-time simulation streaming
+// Hyderabad, Telangana preset zones used for real-time simulation streaming
 const SIMULATION_ZONES = [
-  { name: 'University Library Silence Zone', lat: 37.7758, lng: -122.4182, baseDb: 40, dominantHz: 120, source: 'HVAC Airflow / Whisper' },
-  { name: 'Student Union Cafeteria', lat: 37.7741, lng: -122.4205, baseDb: 73, dominantHz: 620, source: 'Chatter & Cutlery' },
-  { name: 'University Ave Bus Stop', lat: 37.7765, lng: -122.4221, baseDb: 82, dominantHz: 95, source: 'Transit Bus Acceleration' },
-  { name: 'Engineering Hall Expansion', lat: 37.7732, lng: -122.4170, baseDb: 90, dominantHz: 3200, source: 'Steel Cut & Pneumatic Drill' },
-  { name: 'Memorial Botanical Quad', lat: 37.7770, lng: -122.4160, baseDb: 49, dominantHz: 2100, source: 'Fountain Water & Trees' },
-  { name: 'CS Innovation Hub', lat: 37.7745, lng: -122.4148, baseDb: 63, dominantHz: 480, source: 'Keyboards & Dialogue' },
-  { name: 'Campus South Perimeter Road', lat: 37.7725, lng: -122.4215, baseDb: 77, dominantHz: 140, source: 'Urban Vehicle Traffic' }
+  { name: 'HITEC City Cyber Towers, Hyderabad', lat: 17.4504, lng: 78.3808, baseDb: 74, dominantHz: 640, source: 'IT Corridor Traffic & Commercial Bustle' },
+  { name: 'Charminar Heritage & Old City Bazaar, Hyderabad', lat: 17.3616, lng: 78.4747, baseDb: 83, dominantHz: 720, source: 'Historic Market Din & Autorickshaws' },
+  { name: 'Hussain Sagar Tank Bund Promenade, Hyderabad', lat: 17.4239, lng: 78.4738, baseDb: 58, dominantHz: 280, source: 'Lakefront Breeze & Promenade Footfall' },
+  { name: 'KBR National Park (Jubilee Hills), Hyderabad', lat: 17.4277, lng: 78.4208, baseDb: 40, dominantHz: 140, source: 'Protected Forest Sanctuary & Birdsong' },
+  { name: 'Osmania University Arts College, Hyderabad', lat: 17.4138, lng: 78.5284, baseDb: 44, dominantHz: 120, source: 'Academic Walkways & Library Quiet' },
+  { name: 'Secunderabad Railway Junction, Hyderabad', lat: 17.4334, lng: 78.5045, baseDb: 89, dominantHz: 3100, source: 'Locomotives & Transit Hub Congestion' },
+  { name: 'Gachibowli Financial District, Hyderabad', lat: 17.4401, lng: 78.3489, baseDb: 69, dominantHz: 520, source: 'Flyover Traffic & Corporate Commute' }
 ];
 
 function triggerSimulatedReading() {
@@ -232,6 +233,38 @@ app.post('/api/simulation/toggle', (req, res) => {
 
   io.emit('simulation:status', { active: isSimulating });
   res.json({ active: isSimulating, message: isSimulating ? 'Live stream simulation active' : 'Live stream stopped' });
+});
+
+app.post('/api/seed-area', async (req, res) => {
+  try {
+    const { latitude, longitude, locationName } = req.body;
+    if (latitude === undefined || longitude === undefined || isNaN(latitude) || isNaN(longitude)) {
+      return res.status(400).json({ error: 'Valid latitude and longitude coordinates are required.' });
+    }
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
+    const name = locationName || 'Local Area';
+
+    const createdReadings = await seedAreaReadings(lat, lng, name);
+    const updatedCells = await getHeatmapCells();
+    const updatedStats = await getStats();
+
+    io.emit('heatmap:update', updatedCells);
+    io.emit('stats:update', updatedStats);
+    for (const r of createdReadings) {
+      io.emit('reading:new', r);
+    }
+
+    res.json({
+      success: true,
+      message: `Seeded 5 sample noise readings around ${name}.`,
+      readings: createdReadings,
+      cells: updatedCells
+    });
+  } catch (err) {
+    console.error('Error seeding area readings:', err);
+    res.status(500).json({ error: 'Failed to seed area readings', details: err.message });
+  }
 });
 
 app.post('/api/reset-seed', async (req, res) => {

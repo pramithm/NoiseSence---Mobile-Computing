@@ -22,42 +22,27 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   ];
 
   return (
-    <nav className="bottom-nav-container">
+    <nav className="bottom-nav-container" aria-label="Main Navigation">
       <div className="bottom-nav-inner">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
 
-          if (tab.isAction) {
-            return (
-              <button
-                key={tab.id}
-                onClick={() => onTabChange(tab.id)}
-                className={`nav-action-btn ${isActive ? 'nav-action-active' : ''} ${
-                  isMeasuring ? 'nav-action-pulsing' : ''
-                }`}
-                aria-label={tab.label}
-              >
-                <div className="action-circle">
-                  <Icon size={22} className={isMeasuring ? 'pulse-icon' : ''} />
-                </div>
-                <span className="nav-label">{tab.label}</span>
-              </button>
-            );
-          }
-
           return (
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`nav-item ${isActive ? 'nav-item-active' : ''}`}
+              className={`nav-item ${isActive ? 'nav-item-active' : ''} ${
+                tab.isAction ? 'nav-item-primary' : ''
+              }`}
               aria-label={tab.label}
+              aria-current={isActive ? 'page' : undefined}
             >
-              <div className="nav-icon-wrapper">
-                <Icon size={20} />
-                {isActive && <span className="active-glow-dot"></span>}
+              <div className={`nav-icon-wrapper ${tab.isAction ? 'nav-icon-action' : ''} ${isMeasuring && tab.isAction ? 'nav-icon-measuring' : ''}`}>
+                <Icon size={tab.isAction ? 20 : 19} className={isMeasuring && tab.isAction ? 'pulse-icon' : ''} />
               </div>
               <span className="nav-label">{tab.label}</span>
+              {isActive && <span className="active-pill-indicator" />}
             </button>
           );
         })}
@@ -65,3 +50,4 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     </nav>
   );
 };
+

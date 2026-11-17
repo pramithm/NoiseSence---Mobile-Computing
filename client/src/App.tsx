@@ -184,6 +184,7 @@ export const App: React.FC = () => {
           <MeasureTab
             onReadingSubmitted={handleReadingSubmitted}
             onNavigateToMap={() => setActiveTab('map')}
+            onNavigateToHistory={() => setActiveTab('history')}
             isOnline={isOnline && socketStatus === 'connected'}
             initialTargetPlace={targetPlaceForMeasurement}
           />
@@ -195,6 +196,7 @@ export const App: React.FC = () => {
             recentReadings={readings}
             onRefreshMap={loadAllData}
             userCoords={userCoords}
+            onUpdateUserCoords={setUserCoords}
             isSimulating={isSimulating}
             onToggleSimulation={handleToggleSimulation}
             onNavigateToMeasureWithPlace={(place) => {
@@ -209,6 +211,10 @@ export const App: React.FC = () => {
             readings={readings}
             onSyncOffline={handleSyncOffline}
             onRefreshReadings={loadAllData}
+            onNavigateToMapWithCoords={(coords) => {
+              setUserCoords(coords);
+              setActiveTab('map');
+            }}
           />
         )}
       </main>

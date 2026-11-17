@@ -21,13 +21,15 @@ import {
   MapPin
 } from 'lucide-react';
 import type { HeatmapCell, NoiseReading } from '../types';
-import { searchPlaces, calculateDistanceMeters, type GeocodedPlace } from '../services/geolocation';
+import { searchPlaces, calculateDistanceMeters, requestCurrentLocation, type GeocodedPlace } from '../services/geolocation';
+import { seedArea } from '../services/api';
 
 interface MapTabProps {
   cells: HeatmapCell[];
   recentReadings: NoiseReading[];
   onRefreshMap: () => void;
   userCoords?: { lat: number; lng: number } | null;
+  onUpdateUserCoords?: (coords: { lat: number; lng: number }) => void;
   isSimulating?: boolean;
   onToggleSimulation?: () => void;
   onNavigateToMeasureWithPlace?: (place: { name: string; lat: number; lng: number }) => void;
@@ -38,6 +40,7 @@ export const MapTab: React.FC<MapTabProps> = ({
   recentReadings,
   onRefreshMap,
   userCoords,
+  onUpdateUserCoords,
   isSimulating = false,
   onToggleSimulation,
   onNavigateToMeasureWithPlace
@@ -55,6 +58,8 @@ export const MapTab: React.FC<MapTabProps> = ({
   // Place Search & Noise Analysis State
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isLocatingUser, setIsLocatingUser] = useState<boolean>(false);
+  const [isSeedingArea, setIsSeedingArea] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<GeocodedPlace[]>([]);
   const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
   const [searchedPlaceInfo, setSearchedPlaceInfo] = useState<{
@@ -63,7 +68,15 @@ export const MapTab: React.FC<MapTabProps> = ({
     distanceMeters: number | null;
   } | null>(null);
 
-  // Initial center prioritizes real user coordinates, then most recent reading, then campus
+  // Global search "No data recorded" popup modal state (Requirement 1)
+  const [noDataModal, setNoDataModal] = useState<{
+    placeName: string;
+    fullName: string;
+    lat: number;
+    lng: number;
+  } | null>(null);
+
+  // Initial center defaults to Hyderabad, Telangana (Requirement 2)
   const getInitialCenter = useCallback((): [number, number] => {
     if (userCoords && userCoords.lat && userCoords.lng) {
       return [userCoords.lat, userCoords.lng];
@@ -71,7 +84,7 @@ export const MapTab: React.FC<MapTabProps> = ({
     if (recentReadings.length > 0 && recentReadings[0].latitude) {
       return [recentReadings[0].latitude, recentReadings[0].longitude];
     }
-    return [37.7750, -122.4194];
+    return [17.4239, 78.4738]; // Hyderabad Central (Telangana)
   }, [userCoords, recentReadings]);
 
   // Initialize Leaflet map
@@ -82,7 +95,7 @@ export const MapTab: React.FC<MapTabProps> = ({
     const center = getInitialCenter();
     const map = L.map(mapContainerRef.current, {
       center: center,
-      zoom: 15,
+      zoom: 13,
       zoomControl: false
     });
 
@@ -267,7 +280,7 @@ export const MapTab: React.FC<MapTabProps> = ({
     setSelectedCell(null);
 
     if (!mapInstanceRef.current) return;
-    mapInstanceRef.current.flyTo([place.lat, place.lng], 16, { duration: 1.2 });
+    mapInstanceRef.current.flyTo([place.lat, place.lng], 15, { duration: 1.2 });
 
     // Drop or move Search Pin Marker
     if (searchMarkerRef.current) {
@@ -287,7 +300,7 @@ export const MapTab: React.FC<MapTabProps> = ({
     const marker = L.marker([place.lat, place.lng], { icon: searchIcon }).addTo(mapInstanceRef.current);
     searchMarkerRef.current = marker;
 
-    // Calculate How Much Noise Is In That Location
+    // Calculate distance to nearest recorded noise cell
     let closestCell: HeatmapCell | null = null;
     let minDistance = Infinity;
 
@@ -299,18 +312,50 @@ export const MapTab: React.FC<MapTabProps> = ({
       }
     }
 
-    // If within 2500m (2.5km), associate noise reading
-    const isNearby = minDistance <= 2500;
-    setSearchedPlaceInfo({
-      place,
-      nearestCell: isNearby ? closestCell : null,
-      distanceMeters: isNearby ? Math.round(minDistance) : null
-    });
+    // REQUIREMENT 1: If location does not contain recorded noise data, show popup!
+    if (minDistance > 2000 || !closestCell) {
+      setSearchedPlaceInfo(null);
+      setNoDataModal({
+        placeName: place.shortName,
+        fullName: place.displayName,
+        lat: place.lat,
+        lng: place.lng
+      });
+    } else {
+      setNoDataModal(null);
+      setSearchedPlaceInfo({
+        place,
+        nearestCell: closestCell,
+        distanceMeters: Math.round(minDistance)
+      });
+    }
   };
 
-  const centerUser = () => {
-    if (userCoords && userCoords.lat && userCoords.lng && mapInstanceRef.current) {
-      mapInstanceRef.current.flyTo([userCoords.lat, userCoords.lng], 17, { duration: 1 });
+  const centerUser = async () => {
+    setIsLocatingUser(true);
+    try {
+      let lat = userCoords?.lat;
+      let lng = userCoords?.lng;
+
+      if (!lat || !lng) {
+        const geoResult = await requestCurrentLocation();
+        if (geoResult.latitude && geoResult.longitude) {
+          lat = geoResult.latitude;
+          lng = geoResult.longitude;
+          if (onUpdateUserCoords) {
+            onUpdateUserCoords({ lat, lng });
+          }
+        } else {
+          alert(geoResult.error || 'GPS location not available. Please allow location permissions in your browser or search an area.');
+          return;
+        }
+      }
+
+      if (lat && lng && mapInstanceRef.current) {
+        mapInstanceRef.current.flyTo([lat, lng], 16, { duration: 1.2 });
+      }
+    } finally {
+      setIsLocatingUser(false);
     }
   };
 
@@ -422,11 +467,34 @@ export const MapTab: React.FC<MapTabProps> = ({
 
             <button
               onClick={centerUser}
+              disabled={isLocatingUser || isSeedingArea}
               className="btn-map-control"
-              title="Fly to My Current GPS Location"
+              title="Fly to My Current GPS Location & Detect Neighborhood Noise"
             >
-              <Crosshair size={14} />
-              <span className="control-btn-text">My GPS</span>
+              {isLocatingUser ? <RefreshCw size={14} className="spin-icon" /> : <Crosshair size={14} />}
+              <span className="control-btn-text">{isLocatingUser ? 'Locating...' : 'My GPS'}</span>
+            </button>
+
+            <button
+              onClick={async () => {
+                if (!mapInstanceRef.current) return;
+                const center = mapInstanceRef.current.getCenter();
+                setIsSeedingArea(true);
+                try {
+                  await seedArea(center.lat, center.lng, 'Map View Area');
+                  onRefreshMap();
+                } catch (e) {
+                  console.warn('Manual seed error:', e);
+                } finally {
+                  setIsSeedingArea(false);
+                }
+              }}
+              disabled={isSeedingArea}
+              className="btn-map-control"
+              title="Generate 5 Sample Noise Readings at Current View"
+            >
+              {isSeedingArea ? <RefreshCw size={14} className="spin-icon" /> : <MapPin size={14} className="text-amber" />}
+              <span className="control-btn-text">{isSeedingArea ? 'Adding...' : '+ 5 Samples'}</span>
             </button>
 
             <button
@@ -451,6 +519,52 @@ export const MapTab: React.FC<MapTabProps> = ({
 
       {/* Full Map Canvas Container */}
       <div ref={mapContainerRef} className="leaflet-map-container" />
+
+      {/* Global Search: No Data Recorded Popup Modal (Requirement 1) */}
+      {noDataModal && (
+        <div className="no-data-modal-backdrop" onClick={() => setNoDataModal(null)}>
+          <div className="no-data-modal-card animate-scale-up" onClick={(e) => e.stopPropagation()}>
+            <div className="no-data-icon-wrap">
+              <AlertTriangle size={30} className="text-amber" />
+            </div>
+            <h3 className="no-data-title">No Noise Data Recorded</h3>
+            <p className="no-data-desc">
+              There are currently no crowdsourced acoustic measurements recorded for <strong>{noDataModal.placeName}</strong> yet.
+            </p>
+            <div className="no-data-coords-badge">
+              <span>📍 {noDataModal.lat.toFixed(4)}, {noDataModal.lng.toFixed(4)}</span>
+            </div>
+
+            <div className="no-data-actions">
+              <button
+                type="button"
+                onClick={() => {
+                  const target = { ...noDataModal };
+                  setNoDataModal(null);
+                  if (onNavigateToMeasureWithPlace) {
+                    onNavigateToMeasureWithPlace({
+                      name: target.placeName,
+                      lat: target.lat,
+                      lng: target.lng
+                    });
+                  }
+                }}
+                className="btn-measure-here-modal"
+              >
+                <Mic size={16} />
+                <span>Measure Sound at {noDataModal.placeName}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setNoDataModal(null)}
+                className="btn-dismiss-modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating Searched Location Sound Intelligence Card */}
       {searchedPlaceInfo && (

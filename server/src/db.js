@@ -12,112 +12,157 @@ const { Pool } = pg;
 let pool = null;
 let usePostgres = false;
 
-// Pre-seeded demo readings with rich acoustic frequency profiles
+// Pre-seeded demo readings located across Hyderabad, Telangana for demonstration
 const SEED_READINGS = [
   {
-    id: 'seed-1',
-    decibel: 39.4,
-    latitude: 37.7758,
-    longitude: -122.4182,
+    id: 'seed-hyd-1',
+    decibel: 74.8,
+    latitude: 17.4504,
+    longitude: 78.3808,
     accuracy: 4.2,
-    locationName: 'University Library - 3rd Floor Silence Zone',
+    locationName: 'HITEC City Cyber Towers & Madhapur IT Corridor, Hyderabad',
+    category: 'Loud',
+    timestamp: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 640,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 32, midPercent: 56, highPercent: 12 },
+    estimatedSource: 'IT Corridor Traffic & Commercial Bustle'
+  },
+  {
+    id: 'seed-hyd-2',
+    decibel: 83.4,
+    latitude: 17.3616,
+    longitude: 78.4747,
+    accuracy: 5.0,
+    locationName: 'Charminar Heritage Plaza & Laad Bazaar, Hyderabad',
+    category: 'Loud',
+    timestamp: new Date(Date.now() - 1000 * 60 * 22).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 720,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 24, midPercent: 64, highPercent: 12 },
+    estimatedSource: 'Historic Market Din & Autorickshaws'
+  },
+  {
+    id: 'seed-hyd-3',
+    decibel: 58.2,
+    latitude: 17.4239,
+    longitude: 78.4738,
+    accuracy: 4.5,
+    locationName: 'Hussain Sagar Lake Promenade & Tank Bund, Hyderabad',
+    category: 'Moderate',
+    timestamp: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 280,
+    frequencyBand: 'Low (Rumble)',
+    frequencyDistribution: { lowPercent: 52, midPercent: 38, highPercent: 10 },
+    estimatedSource: 'Lakefront Breeze & Promenade Footfall'
+  },
+  {
+    id: 'seed-hyd-4',
+    decibel: 39.8,
+    latitude: 17.4277,
+    longitude: 78.4208,
+    accuracy: 3.9,
+    locationName: 'KBR National Park Nature Sanctuary (Jubilee Hills), Hyderabad',
     category: 'Quiet',
-    timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-    source: 'Demonstration Baseline',
+    timestamp: new Date(Date.now() - 1000 * 60 * 48).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 140,
+    frequencyBand: 'Low (Rumble)',
+    frequencyDistribution: { lowPercent: 65, midPercent: 25, highPercent: 10 },
+    estimatedSource: 'Protected Forest Foliage & Birdsong'
+  },
+  {
+    id: 'seed-hyd-5',
+    decibel: 43.6,
+    latitude: 17.4138,
+    longitude: 78.5284,
+    accuracy: 4.1,
+    locationName: 'Osmania University Arts College & Library, Hyderabad',
+    category: 'Quiet',
+    timestamp: new Date(Date.now() - 1000 * 60 * 65).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
     dominantFrequency: 120,
     frequencyBand: 'Low (Rumble)',
     frequencyDistribution: { lowPercent: 58, midPercent: 32, highPercent: 10 },
-    estimatedSource: 'HVAC Airflow / Whisper Quiet'
+    estimatedSource: 'Academic Walkways & Quiet Reading Room'
   },
   {
-    id: 'seed-2',
-    decibel: 72.8,
-    latitude: 37.7741,
-    longitude: -122.4205,
-    accuracy: 5.1,
-    locationName: 'Student Union Cafeteria',
-    category: 'Moderate',
-    timestamp: new Date(Date.now() - 1000 * 60 * 18).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 580,
-    frequencyBand: 'Mid (Speech/Urban)',
-    frequencyDistribution: { lowPercent: 24, midPercent: 62, highPercent: 14 },
-    estimatedSource: 'Active Social Babble & Cutlery'
-  },
-  {
-    id: 'seed-3',
-    decibel: 83.2,
-    latitude: 37.7765,
-    longitude: -122.4221,
-    accuracy: 6.0,
-    locationName: 'University Ave Bus Stop & Transit Hub',
-    category: 'Loud',
-    timestamp: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 85,
-    frequencyBand: 'Low (Rumble)',
-    frequencyDistribution: { lowPercent: 68, midPercent: 22, highPercent: 10 },
-    estimatedSource: 'Diesel Transit Bus & Traffic Tires'
-  },
-  {
-    id: 'seed-4',
-    decibel: 91.5,
-    latitude: 37.7732,
-    longitude: -122.4170,
-    accuracy: 3.8,
-    locationName: 'Engineering Hall Expansion Construction',
+    id: 'seed-hyd-6',
+    decibel: 89.2,
+    latitude: 17.4334,
+    longitude: 78.5045,
+    accuracy: 5.6,
+    locationName: 'Secunderabad Railway Junction & Bus Terminal, Hyderabad',
     category: 'Hazardous',
-    timestamp: new Date(Date.now() - 1000 * 60 * 32).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 3400,
+    timestamp: new Date(Date.now() - 1000 * 60 * 80).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 3100,
     frequencyBand: 'High (Machinery/Siren)',
     frequencyDistribution: { lowPercent: 35, midPercent: 25, highPercent: 40 },
-    estimatedSource: 'Pneumatic Drill & Steel Grinding'
+    estimatedSource: 'Locomotives & Transit Hub Congestion'
   },
   {
-    id: 'seed-5',
-    decibel: 48.7,
-    latitude: 37.7770,
-    longitude: -122.4160,
-    accuracy: 5.5,
-    locationName: 'Memorial Quad & Botanical Garden',
-    category: 'Quiet',
-    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 2400,
-    frequencyBand: 'High (Machinery/Siren)',
-    frequencyDistribution: { lowPercent: 20, midPercent: 45, highPercent: 35 },
-    estimatedSource: 'Fountain Water & Ambient Breeze'
-  },
-  {
-    id: 'seed-6',
-    decibel: 64.3,
-    latitude: 37.7745,
-    longitude: -122.4148,
-    accuracy: 4.9,
-    locationName: 'Computer Science Innovation Lab',
+    id: 'seed-hyd-7',
+    decibel: 69.4,
+    latitude: 17.4401,
+    longitude: 78.3489,
+    accuracy: 4.8,
+    locationName: 'Gachibowli Financial District & Stadium Road, Hyderabad',
     category: 'Moderate',
-    timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 450,
+    timestamp: new Date(Date.now() - 1000 * 60 * 95).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 520,
     frequencyBand: 'Mid (Speech/Urban)',
     frequencyDistribution: { lowPercent: 30, midPercent: 55, highPercent: 15 },
-    estimatedSource: 'Collaborative Discussion & Keyboards'
+    estimatedSource: 'Flyover Traffic & Corporate Commute'
   },
   {
-    id: 'seed-7',
-    decibel: 76.1,
-    latitude: 37.7725,
-    longitude: -122.4215,
-    accuracy: 6.4,
-    locationName: 'Campus South Perimeter Road',
+    id: 'seed-hyd-8',
+    decibel: 72.1,
+    latitude: 17.4156,
+    longitude: 78.4357,
+    accuracy: 4.6,
+    locationName: 'Banjara Hills Road No. 12 Commercial Strip, Hyderabad',
     category: 'Loud',
-    timestamp: new Date(Date.now() - 1000 * 60 * 85).toISOString(),
-    source: 'Demonstration Baseline',
-    dominantFrequency: 110,
-    frequencyBand: 'Low (Rumble)',
-    frequencyDistribution: { lowPercent: 62, midPercent: 28, highPercent: 10 },
-    estimatedSource: 'Vehicle Traffic & Acceleration'
+    timestamp: new Date(Date.now() - 1000 * 60 * 110).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 580,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 28, midPercent: 58, highPercent: 14 },
+    estimatedSource: 'Commercial Shopping Din & Cafe Music'
+  },
+  {
+    id: 'seed-hyd-9',
+    decibel: 65.4,
+    latitude: 17.4342,
+    longitude: 78.3881,
+    accuracy: 4.3,
+    locationName: 'Durgam Cheruvu Cable-Stayed Bridge, Hyderabad',
+    category: 'Moderate',
+    timestamp: new Date(Date.now() - 1000 * 60 * 130).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 460,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 34, midPercent: 52, highPercent: 14 },
+    estimatedSource: 'Waterfront Promenade & Commuter Traffic'
+  },
+  {
+    id: 'seed-hyd-10',
+    decibel: 62.8,
+    latitude: 17.4933,
+    longitude: 78.3914,
+    accuracy: 4.7,
+    locationName: 'JNTU College of Engineering (Kukatpally), Hyderabad',
+    category: 'Moderate',
+    timestamp: new Date(Date.now() - 1000 * 60 * 150).toISOString(),
+    source: 'Demonstration Baseline (Telangana)',
+    dominantFrequency: 490,
+    frequencyBand: 'Mid (Speech/Urban)',
+    frequencyDistribution: { lowPercent: 36, midPercent: 50, highPercent: 14 },
+    estimatedSource: 'Student Gathering & Campus Grounds'
   }
 ];
 
@@ -527,4 +572,97 @@ export async function resetToDemoSeed() {
     persistStore();
   }
   return { success: true, count: SEED_READINGS.length };
+}
+
+export async function seedAreaReadings(latitude, longitude, baseLocationName = 'Area') {
+  const sampleProfiles = [
+    {
+      offsetLat: 0.0007,
+      offsetLng: 0.0005,
+      nameSuffix: 'Quiet Park & Study Corner',
+      decibel: 42.4,
+      dominantFrequency: 130,
+      frequencyBand: 'Low (Rumble)',
+      source: 'Neighborhood Survey Node',
+      estimatedSource: 'Foliage Breeze & Whispers',
+      lowPercent: 55,
+      midPercent: 35,
+      highPercent: 10
+    },
+    {
+      offsetLat: -0.0008,
+      offsetLng: 0.0010,
+      nameSuffix: 'Campus Cafeteria & Lounge',
+      decibel: 64.6,
+      dominantFrequency: 540,
+      frequencyBand: 'Mid (Speech/Urban)',
+      source: 'Neighborhood Survey Node',
+      estimatedSource: 'Active Conversation & Social Din',
+      lowPercent: 25,
+      midPercent: 62,
+      highPercent: 13
+    },
+    {
+      offsetLat: 0.0014,
+      offsetLng: -0.0011,
+      nameSuffix: 'Main Transit Avenue & Bus Stop',
+      decibel: 79.2,
+      dominantFrequency: 110,
+      frequencyBand: 'Low (Rumble)',
+      source: 'Neighborhood Survey Node',
+      estimatedSource: 'Motor Traffic & Bus Acceleration',
+      lowPercent: 65,
+      midPercent: 25,
+      highPercent: 10
+    },
+    {
+      offsetLat: -0.0013,
+      offsetLng: -0.0009,
+      nameSuffix: 'Commercial Works & Equipment',
+      decibel: 88.5,
+      dominantFrequency: 3200,
+      frequencyBand: 'High (Machinery/Siren)',
+      source: 'Neighborhood Survey Node',
+      estimatedSource: 'Pneumatic Tool & Generator Hum',
+      lowPercent: 28,
+      midPercent: 22,
+      highPercent: 50
+    },
+    {
+      offsetLat: 0.0001,
+      offsetLng: -0.0002,
+      nameSuffix: 'Pedestrian Walkway & Plaza',
+      decibel: 53.8,
+      dominantFrequency: 450,
+      frequencyBand: 'Mid (Speech/Urban)',
+      source: 'Neighborhood Survey Node',
+      estimatedSource: 'Footsteps & Distant Ambience',
+      lowPercent: 38,
+      midPercent: 48,
+      highPercent: 14
+    }
+  ];
+
+  const createdReadings = [];
+  for (const s of sampleProfiles) {
+    const reading = await insertReading({
+      decibel: s.decibel,
+      latitude: latitude + s.offsetLat,
+      longitude: longitude + s.offsetLng,
+      accuracy: 4.5,
+      locationName: `${baseLocationName} (${s.nameSuffix})`,
+      source: s.source,
+      dominantFrequency: s.dominantFrequency,
+      frequencyBand: s.frequencyBand,
+      estimatedSource: s.estimatedSource,
+      frequencyDistribution: {
+        lowPercent: s.lowPercent,
+        midPercent: s.midPercent,
+        highPercent: s.highPercent
+      }
+    });
+    createdReadings.push(reading);
+  }
+
+  return createdReadings;
 }

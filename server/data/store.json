@@ -1,126 +1,50 @@
 {
   "readings": [
     {
-      "id": "read-1792947295608-3glrgz",
-      "decibel": 74.7,
-      "latitude": 37.772487,
-      "longitude": -122.421516,
-      "accuracy": 5.3,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 138,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:54:55.608Z"
-    },
-    {
-      "id": "read-1792947292606-ffzw7s",
-      "decibel": 77.7,
-      "latitude": 37.77247,
-      "longitude": -122.421513,
-      "accuracy": 4.8,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 135,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:54:52.606Z"
-    },
-    {
-      "id": "read-1792947289595-agvcj5",
-      "decibel": 42.3,
-      "latitude": 37.775781,
-      "longitude": -122.418287,
-      "accuracy": 3.7,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 108,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:54:49.595Z"
-    },
-    {
-      "id": "read-1792947286589-uw0gog",
-      "decibel": 48.7,
-      "latitude": 37.777089,
-      "longitude": -122.416174,
-      "accuracy": 5.6,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2111,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:54:46.589Z"
-    },
-    {
-      "id": "read-1792947283578-aveh1m",
-      "decibel": 73.5,
-      "latitude": 37.772353,
-      "longitude": -122.421425,
-      "accuracy": 4.4,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 119,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:54:43.578Z"
-    },
-    {
-      "id": "read-1792947280561-tiyv3z",
-      "decibel": 90.9,
-      "latitude": 37.773125,
-      "longitude": -122.417087,
-      "accuracy": 3.5,
-      "locationName": "Engineering Hall Expansion",
+      "id": "read-1794915425374-mkhx6b",
+      "decibel": 92.6,
+      "latitude": 17.433358,
+      "longitude": 78.504607,
+      "accuracy": 5.9,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3183,
+      "dominantFrequency": 3081,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:54:40.561Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:37:05.374Z"
     },
     {
-      "id": "read-1792947277545-3lf5wf",
-      "decibel": 71.7,
-      "latitude": 37.774083,
-      "longitude": -122.420368,
-      "accuracy": 4,
-      "locationName": "Student Union Cafeteria",
+      "id": "read-1794915422374-vmu12w",
+      "decibel": 71.3,
+      "latitude": 17.450482,
+      "longitude": 78.380721,
+      "accuracy": 5.2,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 658,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:37:02.374Z"
+    },
+    {
+      "id": "read-1794915419369-7bsf8l",
+      "decibel": 73.5,
+      "latitude": 17.450314,
+      "longitude": 78.380619,
+      "accuracy": 4.4,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
       "dominantFrequency": 627,
@@ -130,245 +54,150 @@
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:54:37.545Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:36:59.369Z"
     },
     {
-      "id": "read-1792947274528-8z2xew",
-      "decibel": 80.6,
-      "latitude": 37.77642,
-      "longitude": -122.422254,
-      "accuracy": 5.7,
-      "locationName": "University Ave Bus Stop",
+      "id": "read-1794915416354-o7q8vo",
+      "decibel": 81.7,
+      "latitude": 17.361532,
+      "longitude": 78.474698,
+      "accuracy": 5.8,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 77,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:54:34.528Z"
-    },
-    {
-      "id": "read-1792947271512-x893hr",
-      "decibel": 70.8,
-      "latitude": 37.773958,
-      "longitude": -122.42066,
-      "accuracy": 4.7,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 616,
+      "dominantFrequency": 701,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:54:31.512Z"
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:36:56.354Z"
     },
     {
-      "id": "read-1792947268511-cen67c",
-      "decibel": 82.9,
-      "latitude": 37.776364,
-      "longitude": -122.421936,
-      "accuracy": 3.3,
-      "locationName": "University Ave Bus Stop",
+      "id": "read-1794915413342-qpa47y",
+      "decibel": 77.6,
+      "latitude": 17.450222,
+      "longitude": 78.380817,
+      "accuracy": 3.8,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 122,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:54:28.511Z"
-    },
-    {
-      "id": "read-1792947265510-wkdghg",
-      "decibel": 46.6,
-      "latitude": 37.777139,
-      "longitude": -122.415825,
-      "accuracy": 5.6,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2118,
+      "dominantFrequency": 664,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
+        "lowPercent": 25,
         "midPercent": 60,
-        "highPercent": 25
+        "highPercent": 15
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:54:25.510Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:36:53.342Z"
     },
     {
-      "id": "read-1792947262508-109gfx",
-      "decibel": 82.6,
-      "latitude": 37.776654,
-      "longitude": -122.422117,
-      "accuracy": 4.1,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 100,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:54:22.508Z"
-    },
-    {
-      "id": "read-1792947259495-61vz52",
-      "decibel": 80.9,
-      "latitude": 37.776435,
-      "longitude": -122.422026,
-      "accuracy": 5.2,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 115,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:54:19.495Z"
-    },
-    {
-      "id": "read-1792947256495-ego54t",
-      "decibel": 43.4,
-      "latitude": 37.775881,
-      "longitude": -122.418081,
+      "id": "read-1794915410326-2781qx",
+      "decibel": 57.9,
+      "latitude": 17.423734,
+      "longitude": 78.47375,
       "accuracy": 5.7,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 107,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:54:16.495Z"
-    },
-    {
-      "id": "read-1792947253477-l1xoyt",
-      "decibel": 69.1,
-      "latitude": 37.774244,
-      "longitude": -122.420648,
-      "accuracy": 5.8,
-      "locationName": "Student Union Cafeteria",
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 641,
+      "dominantFrequency": 293,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:54:13.477Z"
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:36:50.326Z"
     },
     {
-      "id": "read-1792947250478-x9ng9x",
-      "decibel": 76.9,
-      "latitude": 37.772394,
-      "longitude": -122.421401,
-      "accuracy": 4.5,
-      "locationName": "Campus South Perimeter Road",
+      "id": "read-1794915407319-u5q67y",
+      "decibel": 75.5,
+      "latitude": 17.450474,
+      "longitude": 78.38086,
+      "accuracy": 4.8,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 168,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:54:10.478Z"
-    },
-    {
-      "id": "read-1792947247478-u5ir03",
-      "decibel": 71,
-      "latitude": 37.77418,
-      "longitude": -122.420644,
-      "accuracy": 5,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 613,
+      "dominantFrequency": 652,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:54:07.478Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:36:47.319Z"
     },
     {
-      "id": "read-1792947244478-9jrvea",
-      "decibel": 48,
-      "latitude": 37.777013,
-      "longitude": -122.416033,
-      "accuracy": 4.1,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
+      "id": "read-1794915404307-fd27ai",
+      "decibel": 91.4,
+      "latitude": 17.433342,
+      "longitude": 78.504689,
+      "accuracy": 5.3,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2128,
+      "dominantFrequency": 3123,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:54:04.478Z"
-    },
-    {
-      "id": "read-1792947241478-pz182h",
-      "decibel": 38.6,
-      "latitude": 37.77594,
-      "longitude": -122.418146,
-      "accuracy": 4.9,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 131,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
         "midPercent": 25,
-        "highPercent": 10
+        "highPercent": 60
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:54:01.478Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:36:44.307Z"
     },
     {
-      "id": "read-1792947238475-djht37",
-      "decibel": 76.9,
-      "latitude": 37.772551,
-      "longitude": -122.421442,
-      "accuracy": 3.8,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
+      "id": "read-1794915401293-p86ios",
+      "decibel": 88.6,
+      "latitude": 17.433318,
+      "longitude": 78.504545,
+      "accuracy": 5.8,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3111,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:36:41.293Z"
+    },
+    {
+      "id": "read-1794915398293-mc70ej",
+      "decibel": 69.3,
+      "latitude": 17.44009,
+      "longitude": 78.348917,
+      "accuracy": 4.2,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 549,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:36:38.293Z"
+    },
+    {
+      "id": "read-1794915395286-u6ygyd",
+      "decibel": 42.2,
+      "latitude": 17.413662,
+      "longitude": 78.528441,
+      "accuracy": 5.6,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
       "source": "Live Stream Contributor",
       "dominantFrequency": 138,
       "frequencyBand": "Low (Rumble)",
@@ -377,73 +206,111 @@
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:53:58.475Z"
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:36:35.286Z"
     },
     {
-      "id": "read-1792947235462-eo3och",
-      "decibel": 89.6,
-      "latitude": 37.773048,
-      "longitude": -122.417134,
-      "accuracy": 3.8,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
+      "id": "read-1794915392277-g9z18a",
+      "decibel": 58.1,
+      "latitude": 17.423789,
+      "longitude": 78.473936,
+      "accuracy": 5.6,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3201,
+      "dominantFrequency": 256,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:53:55.462Z"
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:36:32.277Z"
     },
     {
-      "id": "read-1792947232460-cmlvig",
-      "decibel": 79.7,
-      "latitude": 37.772538,
-      "longitude": -122.421515,
-      "accuracy": 5.4,
-      "locationName": "Campus South Perimeter Road",
+      "id": "read-1794915389273-nu7haa",
+      "decibel": 58.2,
+      "latitude": 17.423713,
+      "longitude": 78.473928,
+      "accuracy": 4.2,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 271,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:36:29.273Z"
+    },
+    {
+      "id": "read-1794915386267-868w09",
+      "decibel": 72.8,
+      "latitude": 17.440242,
+      "longitude": 78.348874,
+      "accuracy": 3.5,
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 136,
+      "dominantFrequency": 537,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:36:26.267Z"
+    },
+    {
+      "id": "read-1794915383262-lpptdc",
+      "decibel": 60.7,
+      "latitude": 17.423922,
+      "longitude": 78.473698,
+      "accuracy": 3.5,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 255,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:36:23.262Z"
+    },
+    {
+      "id": "read-1794915380254-7t93e7",
+      "decibel": 40.9,
+      "latitude": 17.427728,
+      "longitude": 78.420822,
+      "accuracy": 5.6,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 169,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:53:52.460Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:36:20.254Z"
     },
     {
-      "id": "read-1792947229444-ayng5x",
-      "decibel": 84.4,
-      "latitude": 37.776564,
-      "longitude": -122.422024,
-      "accuracy": 4.6,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 78,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:53:49.444Z"
-    },
-    {
-      "id": "read-1792947226444-62c9tk",
-      "decibel": 38.8,
-      "latitude": 37.775706,
-      "longitude": -122.418017,
-      "accuracy": 4.6,
-      "locationName": "University Library Silence Zone",
+      "id": "read-1794915377244-sd8r1e",
+      "decibel": 42.2,
+      "latitude": 17.413632,
+      "longitude": 78.528267,
+      "accuracy": 5,
+      "locationName": "Osmania University Arts College, Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
       "dominantFrequency": 135,
@@ -453,776 +320,263 @@
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:53:46.443Z"
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:36:17.244Z"
     },
     {
-      "id": "read-1792947223434-p0uufa",
-      "decibel": 92.3,
-      "latitude": 37.773182,
-      "longitude": -122.416873,
-      "accuracy": 4.4,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3182,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:53:43.434Z"
-    },
-    {
-      "id": "read-1792947220424-actytx",
-      "decibel": 86.3,
-      "latitude": 37.773057,
-      "longitude": -122.417092,
-      "accuracy": 4.2,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3202,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:53:40.424Z"
-    },
-    {
-      "id": "read-1792947217422-6l2vjl",
-      "decibel": 76.5,
-      "latitude": 37.774282,
-      "longitude": -122.420672,
-      "accuracy": 5.3,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 616,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:53:37.422Z"
-    },
-    {
-      "id": "read-1792947214412-auxulu",
-      "decibel": 75.3,
-      "latitude": 37.773997,
-      "longitude": -122.420622,
-      "accuracy": 5.1,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 593,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:53:34.412Z"
-    },
-    {
-      "id": "read-1792947211395-gjbs7y",
-      "decibel": 70.1,
-      "latitude": 37.774058,
-      "longitude": -122.420545,
-      "accuracy": 3.1,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 597,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:53:31.395Z"
-    },
-    {
-      "id": "read-1792947208381-48lz1c",
-      "decibel": 45.7,
-      "latitude": 37.776824,
-      "longitude": -122.41589,
-      "accuracy": 3.1,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2107,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:53:28.381Z"
-    },
-    {
-      "id": "read-1792947205370-59bgeg",
-      "decibel": 80.2,
-      "latitude": 37.772436,
-      "longitude": -122.421484,
-      "accuracy": 5.9,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 121,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:53:25.370Z"
-    },
-    {
-      "id": "read-1792947202349-8k7yh8",
-      "decibel": 74.6,
-      "latitude": 37.773934,
-      "longitude": -122.420498,
-      "accuracy": 3.1,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 621,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:53:22.349Z"
-    },
-    {
-      "id": "read-1792947199389-rwfme8",
-      "decibel": 47.7,
-      "latitude": 37.777133,
-      "longitude": -122.415949,
-      "accuracy": 4.6,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2127,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:53:19.340Z"
-    },
-    {
-      "id": "read-1792947196332-ymkqml",
-      "decibel": 61.3,
-      "latitude": 37.774657,
-      "longitude": -122.414869,
-      "accuracy": 6,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 491,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:53:16.332Z"
-    },
-    {
-      "id": "read-1792947193300-0sunnk",
-      "decibel": 84,
-      "latitude": 37.776567,
-      "longitude": -122.422058,
-      "accuracy": 5.9,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 110,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:53:13.300Z"
-    },
-    {
-      "id": "read-1792947190291-7i0do2",
-      "decibel": 50.5,
-      "latitude": 37.776924,
-      "longitude": -122.416092,
-      "accuracy": 4.9,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2093,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:53:10.291Z"
-    },
-    {
-      "id": "read-1792947187238-06tgu8",
-      "decibel": 83.2,
-      "latitude": 37.776418,
-      "longitude": -122.422121,
-      "accuracy": 3.5,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 121,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:53:07.238Z"
-    },
-    {
-      "id": "read-1792947184238-8lyqk9",
-      "decibel": 59.4,
-      "latitude": 37.774432,
-      "longitude": -122.414817,
-      "accuracy": 3.5,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 472,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:53:04.238Z"
-    },
-    {
-      "id": "read-1792947181219-3vstxk",
-      "decibel": 85.8,
-      "latitude": 37.776646,
-      "longitude": -122.422252,
-      "accuracy": 5.8,
-      "locationName": "University Ave Bus Stop",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 111,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:53:01.219Z"
-    },
-    {
-      "id": "read-1792947178184-ulcjje",
-      "decibel": 85.5,
-      "latitude": 37.776338,
-      "longitude": -122.422031,
-      "accuracy": 3.4,
-      "locationName": "University Ave Bus Stop",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 105,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:52:58.184Z"
-    },
-    {
-      "id": "read-1792947175153-if5hai",
-      "decibel": 73.1,
-      "latitude": 37.774084,
-      "longitude": -122.420504,
-      "accuracy": 3.8,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 609,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:52:55.153Z"
-    },
-    {
-      "id": "read-1792947172123-rehubx",
-      "decibel": 64.7,
-      "latitude": 37.774639,
-      "longitude": -122.414974,
-      "accuracy": 4.2,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 484,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:52:52.123Z"
-    },
-    {
-      "id": "read-1792947169113-lts6dt",
-      "decibel": 74.2,
-      "latitude": 37.772563,
-      "longitude": -122.421606,
-      "accuracy": 3.9,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 145,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:52:49.113Z"
-    },
-    {
-      "id": "read-1792947166084-zrvzz5",
-      "decibel": 69.4,
-      "latitude": 37.77413,
-      "longitude": -122.420323,
-      "accuracy": 3.4,
-      "locationName": "Student Union Cafeteria",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 591,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:52:46.084Z"
-    },
-    {
-      "id": "read-1792947162984-ugsjq0",
-      "decibel": 64,
-      "latitude": 37.774526,
-      "longitude": -122.414729,
-      "accuracy": 6,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 508,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:52:42.984Z"
-    },
-    {
-      "id": "read-1792947159950-p4555n",
-      "decibel": 81.8,
-      "latitude": 37.776603,
-      "longitude": -122.422051,
+      "id": "read-1794915374229-oaxbdw",
+      "decibel": 38.1,
+      "latitude": 17.427752,
+      "longitude": 78.420726,
       "accuracy": 4.8,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 119,
+      "dominantFrequency": 167,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:52:39.950Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:36:14.229Z"
     },
     {
-      "id": "read-1792947156923-467w2l",
-      "decibel": 49.4,
-      "latitude": 37.776984,
-      "longitude": -122.415912,
-      "accuracy": 5.4,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
+      "id": "read-1794915371222-k6xanm",
+      "decibel": 77.8,
+      "latitude": 17.450317,
+      "longitude": 78.3806,
+      "accuracy": 6,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2112,
+      "dominantFrequency": 667,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
+        "lowPercent": 25,
         "midPercent": 60,
-        "highPercent": 25
+        "highPercent": 15
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:52:36.923Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:36:11.222Z"
     },
     {
-      "id": "read-1792947153888-haisq3",
-      "decibel": 82.4,
-      "latitude": 37.776446,
-      "longitude": -122.42225,
-      "accuracy": 4.7,
-      "locationName": "University Ave Bus Stop",
+      "id": "read-1794915368213-j5hm1i",
+      "decibel": 70.7,
+      "latitude": 17.450354,
+      "longitude": 78.3809,
+      "accuracy": 5.1,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 68,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:52:33.888Z"
-    },
-    {
-      "id": "read-1792947150871-0jq4e5",
-      "decibel": 38.2,
-      "latitude": 37.775841,
-      "longitude": -122.41819,
-      "accuracy": 3.9,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 111,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:52:30.871Z"
-    },
-    {
-      "id": "read-1792947147828-pcwssb",
-      "decibel": 84.3,
-      "latitude": 37.776586,
-      "longitude": -122.422209,
-      "accuracy": 3.8,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 83,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:52:27.828Z"
-    },
-    {
-      "id": "read-1792947144820-kbj6zd",
-      "decibel": 46.4,
-      "latitude": 37.777017,
-      "longitude": -122.416102,
-      "accuracy": 5.4,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2090,
+      "dominantFrequency": 622,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
+        "lowPercent": 25,
         "midPercent": 60,
-        "highPercent": 25
+        "highPercent": 15
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:52:24.820Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:36:08.213Z"
     },
     {
-      "id": "read-1792947141792-uo7qtc",
-      "decibel": 78.2,
-      "latitude": 37.772432,
-      "longitude": -122.421486,
-      "accuracy": 4.7,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
+      "id": "read-1794915365200-0yos65",
+      "decibel": 42.6,
+      "latitude": 17.427837,
+      "longitude": 78.420983,
+      "accuracy": 4.9,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 160,
+      "dominantFrequency": 155,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:52:21.792Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:36:05.200Z"
     },
     {
-      "id": "read-1792947138781-wvq4gn",
-      "decibel": 90.2,
-      "latitude": 37.7732,
-      "longitude": -122.416961,
-      "accuracy": 4.7,
-      "locationName": "Engineering Hall Expansion",
+      "id": "read-1794915362192-is1sc3",
+      "decibel": 92.5,
+      "latitude": 17.433515,
+      "longitude": 78.504682,
+      "accuracy": 5.6,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3228,
+      "dominantFrequency": 3093,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:52:18.781Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:36:02.192Z"
     },
     {
-      "id": "read-1792947135728-66lb1t",
-      "decibel": 89,
-      "latitude": 37.773045,
-      "longitude": -122.416967,
-      "accuracy": 5.5,
-      "locationName": "Engineering Hall Expansion",
+      "id": "read-1794915359183-0s9aql",
+      "decibel": 77.5,
+      "latitude": 17.450451,
+      "longitude": 78.380825,
+      "accuracy": 5.2,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 640,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:35:59.183Z"
+    },
+    {
+      "id": "read-1794915356172-jt7a9m",
+      "decibel": 91.4,
+      "latitude": 17.433415,
+      "longitude": 78.504603,
+      "accuracy": 4.6,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3217,
+      "dominantFrequency": 3077,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:52:15.728Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:35:56.172Z"
     },
     {
-      "id": "read-1792947132673-sthog0",
-      "decibel": 86.4,
-      "latitude": 37.773212,
-      "longitude": -122.416928,
-      "accuracy": 5.8,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
+      "id": "read-1794915353169-xvak5g",
+      "decibel": 76.5,
+      "latitude": 17.450509,
+      "longitude": 78.380609,
+      "accuracy": 3.5,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3171,
+      "dominantFrequency": 639,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:52:12.673Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:35:53.169Z"
     },
     {
-      "id": "read-1792947129631-2lzsvj",
-      "decibel": 66,
-      "latitude": 37.774394,
-      "longitude": -122.414849,
+      "id": "read-1794915350161-3a7zdd",
+      "decibel": 55.2,
+      "latitude": 17.423835,
+      "longitude": 78.473946,
       "accuracy": 3.3,
-      "locationName": "CS Innovation Hub",
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 502,
+      "dominantFrequency": 304,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:52:09.631Z"
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:35:50.161Z"
     },
     {
-      "id": "read-1792947126593-w742fa",
-      "decibel": 86.7,
-      "latitude": 37.773204,
-      "longitude": -122.417057,
-      "accuracy": 3.2,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3196,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:52:06.593Z"
-    },
-    {
-      "id": "read-1792947123536-jwtcg7",
-      "decibel": 72.6,
-      "latitude": 37.773938,
-      "longitude": -122.420601,
+      "id": "read-1794915347147-4rxirg",
+      "decibel": 77.9,
+      "latitude": 17.45029,
+      "longitude": 78.380952,
       "accuracy": 6,
-      "locationName": "Student Union Cafeteria",
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 647,
+      "dominantFrequency": 668,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:52:03.536Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:35:47.147Z"
     },
     {
-      "id": "read-1792947120501-4np8mk",
-      "decibel": 78.6,
-      "latitude": 37.772493,
-      "longitude": -122.421653,
-      "accuracy": 3.9,
-      "locationName": "Campus South Perimeter Road",
+      "id": "read-1794915344144-9n4g60",
+      "decibel": 71.7,
+      "latitude": 17.450243,
+      "longitude": 78.380679,
+      "accuracy": 4.9,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 153,
-      "frequencyBand": "Low (Rumble)",
+      "dominantFrequency": 655,
+      "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
       },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:52:00.501Z"
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:35:44.144Z"
     },
     {
-      "id": "read-1792947117452-rtq24p",
-      "decibel": 42.4,
-      "latitude": 37.775819,
-      "longitude": -122.418081,
-      "accuracy": 4.2,
-      "locationName": "University Library Silence Zone",
+      "id": "read-1794915341130-1lf1vz",
+      "decibel": 39.4,
+      "latitude": 17.427703,
+      "longitude": 78.420642,
+      "accuracy": 5.6,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 129,
+      "dominantFrequency": 167,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:51:57.452Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:35:41.130Z"
     },
     {
-      "id": "read-1792947114436-amqdqa",
-      "decibel": 78,
-      "latitude": 37.772324,
-      "longitude": -122.421424,
-      "accuracy": 4.9,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 117,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:51:54.436Z"
-    },
-    {
-      "id": "read-1792947111425-1gppex",
-      "decibel": 85.4,
-      "latitude": 37.776392,
-      "longitude": -122.421977,
-      "accuracy": 3.1,
-      "locationName": "University Ave Bus Stop",
+      "id": "read-1794915338111-1g1osy",
+      "decibel": 90.3,
+      "latitude": 17.43353,
+      "longitude": 78.50441,
+      "accuracy": 5.8,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 73,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:51:51.425Z"
-    },
-    {
-      "id": "read-1792947108424-laq54r",
-      "decibel": 89.7,
-      "latitude": 37.773306,
-      "longitude": -122.41693,
-      "accuracy": 5.5,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3179,
+      "dominantFrequency": 3079,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:51:48.424Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:35:38.111Z"
     },
     {
-      "id": "read-1792947105416-bpqakh",
-      "decibel": 49.4,
-      "latitude": 37.776808,
-      "longitude": -122.415918,
-      "accuracy": 4.4,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2072,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:51:45.416Z"
-    },
-    {
-      "id": "read-1792947102405-atbpa6",
-      "decibel": 36.5,
-      "latitude": 37.775876,
-      "longitude": -122.418232,
-      "accuracy": 5.6,
-      "locationName": "University Library Silence Zone",
+      "id": "read-1794915335106-iertr9",
+      "decibel": 36.2,
+      "latitude": 17.427889,
+      "longitude": 78.420844,
+      "accuracy": 5.4,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
       "dominantFrequency": 125,
@@ -1232,624 +586,548 @@
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:51:42.405Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:35:35.106Z"
     },
     {
-      "id": "read-1792947099391-0uevsi",
-      "decibel": 85.1,
-      "latitude": 37.77668,
-      "longitude": -122.422183,
-      "accuracy": 5.6,
-      "locationName": "University Ave Bus Stop",
-      "category": "Hazardous",
+      "id": "read-1794915332106-gr6ec7",
+      "decibel": 41.9,
+      "latitude": 17.413752,
+      "longitude": 78.528251,
+      "accuracy": 3.4,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 94,
+      "dominantFrequency": 91,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:51:39.390Z"
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:35:32.106Z"
     },
     {
-      "id": "read-1792947096386-6ck4zd",
-      "decibel": 89.4,
-      "latitude": 37.773358,
-      "longitude": -122.416961,
-      "accuracy": 5.3,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3203,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:51:36.386Z"
-    },
-    {
-      "id": "read-1792947093381-4jo5y8",
-      "decibel": 51.8,
-      "latitude": 37.776914,
-      "longitude": -122.416123,
-      "accuracy": 4.8,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2116,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:51:33.381Z"
-    },
-    {
-      "id": "read-1792947090380-tx3bw6",
-      "decibel": 75.6,
-      "latitude": 37.774291,
-      "longitude": -122.420582,
-      "accuracy": 6,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 599,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:51:30.380Z"
-    },
-    {
-      "id": "read-1792947087361-edqw02",
-      "decibel": 75.5,
-      "latitude": 37.773971,
-      "longitude": -122.420381,
-      "accuracy": 3.9,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 614,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:51:27.361Z"
-    },
-    {
-      "id": "read-1792947084355-1lrx1u",
-      "decibel": 51.3,
-      "latitude": 37.776994,
-      "longitude": -122.416055,
+      "id": "read-1794915329105-3xx7yu",
+      "decibel": 90,
+      "latitude": 17.433359,
+      "longitude": 78.504358,
       "accuracy": 5,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2127,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:51:24.355Z"
-    },
-    {
-      "id": "read-1792947081350-6rhsg0",
-      "decibel": 70,
-      "latitude": 37.774062,
-      "longitude": -122.420434,
-      "accuracy": 3.1,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 642,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:51:21.350Z"
-    },
-    {
-      "id": "read-1792947078334-qymbhe",
-      "decibel": 49.7,
-      "latitude": 37.777022,
-      "longitude": -122.415942,
-      "accuracy": 4.8,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2098,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:51:18.334Z"
-    },
-    {
-      "id": "read-1792947075323-clx9xg",
-      "decibel": 66.4,
-      "latitude": 37.774468,
-      "longitude": -122.41468,
-      "accuracy": 4.6,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 471,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:51:15.323Z"
-    },
-    {
-      "id": "read-1792947072315-0et6ho",
-      "decibel": 66.3,
-      "latitude": 37.774642,
-      "longitude": -122.414614,
-      "accuracy": 5.3,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 493,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:51:12.315Z"
-    },
-    {
-      "id": "read-1792947069304-q6up3g",
-      "decibel": 44,
-      "latitude": 37.775804,
-      "longitude": -122.418364,
-      "accuracy": 3.5,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 143,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:51:09.304Z"
-    },
-    {
-      "id": "read-1792947066294-6c5ffq",
-      "decibel": 51.9,
-      "latitude": 37.776866,
-      "longitude": -122.415946,
-      "accuracy": 3.7,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2114,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:51:06.294Z"
-    },
-    {
-      "id": "read-1792947063286-0sraro",
-      "decibel": 85.7,
-      "latitude": 37.776541,
-      "longitude": -122.422051,
-      "accuracy": 3.6,
-      "locationName": "University Ave Bus Stop",
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 82,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:51:03.286Z"
-    },
-    {
-      "id": "read-1792947060281-el12ba",
-      "decibel": 73.5,
-      "latitude": 37.772457,
-      "longitude": -122.4215,
-      "accuracy": 5.2,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 155,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:51:00.281Z"
-    },
-    {
-      "id": "read-1792947057263-w3z4y4",
-      "decibel": 85.6,
-      "latitude": 37.776596,
-      "longitude": -122.421933,
-      "accuracy": 3.2,
-      "locationName": "University Ave Bus Stop",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 84,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:50:57.263Z"
-    },
-    {
-      "id": "read-1792947054250-x8sw9i",
-      "decibel": 89.2,
-      "latitude": 37.773145,
-      "longitude": -122.417007,
-      "accuracy": 5.3,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3181,
+      "dominantFrequency": 3106,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:50:54.250Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:35:29.105Z"
     },
     {
-      "id": "read-1792947051235-pk91em",
-      "decibel": 74.7,
-      "latitude": 37.77403,
-      "longitude": -122.420501,
-      "accuracy": 5.9,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 596,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:50:51.235Z"
-    },
-    {
-      "id": "read-1792947048220-d7h2sa",
-      "decibel": 59.7,
-      "latitude": 37.774346,
-      "longitude": -122.414703,
-      "accuracy": 3.7,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 472,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 25,
-        "midPercent": 60,
-        "highPercent": 15
-      },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:50:48.220Z"
-    },
-    {
-      "id": "read-1792947045215-2p4vmy",
-      "decibel": 77.2,
-      "latitude": 37.772362,
-      "longitude": -122.421665,
-      "accuracy": 3.8,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 117,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:50:45.215Z"
-    },
-    {
-      "id": "read-1792947042202-7kjb7p",
-      "decibel": 76.6,
-      "latitude": 37.772464,
-      "longitude": -122.421358,
-      "accuracy": 5.6,
-      "locationName": "Campus South Perimeter Road",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 169,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:50:42.202Z"
-    },
-    {
-      "id": "read-1792947039190-41otub",
-      "decibel": 89.3,
-      "latitude": 37.773309,
-      "longitude": -122.417046,
-      "accuracy": 3.2,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3212,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:50:39.190Z"
-    },
-    {
-      "id": "read-1792947036183-w6gm90",
-      "decibel": 47.6,
-      "latitude": 37.776956,
-      "longitude": -122.41597,
-      "accuracy": 3.2,
-      "locationName": "Memorial Botanical Quad",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 2098,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
-      },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:50:36.183Z"
-    },
-    {
-      "id": "read-1792947033167-hekdmw",
-      "decibel": 81.5,
-      "latitude": 37.776517,
-      "longitude": -122.422097,
-      "accuracy": 3.6,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 97,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:50:33.167Z"
-    },
-    {
-      "id": "read-1792947030149-nbxjgi",
-      "decibel": 60.1,
-      "latitude": 37.774627,
-      "longitude": -122.414936,
+      "id": "read-1794915326091-x8czgu",
+      "decibel": 69.6,
+      "latitude": 17.439969,
+      "longitude": 78.3489,
       "accuracy": 3,
-      "locationName": "CS Innovation Hub",
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 491,
+      "dominantFrequency": 505,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:50:30.149Z"
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:35:26.091Z"
     },
     {
-      "id": "read-1792947027149-9ler9a",
-      "decibel": 38.1,
-      "latitude": 37.775957,
-      "longitude": -122.418397,
-      "accuracy": 5.4,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 142,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:50:27.149Z"
-    },
-    {
-      "id": "read-1792947024131-p743he",
-      "decibel": 80,
-      "latitude": 37.772636,
-      "longitude": -122.421549,
-      "accuracy": 4.4,
-      "locationName": "Campus South Perimeter Road",
+      "id": "read-1794915323083-3ntrqj",
+      "decibel": 71.9,
+      "latitude": 17.440035,
+      "longitude": 78.348741,
+      "accuracy": 3.6,
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Loud",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 142,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Urban Vehicle Traffic",
-      "timestamp": "2026-10-25T16:50:24.131Z"
-    },
-    {
-      "id": "read-1792947021114-n7aod8",
-      "decibel": 42.8,
-      "latitude": 37.775602,
-      "longitude": -122.418035,
-      "accuracy": 5.2,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 110,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:50:21.113Z"
-    },
-    {
-      "id": "read-1792947018105-73o6jw",
-      "decibel": 62.9,
-      "latitude": 37.77467,
-      "longitude": -122.41472,
-      "accuracy": 5,
-      "locationName": "CS Innovation Hub",
-      "category": "Moderate",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 477,
+      "dominantFrequency": 536,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Keyboards & Dialogue",
-      "timestamp": "2026-10-25T16:50:18.105Z"
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:35:23.083Z"
     },
     {
-      "id": "read-1792947015093-5bxnq5",
-      "decibel": 37.2,
-      "latitude": 37.775972,
-      "longitude": -122.418219,
-      "accuracy": 4.6,
-      "locationName": "University Library Silence Zone",
-      "category": "Quiet",
+      "id": "read-1794915320079-7mzu2k",
+      "decibel": 65.1,
+      "latitude": 17.440204,
+      "longitude": 78.348733,
+      "accuracy": 5.7,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 150,
-      "frequencyBand": "Low (Rumble)",
+      "dominantFrequency": 509,
+      "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:50:15.093Z"
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:35:20.079Z"
     },
     {
-      "id": "read-1792947012089-p8s8eg",
-      "decibel": 92.8,
-      "latitude": 37.773118,
-      "longitude": -122.417015,
-      "accuracy": 5.3,
-      "locationName": "Engineering Hall Expansion",
+      "id": "read-1794915317078-0q468m",
+      "decibel": 54.9,
+      "latitude": 17.423887,
+      "longitude": 78.473651,
+      "accuracy": 4.4,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 266,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:35:17.078Z"
+    },
+    {
+      "id": "read-1794915314068-hu2e9x",
+      "decibel": 91.8,
+      "latitude": 17.433438,
+      "longitude": 78.50443,
+      "accuracy": 4.7,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
       "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 3184,
+      "dominantFrequency": 3119,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
         "midPercent": 25,
         "highPercent": 60
       },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:50:12.089Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:35:14.068Z"
     },
     {
-      "id": "read-1792947009080-vegtfc",
-      "decibel": 71.4,
-      "latitude": 37.774278,
-      "longitude": -122.420511,
-      "accuracy": 4,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
+      "id": "read-1794915311063-in4nt4",
+      "decibel": 86,
+      "latitude": 17.361796,
+      "longitude": 78.474706,
+      "accuracy": 5.9,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Hazardous",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 610,
+      "dominantFrequency": 744,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:50:09.080Z"
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:35:11.063Z"
     },
     {
-      "id": "read-1792947006064-ytjjlc",
-      "decibel": 53,
-      "latitude": 37.777043,
-      "longitude": -122.415949,
-      "accuracy": 3.2,
-      "locationName": "Memorial Botanical Quad",
+      "id": "read-1794915308054-u1tzuj",
+      "decibel": 38.4,
+      "latitude": 17.427709,
+      "longitude": 78.420778,
+      "accuracy": 3.4,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 120,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:35:08.054Z"
+    },
+    {
+      "id": "read-1794915305050-qay87a",
+      "decibel": 46.9,
+      "latitude": 17.41396,
+      "longitude": 78.528359,
+      "accuracy": 5.3,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 149,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:35:05.050Z"
+    },
+    {
+      "id": "read-1794915302049-qxnj3d",
+      "decibel": 42.8,
+      "latitude": 17.413797,
+      "longitude": 78.528456,
+      "accuracy": 4.5,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 99,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:35:02.049Z"
+    },
+    {
+      "id": "read-1794915299041-vszubf",
+      "decibel": 66.1,
+      "latitude": 17.440007,
+      "longitude": 78.348901,
+      "accuracy": 4.1,
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2072,
+      "dominantFrequency": 538,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:34:59.041Z"
+    },
+    {
+      "id": "read-1794915296027-msf6xi",
+      "decibel": 45.8,
+      "latitude": 17.413757,
+      "longitude": 78.528301,
+      "accuracy": 4.8,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 93,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:34:56.027Z"
+    },
+    {
+      "id": "read-1794915293023-gkd6wp",
+      "decibel": 54.2,
+      "latitude": 17.423895,
+      "longitude": 78.47382,
+      "accuracy": 3.2,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 307,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:34:53.023Z"
+    },
+    {
+      "id": "read-1794915290021-eny16e",
+      "decibel": 87,
+      "latitude": 17.433343,
+      "longitude": 78.504478,
+      "accuracy": 3.9,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3117,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
+        "midPercent": 25,
+        "highPercent": 60
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:50:06.064Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:34:50.021Z"
     },
     {
-      "id": "read-1792947003060-4egnis",
-      "decibel": 37.3,
-      "latitude": 37.775682,
-      "longitude": -122.418383,
-      "accuracy": 4.2,
-      "locationName": "University Library Silence Zone",
+      "id": "read-1794915287009-87rcj2",
+      "decibel": 86.5,
+      "latitude": 17.361547,
+      "longitude": 78.474762,
+      "accuracy": 4.8,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 711,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:34:47.009Z"
+    },
+    {
+      "id": "read-1794915283995-qh9epw",
+      "decibel": 72.2,
+      "latitude": 17.450289,
+      "longitude": 78.380605,
+      "accuracy": 3.6,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 660,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:34:43.995Z"
+    },
+    {
+      "id": "read-1794915280993-pqk5f4",
+      "decibel": 71,
+      "latitude": 17.450493,
+      "longitude": 78.380973,
+      "accuracy": 4.3,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 633,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:34:40.993Z"
+    },
+    {
+      "id": "read-1794915277989-od6g0y",
+      "decibel": 90.3,
+      "latitude": 17.433524,
+      "longitude": 78.504689,
+      "accuracy": 4.3,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3127,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:34:37.989Z"
+    },
+    {
+      "id": "read-1794915274969-vz3f0j",
+      "decibel": 81.3,
+      "latitude": 17.361744,
+      "longitude": 78.474847,
+      "accuracy": 3.4,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 738,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:34:34.969Z"
+    },
+    {
+      "id": "read-1794915271955-pjsmss",
+      "decibel": 76.3,
+      "latitude": 17.450552,
+      "longitude": 78.380835,
+      "accuracy": 5,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 616,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:34:31.955Z"
+    },
+    {
+      "id": "read-1794915268953-n412i1",
+      "decibel": 68.1,
+      "latitude": 17.44012,
+      "longitude": 78.349048,
+      "accuracy": 3.1,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 539,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:34:28.953Z"
+    },
+    {
+      "id": "read-1794915265947-jf04xh",
+      "decibel": 55.3,
+      "latitude": 17.423734,
+      "longitude": 78.473926,
+      "accuracy": 5.2,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 250,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:34:25.947Z"
+    },
+    {
+      "id": "read-1794915262942-qhw650",
+      "decibel": 69.6,
+      "latitude": 17.440176,
+      "longitude": 78.348762,
+      "accuracy": 4.8,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 548,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:34:22.942Z"
+    },
+    {
+      "id": "read-1794915259937-3usdj8",
+      "decibel": 73.9,
+      "latitude": 17.450419,
+      "longitude": 78.380981,
+      "accuracy": 5.2,
+      "locationName": "HITEC City Cyber Towers, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 650,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle",
+      "timestamp": "2026-11-17T11:34:19.937Z"
+    },
+    {
+      "id": "read-1794915256926-3vsj60",
+      "decibel": 83.3,
+      "latitude": 17.36161,
+      "longitude": 78.474552,
+      "accuracy": 3.4,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 745,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:34:16.926Z"
+    },
+    {
+      "id": "read-1794915253925-ic1t6o",
+      "decibel": 87.4,
+      "latitude": 17.433366,
+      "longitude": 78.504606,
+      "accuracy": 4.8,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3094,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:34:13.925Z"
+    },
+    {
+      "id": "read-1794915250918-0mbmt1",
+      "decibel": 59,
+      "latitude": 17.423742,
+      "longitude": 78.473644,
+      "accuracy": 5.9,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 262,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:34:10.918Z"
+    },
+    {
+      "id": "read-1794915247911-26fclq",
+      "decibel": 37.7,
+      "latitude": 17.427715,
+      "longitude": 78.420867,
+      "accuracy": 4.3,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
       "dominantFrequency": 112,
@@ -1859,111 +1137,605 @@
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:50:03.060Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:34:07.911Z"
     },
     {
-      "id": "read-1792947000044-4w4bbu",
-      "decibel": 72.2,
-      "latitude": 37.773953,
-      "longitude": -122.420637,
-      "accuracy": 4.4,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
+      "id": "read-1794915244900-vp3ay6",
+      "decibel": 55.1,
+      "latitude": 17.423703,
+      "longitude": 78.473725,
+      "accuracy": 4.1,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 597,
+      "dominantFrequency": 299,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:50:00.044Z"
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:34:04.900Z"
     },
     {
-      "id": "read-1792946997031-yvbq8r",
-      "decibel": 42.9,
-      "latitude": 37.775924,
-      "longitude": -122.418116,
-      "accuracy": 3.7,
-      "locationName": "University Library Silence Zone",
+      "id": "read-1794915241893-gd8hun",
+      "decibel": 85.3,
+      "latitude": 17.433417,
+      "longitude": 78.504563,
+      "accuracy": 4.1,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3095,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:34:01.893Z"
+    },
+    {
+      "id": "read-1794915238886-ubwnkz",
+      "decibel": 39.9,
+      "latitude": 17.427748,
+      "longitude": 78.420655,
+      "accuracy": 4.4,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 116,
+      "dominantFrequency": 137,
       "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
         "lowPercent": 65,
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:49:57.031Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:33:58.886Z"
     },
     {
-      "id": "read-1792946994020-n76sjk",
-      "decibel": 75,
-      "latitude": 37.774286,
-      "longitude": -122.420449,
-      "accuracy": 4.8,
-      "locationName": "Student Union Cafeteria",
-      "category": "Loud",
+      "id": "read-1794915235886-zvjb24",
+      "decibel": 47.1,
+      "latitude": 17.413903,
+      "longitude": 78.528206,
+      "accuracy": 3.3,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 624,
+      "dominantFrequency": 124,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:33:55.886Z"
+    },
+    {
+      "id": "read-1794915232885-pw3667",
+      "decibel": 60.6,
+      "latitude": 17.423841,
+      "longitude": 78.473672,
+      "accuracy": 3.1,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 294,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 25,
         "midPercent": 60,
         "highPercent": 15
       },
-      "estimatedSource": "Chatter & Cutlery",
-      "timestamp": "2026-10-25T16:49:54.020Z"
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:52.885Z"
     },
     {
-      "id": "read-1792946991011-mlvfde",
-      "decibel": 48.8,
-      "latitude": 37.776995,
-      "longitude": -122.415862,
-      "accuracy": 5.9,
-      "locationName": "Memorial Botanical Quad",
+      "id": "read-1794915229880-sdwtiw",
+      "decibel": 90.8,
+      "latitude": 17.433413,
+      "longitude": 78.504459,
+      "accuracy": 4.4,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3123,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 15,
+        "midPercent": 25,
+        "highPercent": 60
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:33:49.880Z"
+    },
+    {
+      "id": "read-1794915226878-0j3x84",
+      "decibel": 70,
+      "latitude": 17.440276,
+      "longitude": 78.348888,
+      "accuracy": 3.1,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 533,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:33:46.878Z"
+    },
+    {
+      "id": "read-1794915223868-njzmoc",
+      "decibel": 39.1,
+      "latitude": 17.427844,
+      "longitude": 78.420951,
+      "accuracy": 6,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2111,
-      "frequencyBand": "Mid (Speech/Urban)",
+      "dominantFrequency": 139,
+      "frequencyBand": "Low (Rumble)",
       "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:49:51.011Z"
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:33:43.868Z"
     },
     {
-      "id": "read-1792946988006-gqurgi",
-      "decibel": 52.8,
-      "latitude": 37.777136,
-      "longitude": -122.416174,
-      "accuracy": 4,
-      "locationName": "Memorial Botanical Quad",
+      "id": "read-1794915220852-x6soaw",
+      "decibel": 42.7,
+      "latitude": 17.427742,
+      "longitude": 78.420898,
+      "accuracy": 4.5,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 165,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:33:40.852Z"
+    },
+    {
+      "id": "read-1794915217845-28lgj5",
+      "decibel": 83.8,
+      "latitude": 17.361599,
+      "longitude": 78.474683,
+      "accuracy": 5.7,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 721,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:33:37.845Z"
+    },
+    {
+      "id": "read-1794915214843-pra79y",
+      "decibel": 61.4,
+      "latitude": 17.424051,
+      "longitude": 78.473964,
+      "accuracy": 4.3,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2124,
+      "dominantFrequency": 301,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:34.843Z"
+    },
+    {
+      "id": "read-1794915211832-ezhbki",
+      "decibel": 43.9,
+      "latitude": 17.413664,
+      "longitude": 78.528271,
+      "accuracy": 5.2,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 144,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:33:31.832Z"
+    },
+    {
+      "id": "read-1794915208821-sxnt17",
+      "decibel": 61.1,
+      "latitude": 17.423947,
+      "longitude": 78.473834,
+      "accuracy": 4,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 262,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:28.821Z"
+    },
+    {
+      "id": "read-1794915205820-se8anf",
+      "decibel": 70.9,
+      "latitude": 17.43997,
+      "longitude": 78.348897,
+      "accuracy": 4.7,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 501,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:33:25.820Z"
+    },
+    {
+      "id": "read-1794915202818-zh90vs",
+      "decibel": 88.1,
+      "latitude": 17.433518,
+      "longitude": 78.504693,
+      "accuracy": 4.4,
+      "locationName": "Secunderabad Railway Junction, Hyderabad",
+      "category": "Hazardous",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 3128,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
         "lowPercent": 15,
-        "midPercent": 60,
-        "highPercent": 25
+        "midPercent": 25,
+        "highPercent": 60
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:49:48.006Z"
+      "estimatedSource": "Locomotives & Transit Hub Congestion",
+      "timestamp": "2026-11-17T11:33:22.818Z"
     },
     {
-      "id": "read-1792946984989-wycj3l",
-      "decibel": 41.4,
-      "latitude": 37.775685,
-      "longitude": -122.418321,
+      "id": "read-1794915199809-9moy6c",
+      "decibel": 56.8,
+      "latitude": 17.423841,
+      "longitude": 78.473743,
+      "accuracy": 3.3,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 281,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:19.809Z"
+    },
+    {
+      "id": "read-1794915196804-57jrap",
+      "decibel": 54.2,
+      "latitude": 17.423835,
+      "longitude": 78.473755,
+      "accuracy": 4.6,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 293,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:16.804Z"
+    },
+    {
+      "id": "read-1794915193795-wfjqys",
+      "decibel": 47.5,
+      "latitude": 17.41376,
+      "longitude": 78.528325,
+      "accuracy": 3.2,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 147,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:33:13.795Z"
+    },
+    {
+      "id": "read-1794915190795-qbsjxn",
+      "decibel": 84,
+      "latitude": 17.361614,
+      "longitude": 78.474796,
+      "accuracy": 4.7,
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 711,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:33:10.795Z"
+    },
+    {
+      "id": "read-1794915187794-jq9rkz",
+      "decibel": 57.2,
+      "latitude": 17.423975,
+      "longitude": 78.473909,
+      "accuracy": 4.6,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 276,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:07.794Z"
+    },
+    {
+      "id": "read-1794915184791-syxz59",
+      "decibel": 82.4,
+      "latitude": 17.361785,
+      "longitude": 78.474821,
       "accuracy": 3.7,
-      "locationName": "University Library Silence Zone",
+      "locationName": "Charminar Heritage & Old City Bazaar, Hyderabad",
+      "category": "Loud",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 750,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws",
+      "timestamp": "2026-11-17T11:33:04.791Z"
+    },
+    {
+      "id": "read-1794915181777-0eil82",
+      "decibel": 60.9,
+      "latitude": 17.424048,
+      "longitude": 78.473639,
+      "accuracy": 3.3,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 295,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:33:01.777Z"
+    },
+    {
+      "id": "read-1794915178773-m2hs2o",
+      "decibel": 65.4,
+      "latitude": 17.440252,
+      "longitude": 78.348873,
+      "accuracy": 3.8,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 501,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:32:58.773Z"
+    },
+    {
+      "id": "read-1794915175773-8r2dib",
+      "decibel": 48,
+      "latitude": 17.413934,
+      "longitude": 78.528416,
+      "accuracy": 4.2,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 149,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:32:55.773Z"
+    },
+    {
+      "id": "read-1794915172762-gbj29v",
+      "decibel": 44.5,
+      "latitude": 17.413856,
+      "longitude": 78.528324,
+      "accuracy": 4.3,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 138,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:32:52.762Z"
+    },
+    {
+      "id": "read-1794915169755-4jzxzj",
+      "decibel": 43.3,
+      "latitude": 17.427828,
+      "longitude": 78.42065,
+      "accuracy": 4.3,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 123,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:32:49.755Z"
+    },
+    {
+      "id": "read-1794915166745-ftizkh",
+      "decibel": 41.5,
+      "latitude": 17.413755,
+      "longitude": 78.528412,
+      "accuracy": 5,
+      "locationName": "Osmania University Arts College, Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 133,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:32:46.745Z"
+    },
+    {
+      "id": "read-1794915163746-3sh6y0",
+      "decibel": 55.2,
+      "latitude": 17.423901,
+      "longitude": 78.473885,
+      "accuracy": 5.8,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 293,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:32:43.746Z"
+    },
+    {
+      "id": "read-1794915160745-ab1zvw",
+      "decibel": 67.9,
+      "latitude": 17.440055,
+      "longitude": 78.348724,
+      "accuracy": 4.5,
+      "locationName": "Gachibowli Financial District, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 532,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:32:40.745Z"
+    },
+    {
+      "id": "read-1794915157744-ii2mpu",
+      "decibel": 43.5,
+      "latitude": 17.427621,
+      "longitude": 78.420619,
+      "accuracy": 3.1,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 169,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:32:37.744Z"
+    },
+    {
+      "id": "read-1794915154735-yzf4mx",
+      "decibel": 36.9,
+      "latitude": 17.427828,
+      "longitude": 78.420752,
+      "accuracy": 3.2,
+      "locationName": "KBR National Park (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 146,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Sanctuary & Birdsong",
+      "timestamp": "2026-11-17T11:32:34.735Z"
+    },
+    {
+      "id": "read-1794915151725-bohu40",
+      "decibel": 44,
+      "latitude": 17.413769,
+      "longitude": 78.528561,
+      "accuracy": 5.9,
+      "locationName": "Osmania University Arts College, Hyderabad",
       "category": "Quiet",
       "source": "Live Stream Contributor",
       "dominantFrequency": 127,
@@ -1973,214 +1745,370 @@
         "midPercent": 25,
         "highPercent": 10
       },
-      "estimatedSource": "HVAC Airflow / Whisper",
-      "timestamp": "2026-10-25T16:49:44.989Z"
+      "estimatedSource": "Academic Walkways & Library Quiet",
+      "timestamp": "2026-11-17T11:32:31.725Z"
     },
     {
-      "id": "read-1792946981985-qgyli3",
-      "decibel": 79,
-      "latitude": 37.77645,
-      "longitude": -122.422294,
-      "accuracy": 3.2,
-      "locationName": "University Ave Bus Stop",
-      "category": "Loud",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 102,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:49:41.985Z"
-    },
-    {
-      "id": "read-1792946978967-70uzps",
-      "decibel": 85.3,
-      "latitude": 37.776429,
-      "longitude": -122.421908,
+      "id": "read-1794915148713-25uyi7",
+      "decibel": 65.6,
+      "latitude": 17.440191,
+      "longitude": 78.348785,
       "accuracy": 3.8,
-      "locationName": "University Ave Bus Stop",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 89,
-      "frequencyBand": "Low (Rumble)",
-      "frequencyDistribution": {
-        "lowPercent": 65,
-        "midPercent": 25,
-        "highPercent": 10
-      },
-      "estimatedSource": "Transit Bus Acceleration",
-      "timestamp": "2026-10-25T16:49:38.967Z"
-    },
-    {
-      "id": "read-1792946975961-4swgci",
-      "decibel": 51.7,
-      "latitude": 37.777028,
-      "longitude": -122.415999,
-      "accuracy": 3.5,
-      "locationName": "Memorial Botanical Quad",
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Moderate",
       "source": "Live Stream Contributor",
-      "dominantFrequency": 2073,
+      "dominantFrequency": 528,
       "frequencyBand": "Mid (Speech/Urban)",
       "frequencyDistribution": {
-        "lowPercent": 15,
+        "lowPercent": 25,
         "midPercent": 60,
-        "highPercent": 25
+        "highPercent": 15
       },
-      "estimatedSource": "Fountain Water & Trees",
-      "timestamp": "2026-10-25T16:49:35.961Z"
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:32:28.713Z"
     },
     {
-      "id": "read-1792946972951-1g67i8",
-      "decibel": 92.1,
-      "latitude": 37.773091,
-      "longitude": -122.41708,
-      "accuracy": 4.5,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3225,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:49:32.951Z"
-    },
-    {
-      "id": "read-1792946969939-478h4z",
-      "decibel": 94,
-      "latitude": 37.773213,
-      "longitude": -122.417059,
-      "accuracy": 3.3,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Hazardous",
-      "source": "Live Stream Contributor",
-      "dominantFrequency": 3217,
-      "frequencyBand": "Mid (Speech/Urban)",
-      "frequencyDistribution": {
-        "lowPercent": 15,
-        "midPercent": 25,
-        "highPercent": 60
-      },
-      "estimatedSource": "Steel Cut & Pneumatic Drill",
-      "timestamp": "2026-10-25T16:49:29.939Z"
-    },
-    {
-      "id": "read-1792945896601-45363c",
-      "decibel": 42,
-      "latitude": 37.7732,
-      "longitude": -122.417,
-      "accuracy": 4,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Quiet",
-      "source": "Mobile Client (Web Audio API)",
-      "timestamp": "2026-10-25T16:31:36.549Z"
-    },
-    {
-      "id": "read-1792945868390-x6v14t",
-      "decibel": 42,
-      "latitude": 37.7732,
-      "longitude": -122.417,
-      "accuracy": 4,
-      "locationName": "Engineering Hall Expansion",
-      "category": "Quiet",
-      "source": "Mobile Client (Web Audio API)",
-      "timestamp": "2026-10-25T16:31:08.365Z"
-    },
-    {
-      "id": "read-1792945688910-56zk43",
-      "decibel": 62.5,
-      "latitude": 37.7758,
-      "longitude": -122.4182,
-      "accuracy": 4.5,
-      "locationName": "Library Cafe",
-      "category": "Moderate",
-      "source": "Test Script",
-      "timestamp": "2026-10-25T16:28:08.910Z"
-    },
-    {
-      "id": "seed-1",
-      "decibel": 39.4,
-      "latitude": 37.7758,
-      "longitude": -122.4182,
-      "accuracy": 4.2,
-      "locationName": "University Library - 3rd Floor Silence Zone",
-      "category": "Quiet",
-      "timestamp": "2026-10-25T16:10:04.745Z",
-      "source": "Demonstration Baseline"
-    },
-    {
-      "id": "seed-2",
-      "decibel": 72.8,
-      "latitude": 37.7741,
-      "longitude": -122.4205,
+      "id": "read-1794915145711-zwntmt",
+      "decibel": 66.3,
+      "latitude": 17.440057,
+      "longitude": 78.349049,
       "accuracy": 5.1,
-      "locationName": "Student Union Cafeteria",
+      "locationName": "Gachibowli Financial District, Hyderabad",
       "category": "Moderate",
-      "timestamp": "2026-10-25T16:00:04.745Z",
-      "source": "Demonstration Baseline"
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 540,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute",
+      "timestamp": "2026-11-17T11:32:25.711Z"
     },
     {
-      "id": "seed-3",
-      "decibel": 83.2,
-      "latitude": 37.7765,
-      "longitude": -122.4221,
-      "accuracy": 6,
-      "locationName": "University Ave Bus Stop & Transit Hub",
-      "category": "Loud",
-      "timestamp": "2026-10-25T15:50:04.745Z",
-      "source": "Demonstration Baseline"
+      "id": "read-1794915142702-u8dzhq",
+      "decibel": 55.3,
+      "latitude": 17.423978,
+      "longitude": 78.473845,
+      "accuracy": 4.8,
+      "locationName": "Hussain Sagar Tank Bund Promenade, Hyderabad",
+      "category": "Moderate",
+      "source": "Live Stream Contributor",
+      "dominantFrequency": 263,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 60,
+        "highPercent": 15
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall",
+      "timestamp": "2026-11-17T11:32:22.702Z"
     },
     {
-      "id": "seed-4",
-      "decibel": 91.5,
-      "latitude": 37.7732,
-      "longitude": -122.417,
-      "accuracy": 3.8,
-      "locationName": "Engineering Hall Expansion Construction",
+      "id": "read-1794915047376-6zxz8r",
+      "decibel": 53.8,
+      "latitude": 13.026585,
+      "longitude": 80.016926,
+      "accuracy": 4.5,
+      "locationName": "Map View Area (Pedestrian Walkway & Plaza)",
+      "category": "Moderate",
+      "source": "Neighborhood Survey Node",
+      "dominantFrequency": 450,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 38,
+        "midPercent": 48,
+        "highPercent": 14
+      },
+      "estimatedSource": "Footsteps & Distant Ambience",
+      "timestamp": "2026-11-17T11:30:47.376Z"
+    },
+    {
+      "id": "read-1794915047375-f2hrsk",
+      "decibel": 88.5,
+      "latitude": 13.025185,
+      "longitude": 80.016226,
+      "accuracy": 4.5,
+      "locationName": "Map View Area (Commercial Works & Equipment)",
       "category": "Hazardous",
-      "timestamp": "2026-10-25T15:40:04.745Z",
-      "source": "Demonstration Baseline"
+      "source": "Neighborhood Survey Node",
+      "dominantFrequency": 3200,
+      "frequencyBand": "High (Machinery/Siren)",
+      "frequencyDistribution": {
+        "lowPercent": 28,
+        "midPercent": 22,
+        "highPercent": 50
+      },
+      "estimatedSource": "Pneumatic Tool & Generator Hum",
+      "timestamp": "2026-11-17T11:30:47.375Z"
     },
     {
-      "id": "seed-5",
-      "decibel": 48.7,
-      "latitude": 37.777,
-      "longitude": -122.416,
-      "accuracy": 5.5,
-      "locationName": "Memorial Quad & Botanical Garden",
-      "category": "Quiet",
-      "timestamp": "2026-10-25T15:30:04.745Z",
-      "source": "Demonstration Baseline"
-    },
-    {
-      "id": "seed-6",
-      "decibel": 64.3,
-      "latitude": 37.7745,
-      "longitude": -122.4148,
-      "accuracy": 4.9,
-      "locationName": "Computer Science Innovation Lab",
-      "category": "Moderate",
-      "timestamp": "2026-10-25T15:15:04.745Z",
-      "source": "Demonstration Baseline"
-    },
-    {
-      "id": "seed-7",
-      "decibel": 76.1,
-      "latitude": 37.7725,
-      "longitude": -122.4215,
-      "accuracy": 6.4,
-      "locationName": "Campus South Perimeter Road",
+      "id": "read-1794915047373-if7y5v",
+      "decibel": 79.2,
+      "latitude": 13.027885,
+      "longitude": 80.016026,
+      "accuracy": 4.5,
+      "locationName": "Map View Area (Main Transit Avenue & Bus Stop)",
       "category": "Loud",
-      "timestamp": "2026-10-25T14:55:04.745Z",
-      "source": "Demonstration Baseline"
+      "source": "Neighborhood Survey Node",
+      "dominantFrequency": 110,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Motor Traffic & Bus Acceleration",
+      "timestamp": "2026-11-17T11:30:47.373Z"
+    },
+    {
+      "id": "read-1794915047372-zatgs6",
+      "decibel": 64.6,
+      "latitude": 13.025685,
+      "longitude": 80.018126,
+      "accuracy": 4.5,
+      "locationName": "Map View Area (Campus Cafeteria & Lounge)",
+      "category": "Moderate",
+      "source": "Neighborhood Survey Node",
+      "dominantFrequency": 540,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 25,
+        "midPercent": 62,
+        "highPercent": 13
+      },
+      "estimatedSource": "Active Conversation & Social Din",
+      "timestamp": "2026-11-17T11:30:47.372Z"
+    },
+    {
+      "id": "read-1794915047370-wyzw0p",
+      "decibel": 42.4,
+      "latitude": 13.027185,
+      "longitude": 80.017626,
+      "accuracy": 4.5,
+      "locationName": "Map View Area (Quiet Park & Study Corner)",
+      "category": "Quiet",
+      "source": "Neighborhood Survey Node",
+      "dominantFrequency": 130,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 55,
+        "midPercent": 35,
+        "highPercent": 10
+      },
+      "estimatedSource": "Foliage Breeze & Whispers",
+      "timestamp": "2026-11-17T11:30:47.370Z"
+    },
+    {
+      "id": "read-1794915009450-znj36z",
+      "decibel": 49.1,
+      "latitude": 13.026491,
+      "longitude": 80.017134,
+      "accuracy": 55,
+      "locationName": "SAIL, Chennai Metropolitan Area",
+      "category": "Quiet",
+      "source": "Synced from Offline Cache",
+      "dominantFrequency": 266,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 29,
+        "midPercent": 51,
+        "highPercent": 15
+      },
+      "estimatedSource": "Ambient Conversation",
+      "timestamp": "2026-11-17T11:01:03.914Z"
+    },
+    {
+      "id": "seed-hyd-1",
+      "decibel": 74.8,
+      "latitude": 17.4504,
+      "longitude": 78.3808,
+      "accuracy": 4.2,
+      "locationName": "HITEC City Cyber Towers & Madhapur IT Corridor, Hyderabad",
+      "category": "Loud",
+      "timestamp": "2026-11-17T10:59:02.273Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 640,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 32,
+        "midPercent": 56,
+        "highPercent": 12
+      },
+      "estimatedSource": "IT Corridor Traffic & Commercial Bustle"
+    },
+    {
+      "id": "seed-hyd-2",
+      "decibel": 83.4,
+      "latitude": 17.3616,
+      "longitude": 78.4747,
+      "accuracy": 5,
+      "locationName": "Charminar Heritage Plaza & Laad Bazaar, Hyderabad",
+      "category": "Loud",
+      "timestamp": "2026-11-17T10:49:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 720,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 24,
+        "midPercent": 64,
+        "highPercent": 12
+      },
+      "estimatedSource": "Historic Market Din & Autorickshaws"
+    },
+    {
+      "id": "seed-hyd-3",
+      "decibel": 58.2,
+      "latitude": 17.4239,
+      "longitude": 78.4738,
+      "accuracy": 4.5,
+      "locationName": "Hussain Sagar Lake Promenade & Tank Bund, Hyderabad",
+      "category": "Moderate",
+      "timestamp": "2026-11-17T10:36:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 280,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 52,
+        "midPercent": 38,
+        "highPercent": 10
+      },
+      "estimatedSource": "Lakefront Breeze & Promenade Footfall"
+    },
+    {
+      "id": "seed-hyd-4",
+      "decibel": 39.8,
+      "latitude": 17.4277,
+      "longitude": 78.4208,
+      "accuracy": 3.9,
+      "locationName": "KBR National Park Nature Sanctuary (Jubilee Hills), Hyderabad",
+      "category": "Quiet",
+      "timestamp": "2026-11-17T10:23:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 140,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 65,
+        "midPercent": 25,
+        "highPercent": 10
+      },
+      "estimatedSource": "Protected Forest Foliage & Birdsong"
+    },
+    {
+      "id": "seed-hyd-5",
+      "decibel": 43.6,
+      "latitude": 17.4138,
+      "longitude": 78.5284,
+      "accuracy": 4.1,
+      "locationName": "Osmania University Arts College & Library, Hyderabad",
+      "category": "Quiet",
+      "timestamp": "2026-11-17T10:06:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 120,
+      "frequencyBand": "Low (Rumble)",
+      "frequencyDistribution": {
+        "lowPercent": 58,
+        "midPercent": 32,
+        "highPercent": 10
+      },
+      "estimatedSource": "Academic Walkways & Quiet Reading Room"
+    },
+    {
+      "id": "seed-hyd-6",
+      "decibel": 89.2,
+      "latitude": 17.4334,
+      "longitude": 78.5045,
+      "accuracy": 5.6,
+      "locationName": "Secunderabad Railway Junction & Bus Terminal, Hyderabad",
+      "category": "Hazardous",
+      "timestamp": "2026-11-17T09:51:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 3100,
+      "frequencyBand": "High (Machinery/Siren)",
+      "frequencyDistribution": {
+        "lowPercent": 35,
+        "midPercent": 25,
+        "highPercent": 40
+      },
+      "estimatedSource": "Locomotives & Transit Hub Congestion"
+    },
+    {
+      "id": "seed-hyd-7",
+      "decibel": 69.4,
+      "latitude": 17.4401,
+      "longitude": 78.3489,
+      "accuracy": 4.8,
+      "locationName": "Gachibowli Financial District & Stadium Road, Hyderabad",
+      "category": "Moderate",
+      "timestamp": "2026-11-17T09:36:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 520,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 30,
+        "midPercent": 55,
+        "highPercent": 15
+      },
+      "estimatedSource": "Flyover Traffic & Corporate Commute"
+    },
+    {
+      "id": "seed-hyd-8",
+      "decibel": 72.1,
+      "latitude": 17.4156,
+      "longitude": 78.4357,
+      "accuracy": 4.6,
+      "locationName": "Banjara Hills Road No. 12 Commercial Strip, Hyderabad",
+      "category": "Loud",
+      "timestamp": "2026-11-17T09:21:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 580,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 28,
+        "midPercent": 58,
+        "highPercent": 14
+      },
+      "estimatedSource": "Commercial Shopping Din & Cafe Music"
+    },
+    {
+      "id": "seed-hyd-9",
+      "decibel": 65.4,
+      "latitude": 17.4342,
+      "longitude": 78.3881,
+      "accuracy": 4.3,
+      "locationName": "Durgam Cheruvu Cable-Stayed Bridge, Hyderabad",
+      "category": "Moderate",
+      "timestamp": "2026-11-17T09:01:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 460,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 34,
+        "midPercent": 52,
+        "highPercent": 14
+      },
+      "estimatedSource": "Waterfront Promenade & Commuter Traffic"
+    },
+    {
+      "id": "seed-hyd-10",
+      "decibel": 62.8,
+      "latitude": 17.4933,
+      "longitude": 78.3914,
+      "accuracy": 4.7,
+      "locationName": "JNTU College of Engineering (Kukatpally), Hyderabad",
+      "category": "Moderate",
+      "timestamp": "2026-11-17T08:41:02.276Z",
+      "source": "Demonstration Baseline (Telangana)",
+      "dominantFrequency": 490,
+      "frequencyBand": "Mid (Speech/Urban)",
+      "frequencyDistribution": {
+        "lowPercent": 36,
+        "midPercent": 50,
+        "highPercent": 14
+      },
+      "estimatedSource": "Student Gathering & Campus Grounds"
     }
   ],
-  "updatedAt": "2026-10-25T16:25:04.745Z"
+  "updatedAt": "2026-11-17T11:11:02.276Z"
 }

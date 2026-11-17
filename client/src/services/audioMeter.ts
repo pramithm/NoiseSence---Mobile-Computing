@@ -20,6 +20,8 @@ export class AudioNoiseMeter {
   private currentDb: number = 30.0;
   private peakDb: number = 30.0;
   private isRunning: boolean = false;
+  private isSimulated: boolean = false;
+  private simAngle: number = 0;
 
   private onDecibelUpdate?: (currentDb: number, peakDb: number) => void;
   private onSpectrumUpdate?: (frequencyData: Uint8Array) => void;
@@ -50,8 +52,30 @@ export class AudioNoiseMeter {
     return this.calibrationOffset;
   }
 
-  public async start(): Promise<boolean> {
-    if (this.isRunning) return true;
+  public async start(forceSimulation = false): Promise<{ isSimulated: boolean }> {
+    if (this.isRunning) return { isSimulated: this.isSimulated };
+
+    if (forceSimulation) {
+      this.isSimulated = true;
+      this.isRunning = true;
+      this.currentDb = 55.0;
+      this.peakDb = 55.0;
+      this.processSimulatedAudioLoop();
+      return { isSimulated: true };
+    }
+
+    const hasMedia = typeof navigator !== 'undefined' &&
+      Boolean(navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function');
+
+    if (!hasMedia) {
+      console.warn('Microphone API unavailable (insecure HTTP context). Using simulated acoustic sensor mode.');
+      this.isSimulated = true;
+      this.isRunning = true;
+      this.currentDb = 55.0;
+      this.peakDb = 55.0;
+      this.processSimulatedAudioLoop();
+      return { isSimulated: true };
+    }
 
     try {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -76,17 +100,74 @@ export class AudioNoiseMeter {
       this.sourceNode.connect(this.analyser);
 
       this.isRunning = true;
+      this.isSimulated = false;
       this.currentDb = 35.0;
       this.peakDb = 35.0;
 
       this.processAudioLoop();
-      return true;
+      return { isSimulated: false };
     } catch (err) {
-      console.error('Failed to initialize AudioContext / microphone:', err);
-      this.stop();
-      throw err;
+      console.warn('Microphone access blocked or failed, falling back to simulated acoustic sensor:', err);
+      this.isSimulated = true;
+      this.isRunning = true;
+      this.currentDb = 55.0;
+      this.peakDb = 55.0;
+      this.processSimulatedAudioLoop();
+      return { isSimulated: true };
     }
   }
+
+  private processSimulatedAudioLoop = () => {
+    if (!this.isRunning || !this.isSimulated) return;
+
+    this.simAngle += 0.08;
+    // Ambient acoustic fluctuation (between 48 and 78 dB)
+    const targetDb = 59.0 + Math.sin(this.simAngle) * 9.5 + Math.sin(this.simAngle * 2.3) * 4.2 + (Math.random() * 4 - 2);
+    this.currentDb = this.smoothingFactor * targetDb + (1 - this.smoothingFactor) * this.currentDb;
+    if (this.currentDb > this.peakDb) {
+      this.peakDb = this.currentDb;
+    } else {
+      this.peakDb = Math.max(this.currentDb, this.peakDb - 0.2);
+    }
+
+    if (this.onDecibelUpdate) {
+      this.onDecibelUpdate(
+        parseFloat(this.currentDb.toFixed(1)),
+        parseFloat(this.peakDb.toFixed(1))
+      );
+    }
+
+    // 256-bin simulated audio spectrum
+    const binCount = 256;
+    const frequencyData = new Uint8Array(binCount);
+    for (let i = 0; i < binCount; i++) {
+      const centerFactor = Math.exp(-Math.pow((i - 48) / 36, 2));
+      const jitter = (Math.sin(this.simAngle * 3 + i * 0.25) + 1) * 0.5;
+      const val = Math.min(255, Math.max(0, Math.round((centerFactor * 165 + jitter * 75) * (this.currentDb / 70))));
+      frequencyData[i] = val;
+    }
+
+    if (this.onSpectrumUpdate) {
+      this.onSpectrumUpdate(frequencyData);
+    }
+
+    const dominantHz = Math.round(440 + Math.sin(this.simAngle) * 90 + (Math.random() * 20 - 10));
+    const octaveBands = [24, 42, 70, 84, 72, 50, 32, 18];
+    this.latestBreakdown = {
+      lowPercent: 28,
+      midPercent: 58,
+      highPercent: 14,
+      dominantHz,
+      bandName: 'Mid (Speech/Urban)',
+      estimatedSource: this.currentDb > 70 ? 'Commercial Hub & Social Buzz' : 'Conversational Dialogue & Footfall'
+    };
+
+    if (this.onFrequencyUpdate) {
+      this.onFrequencyUpdate(this.latestBreakdown, octaveBands);
+    }
+
+    this.animationFrameId = requestAnimationFrame(this.processSimulatedAudioLoop);
+  };
 
   private processAudioLoop = () => {
     if (!this.isRunning || !this.analyser || !this.audioContext) return;
@@ -229,6 +310,7 @@ export class AudioNoiseMeter {
 
   public stop() {
     this.isRunning = false;
+    this.isSimulated = false;
 
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
@@ -254,6 +336,7 @@ export class AudioNoiseMeter {
   public getStatus() {
     return {
       isRunning: this.isRunning,
+      isSimulated: this.isSimulated,
       currentDb: parseFloat(this.currentDb.toFixed(1)),
       peakDb: parseFloat(this.peakDb.toFixed(1)),
       calibrationOffset: this.calibrationOffset,

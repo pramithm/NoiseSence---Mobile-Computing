@@ -9,12 +9,13 @@ export interface GeocodedPlace {
 }
 
 export const CAMPUS_PRESETS = [
-  { name: 'Library Quiet Zone', lat: 37.7758, lng: -122.4182, accuracy: 4 },
-  { name: 'Student Union Cafeteria', lat: 37.7741, lng: -122.4205, accuracy: 5 },
-  { name: 'University Ave Bus Stop', lat: 37.7765, lng: -122.4221, accuracy: 6 },
-  { name: 'Engineering Hall Expansion', lat: 37.7732, lng: -122.4170, accuracy: 4 },
-  { name: 'Memorial Botanical Quad', lat: 37.7770, lng: -122.4160, accuracy: 5 },
-  { name: 'CS Innovation Hub', lat: 37.7745, lng: -122.4148, accuracy: 5 }
+  { name: 'HITEC City Cyber Towers, Hyderabad', lat: 17.4504, lng: 78.3808, accuracy: 4 },
+  { name: 'Osmania University Arts College, Hyderabad', lat: 17.4138, lng: 78.5284, accuracy: 4 },
+  { name: 'KBR National Park (Jubilee Hills), Hyderabad', lat: 17.4277, lng: 78.4208, accuracy: 4 },
+  { name: 'Hussain Sagar Tank Bund, Hyderabad', lat: 17.4239, lng: 78.4738, accuracy: 5 },
+  { name: 'Charminar Heritage Plaza, Hyderabad', lat: 17.3616, lng: 78.4747, accuracy: 5 },
+  { name: 'Gachibowli Financial District, Hyderabad', lat: 17.4401, lng: 78.3489, accuracy: 5 },
+  { name: 'JNTU College of Engineering (Kukatpally)', lat: 17.4933, lng: 78.3914, accuracy: 4 }
 ];
 
 /**

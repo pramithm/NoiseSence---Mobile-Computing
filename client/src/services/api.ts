@@ -72,4 +72,19 @@ export async function checkServerHealth(): Promise<boolean> {
   }
 }
 
+export async function seedArea(latitude: number, longitude: number, locationName: string): Promise<{
+  success: boolean;
+  message: string;
+  readings: NoiseReading[];
+  cells: HeatmapCell[];
+}> {
+  const res = await fetch(`${API_BASE}/api/seed-area`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ latitude, longitude, locationName })
+  });
+  if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+  return res.json();
+}
+
 export { API_BASE };

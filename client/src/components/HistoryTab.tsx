@@ -7,7 +7,10 @@ import {
   Clock,
   WifiOff,
   Radio,
-  Activity
+  Activity,
+  User,
+  CheckCircle2,
+  MapPin
 } from 'lucide-react';
 import type { NoiseReading, OfflineReading } from '../types';
 import { getOfflineQueue, removeFromOfflineQueue } from '../services/offlineQueue';
@@ -16,17 +19,33 @@ interface HistoryTabProps {
   readings: NoiseReading[];
   onSyncOffline: () => void;
   onRefreshReadings: () => void;
+  onNavigateToMapWithCoords?: (coords: { lat: number; lng: number }) => void;
 }
 
 export const HistoryTab: React.FC<HistoryTabProps> = ({
   readings,
   onSyncOffline,
-  onRefreshReadings
+  onRefreshReadings,
+  onNavigateToMapWithCoords
 }) => {
   const [filterCategory, setFilterCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [scopeFilter, setScopeFilter] = useState<'all' | 'mine'>('all');
   const [offlineItems, setOfflineItems] = useState<OfflineReading[]>(() => getOfflineQueue());
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
+
+  // Load readings submitted from this device
+  const [mySubmissionIds] = useState<Set<string>>(() => {
+    try {
+      const stored = localStorage.getItem('noisesense_my_submission_ids');
+      return new Set(stored ? JSON.parse(stored) : []);
+    } catch {
+      return new Set();
+    }
+  });
+
+  const mySubmissions = readings.filter(r => mySubmissionIds.has(r.id));
+  const latestUserReading = mySubmissions.length > 0 ? mySubmissions[0] : null;
 
   const handleSyncClick = async () => {
     setIsSyncing(true);
@@ -41,6 +60,7 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
   };
 
   const filteredReadings = readings.filter((r) => {
+    if (scopeFilter === 'mine' && !mySubmissionIds.has(r.id)) return false;
     const matchesCat = filterCategory === 'All' || r.category === filterCategory;
     const matchesSearch =
       searchQuery === '' ||
@@ -143,6 +163,74 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
         </div>
       )}
 
+      {/* Latest Submission Highlight Card (Requirement 3) */}
+      {latestUserReading && (
+        <div className="my-submission-hero-card animate-fade-in">
+          <div className="flex-row-center gap-3">
+            <div style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: 'rgba(16, 185, 129, 0.15)',
+              border: '1px solid rgba(16, 185, 129, 0.35)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#10b981'
+            }}>
+              <CheckCircle2 size={24} />
+            </div>
+            <div>
+              <div className="flex-row-center gap-2">
+                <span className="badge-my-reading">
+                  <User size={11} /> Your Recent Submission
+                </span>
+                <span className="text-xs text-secondary">
+                  {new Date(latestUserReading.timestamp).toLocaleTimeString()}
+                </span>
+              </div>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '3px 0 0 0', color: 'var(--text-primary)' }}>
+                {latestUserReading.decibel.toFixed(1)} dB(A) — {latestUserReading.locationName}
+              </h4>
+              <span className="text-xs text-secondary mt-0.5 block">
+                Pitch: <strong>{latestUserReading.dominantFrequency} Hz</strong> · Source: <strong>{latestUserReading.estimatedSource}</strong>
+              </span>
+            </div>
+          </div>
+
+          {onNavigateToMapWithCoords && (
+            <button
+              type="button"
+              onClick={() => onNavigateToMapWithCoords({ lat: latestUserReading.latitude, lng: latestUserReading.longitude })}
+              className="btn-sm-inline"
+              style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+            >
+              <MapPin size={13} />
+              <span>Locate on Map</span>
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Scope Filter Chips: All vs My Submissions */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+        <button
+          type="button"
+          onClick={() => setScopeFilter('all')}
+          className={`filter-pill ${scopeFilter === 'all' ? 'filter-pill-active' : ''}`}
+        >
+          All Contributions ({readings.length})
+        </button>
+        <button
+          type="button"
+          onClick={() => setScopeFilter('mine')}
+          className={`filter-pill ${scopeFilter === 'mine' ? 'filter-pill-active' : ''}`}
+        >
+          <User size={12} className="inline mr-1" />
+          My Submissions ({mySubmissions.length})
+        </button>
+      </div>
+
       {/* Search & Filter Controls */}
       <div className="history-filters-bar">
         <div className="search-input-wrapper">
@@ -208,6 +296,7 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
               </thead>
               <tbody>
                 {filteredReadings.map((r) => {
+                  const isMine = mySubmissionIds.has(r.id);
                   const dbColor =
                     r.decibel < 50
                       ? 'var(--color-emerald)'
@@ -218,21 +307,28 @@ export const HistoryTab: React.FC<HistoryTabProps> = ({
                       : 'var(--color-rose)';
 
                   return (
-                    <tr key={r.id} className="reading-table-row">
+                    <tr key={r.id} className={`reading-table-row ${isMine ? 'row-my-reading' : ''}`}>
                       <td>
-                        <span className="table-db-val" style={{ color: dbColor }}>
-                          {r.decibel.toFixed(1)} dB
-                        </span>
-                        <span
-                          className="table-cat-badge ml-1.5"
-                          style={{
-                            color: dbColor,
-                            borderColor: dbColor,
-                            backgroundColor: `${dbColor}15`
-                          }}
-                        >
-                          {r.category}
-                        </span>
+                        <div className="flex-row-center gap-1.5 flex-wrap">
+                          <span className="table-db-val" style={{ color: dbColor }}>
+                            {r.decibel.toFixed(1)} dB
+                          </span>
+                          <span
+                            className="table-cat-badge"
+                            style={{
+                              color: dbColor,
+                              borderColor: dbColor,
+                              backgroundColor: `${dbColor}15`
+                            }}
+                          >
+                            {r.category}
+                          </span>
+                          {isMine && (
+                            <span className="badge-my-reading">
+                              <User size={10} /> You
+                            </span>
+                          )}
+                        </div>
                       </td>
                       <td>
                         <span className="font-mono text-xs font-bold text-cyan">

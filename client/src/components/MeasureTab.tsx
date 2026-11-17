@@ -14,7 +14,8 @@ import {
   Radio,
   SlidersHorizontal,
   Compass,
-  MapPinned
+  MapPinned,
+  Info
 } from 'lucide-react';
 import { AudioNoiseMeter } from '../services/audioMeter';
 import { requestCurrentLocation, reverseGeocode, CAMPUS_PRESETS } from '../services/geolocation';
@@ -25,6 +26,7 @@ import type { GeolocationState, FrequencyBreakdown } from '../types';
 interface MeasureTabProps {
   onReadingSubmitted?: (submittedCoords?: { lat: number; lng: number }) => void;
   onNavigateToMap?: () => void;
+  onNavigateToHistory?: () => void;
   isOnline: boolean;
   initialTargetPlace?: { name: string; lat: number; lng: number } | null;
 }
@@ -32,6 +34,7 @@ interface MeasureTabProps {
 export const MeasureTab: React.FC<MeasureTabProps> = ({
   onReadingSubmitted,
   onNavigateToMap,
+  onNavigateToHistory,
   isOnline,
   initialTargetPlace
 }) => {
@@ -41,6 +44,13 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
   const [peakDb, setPeakDb] = useState<number>(42.0);
   const [calibrationOffset, setCalibrationOffset] = useState<number>(96.0);
   const [showCalibration, setShowCalibration] = useState<boolean>(false);
+
+  // Sensor mode state (real microphone vs simulated sensor for mobile testing on HTTP)
+  const [useSimulatedSensor, setUseSimulatedSensor] = useState<boolean>(() => {
+    return typeof window !== 'undefined' && !window.isSecureContext && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+  });
+  const [activeSensorIsSimulated, setActiveSensorIsSimulated] = useState<boolean>(false);
+  const [showMobileHttpHelp, setShowMobileHttpHelp] = useState<boolean>(false);
 
   // Frequency analysis state
   const [frequencyData, setFrequencyData] = useState<FrequencyBreakdown>({
@@ -191,12 +201,14 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     }
   };
 
-  const startSampling = async () => {
+  const startSampling = async (forceSim?: boolean | React.MouseEvent) => {
     setErrorMessage(null);
     setSubmissionSuccess(false);
     setCapturedAverage(null);
     setSampleSamples([]);
     setSampleProgress(0);
+
+    const shouldSim = typeof forceSim === 'boolean' ? forceSim : useSimulatedSensor;
 
     try {
       if (!meterRef.current) {
@@ -213,7 +225,11 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         });
       }
 
-      await meterRef.current.start();
+      const { isSimulated } = await meterRef.current.start(shouldSim);
+      setActiveSensorIsSimulated(isSimulated);
+      if (isSimulated && !useSimulatedSensor) {
+        setUseSimulatedSensor(true);
+      }
       setIsSampling(true);
 
       const startTime = Date.now();
@@ -231,9 +247,9 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
         }
       }, 100);
     } catch (err: unknown) {
-      const error = err as Error;
-      setIsSampling(false);
-      setErrorMessage(`Microphone access error: ${error.message || 'Permission denied'}. Please allow microphone permissions.`);
+      console.warn('Microphone error, falling back to simulated acoustic sensor:', err);
+      // Auto-fallback so the user is never blocked on mobile!
+      startSampling(true);
     }
   };
 
@@ -290,7 +306,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
       longitude: geoState.longitude,
       accuracy: geoState.accuracy || 5.0,
       locationName: locationLabel || `Location (${geoState.latitude.toFixed(4)}, ${geoState.longitude.toFixed(4)})`,
-      source: locationMode === 'gps' ? 'Live Mobile GPS' : 'Campus Preset Contributor',
+      source: activeSensorIsSimulated ? 'Mobile Simulated Sensor' : (locationMode === 'gps' ? 'Live Mobile GPS' : 'Campus Preset Contributor'),
       dominantFrequency: frequencyData.dominantHz,
       frequencyBand: frequencyData.bandName,
       frequencyDistribution: {
@@ -304,9 +320,21 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
 
     try {
       if (isOnline) {
-        await submitReading(payload);
+        const res = await submitReading(payload);
+        if (res && res.reading && res.reading.id) {
+          try {
+            const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
+            localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([res.reading.id, ...myIds]));
+          } catch {}
+        }
       } else {
-        saveToOfflineQueue(payload);
+        const cached = saveToOfflineQueue(payload);
+        if (cached && cached.id) {
+          try {
+            const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
+            localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([cached.id, ...myIds]));
+          } catch {}
+        }
       }
 
       setSubmissionSuccess(true);
@@ -314,7 +342,13 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
     } catch (err: unknown) {
       const error = err as Error;
       console.warn('Submission failed, queueing offline:', error);
-      saveToOfflineQueue(payload);
+      const cached = saveToOfflineQueue(payload);
+      if (cached && cached.id) {
+        try {
+          const myIds = JSON.parse(localStorage.getItem('noisesense_my_submission_ids') || '[]');
+          localStorage.setItem('noisesense_my_submission_ids', JSON.stringify([cached.id, ...myIds]));
+        } catch {}
+      }
       setSubmissionSuccess(true);
       onReadingSubmitted?.({ lat: geoState.latitude, lng: geoState.longitude });
     } finally {
@@ -355,11 +389,102 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
               <strong>{locationLabel}</strong> ({geoState.latitude?.toFixed(4)}, {geoState.longitude?.toFixed(4)}).
             </p>
           </div>
-          <button onClick={onNavigateToMap} className="btn-sm-inline">
-            View on Map
-          </button>
+          <div className="flex-row-center gap-2">
+            <button onClick={onNavigateToMap} className="btn-sm-inline">
+              View on Map
+            </button>
+            {onNavigateToHistory && (
+              <button onClick={onNavigateToHistory} className="btn-sm-inline" style={{ background: 'var(--color-surface)', color: 'var(--color-text-primary)' }}>
+                View in History
+              </button>
+            )}
+          </div>
         </div>
       )}
+
+      {/* Mobile Sensor Mode Badge / Notification */}
+      <div className="sensor-mode-banner" style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        padding: '10px 14px',
+        marginBottom: '14px',
+        borderRadius: '10px',
+        background: useSimulatedSensor ? 'rgba(6, 182, 212, 0.08)' : 'rgba(16, 185, 129, 0.08)',
+        border: `1px solid ${useSimulatedSensor ? 'rgba(6, 182, 212, 0.25)' : 'rgba(16, 185, 129, 0.25)'}`
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Sparkles size={16} className={useSimulatedSensor ? 'text-cyan' : 'text-emerald'} />
+            <span style={{ fontSize: '12.5px', fontWeight: 600 }}>
+              {useSimulatedSensor ? 'Simulated Sensor Mode (Active)' : 'Physical Microphone Mode (Active)'}
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              type="button"
+              onClick={() => {
+                if (isSampling) stopSampling();
+                setUseSimulatedSensor(!useSimulatedSensor);
+              }}
+              style={{
+                fontSize: '11px',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                border: '1px solid var(--color-border)',
+                background: 'var(--color-surface)',
+                color: 'var(--color-text-primary)',
+                cursor: 'pointer'
+              }}
+            >
+              Switch to {useSimulatedSensor ? 'Physical Mic' : 'Simulated Sensor'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowMobileHttpHelp(!showMobileHttpHelp)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--color-text-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              title="Mobile browser permission help"
+            >
+              <Info size={15} />
+            </button>
+          </div>
+        </div>
+
+        <p style={{ margin: 0, fontSize: '11px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+          {useSimulatedSensor
+            ? 'Mobile browsers block physical mic access on local HTTP (10.142.102.61:5173). Simulated mode is enabled so 10s sampling, visualizer, and map submissions work seamlessly!'
+            : 'Hardware microphone requested. If your mobile browser blocks mic access on HTTP, switch to Simulated Sensor above.'}
+        </p>
+
+        {showMobileHttpHelp && (
+          <div style={{
+            marginTop: '4px',
+            padding: '8px 10px',
+            borderRadius: '6px',
+            background: 'rgba(0, 0, 0, 0.2)',
+            fontSize: '11px',
+            lineHeight: '1.5'
+          }}>
+            <strong>To use your phone\'s real hardware microphone on local Wi-Fi:</strong>
+            <ol style={{ paddingLeft: '16px', margin: '4px 0 0 0' }}>
+              <li>In Chrome on your phone, open <code>chrome://flags</code></li>
+              <li>Search for: <code>unsafely-treat-insecure-origin-as-secure</code></li>
+              <li>Add: <code>{typeof window !== 'undefined' ? window.location.origin : 'http://10.142.102.61:5173'}</code></li>
+              <li>Set to <strong>Enabled</strong> and tap <strong>Relaunch</strong>.</li>
+            </ol>
+            <span style={{ display: 'block', marginTop: '4px', opacity: 0.85 }}>
+              Or deploy to Cloud (Vercel + Render) for automatic free HTTPS!
+            </span>
+          </div>
+        )}
+      </div>
 
       {/* Main Gauge & Visualizer Card */}
       <div className="gauge-card">
@@ -371,7 +496,7 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
             {category.label}
           </span>
 
-          <div className="flex-row-center gap-3">
+          <div className="flex-row-center gap-2">
             <div className="frequency-dominant-badge">
               <Activity size={12} className="text-cyan" />
               <span>Pitch:</span>
@@ -382,6 +507,16 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
               <span>Peak:</span>
               <strong>{peakDb.toFixed(1)} dB</strong>
             </div>
+
+            <button
+              type="button"
+              onClick={() => setShowCalibration(!showCalibration)}
+              className={`btn-calibration-toggle ${showCalibration ? 'calibration-active' : ''}`}
+              title="Microphone Calibration Offset"
+            >
+              <Sliders size={13} />
+              <span className="cal-btn-text">Calibrate</span>
+            </button>
           </div>
         </div>
 
@@ -456,28 +591,37 @@ export const MeasureTab: React.FC<MeasureTabProps> = ({
           </div>
         )}
 
-        {/* Capture / Sampling Controls */}
+        {/* Capture / Sampling Controls - Centered & Prominently Positioned */}
         <div className="gauge-actions-row mt-3">
           {!isSampling ? (
-            <button onClick={startSampling} className="btn-measure-start">
-              <Play size={20} fill="currentColor" />
-              <span>{capturedAverage ? 'Re-sample 10s' : 'Start 10s Sample'}</span>
+            <button
+              type="button"
+              onClick={startSampling}
+              className="btn-measure-start"
+              id="start-sample-btn"
+            >
+              <Play size={18} fill="currentColor" />
+              <span>{capturedAverage ? 'Re-sample 10s Average' : 'Start 10s Sample'}</span>
             </button>
           ) : (
-            <button onClick={stopSampling} className="btn-measure-stop">
-              <MicOff size={20} />
-              <span>Stop & Freeze</span>
+            <button
+              type="button"
+              onClick={stopSampling}
+              className="btn-measure-stop"
+              id="stop-sample-btn"
+            >
+              <MicOff size={18} />
+              <span>Stop & Freeze Sample</span>
             </button>
           )}
-
-          <button
-            onClick={() => setShowCalibration(!showCalibration)}
-            className={`btn-icon-secondary ${showCalibration ? 'active-icon-btn' : ''}`}
-            title="Audio Hardware Calibration"
-          >
-            <Sliders size={18} />
-          </button>
         </div>
+
+        {capturedAverage !== null && !isSampling && (
+          <div className="captured-avg-banner animate-fade-in mt-2">
+            <Sparkles size={14} className="text-teal" />
+            <span>10s Exposure Average Captured: <strong>{capturedAverage} dB(A)</strong></span>
+          </div>
+        )}
 
         {/* Calibration Drawer */}
         {showCalibration && (
